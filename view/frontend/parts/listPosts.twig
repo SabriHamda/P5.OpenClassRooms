@@ -1,0 +1,26 @@
+    {% block recentPosts %}
+
+{% for post in posts %}
+
+<div class="col-md-3 col-sm-6 col-padding animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
+                        <div class="blog-entry">
+                            <a href="index.php?action=post&amp;id=<?= $post['id'] ?>" class="blog-img"><img src="{{ post.image }}" class="img-responsive" alt="image" style="width: 500px;height: 200px;"></a>
+                            <div class="desc">
+                                <h3><a href="#">{{ post.title }}</a></h3>
+                                <span><small>Creer le : </small><small>{{ post.creation_date_fr }}</small></span>
+                                <div  style="max-height: 90px;overflow: hidden;">
+                                <p>{{ post.content }} </p>
+                                </div>
+                                <p>. . .</p>
+                                <a href="index.php?action=post&amp;id=<?= $post['id'] ?>" class="lead">En savoir plus <i class="icon-arrow-right3"></i></a>
+                            </div>
+                        </div>
+                    </div>
+{% endfor %}
+{% endblock recentPosts %}
+
+
+
+
+
+
