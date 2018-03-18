@@ -1,0 +1,16 @@
+{
+    "name": "hamda/blog",
+    "description": "P5 OpenClassRooms",
+    "require": {
+        "twbs/bootstrap": "^3.3",
+        "twig/twig": "^2.4",
+        "components/jquery": "^3.3"
+    },
+    "authors": [
+        {
+            "name": "sabri",
+            "email": "sabri@hamda.ch"
+        }
+    ],
+    "minimum-stability": "stable"
+}
