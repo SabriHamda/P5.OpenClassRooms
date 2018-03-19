@@ -99,7 +99,7 @@ try {
 
         default :
 
-        echo $twig->render(errors());
+        echo $twig->render('accueil.twig');
 
         break;
 
@@ -109,7 +109,7 @@ try {
 catch (Exception $e) {
 
     $error = $e->getMessage();
-    errors($error);
+    echo $twig->render('errorView.twig', ['error'=> $error]);
     
 }
 
