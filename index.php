@@ -1,15 +1,13 @@
 <?php
-require_once(__DIR__ .'/vendor/autoload.php');
+
 use blog\src\controller\FrontendController;
+use blog\src\controller\Controller;
+require_once('vendor/autoload.php');
 
 
-
-$loader = new Twig_Loader_Filesystem(__DIR__ . '/src/view/frontend');
-
-$twig = new Twig_Environment($loader, array(
-    //'cache' => false,
-));
-
+$controller = new Controller($loader,$twig);
+$loader = $controller->$loader;
+$twig = $controller->$twig;
 
 try {
 
