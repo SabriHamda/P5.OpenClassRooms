@@ -1,9 +1,10 @@
 <?php
+require_once(__DIR__ .'/vendor/autoload.php');
+use blog\src\controller\FrontendController;
 
-require_once('vendor/autoload.php');
-require_once('controller/frontend.php');
 
-$loader = new Twig_Loader_Filesystem('view/frontend');
+
+$loader = new Twig_Loader_Filesystem(__DIR__ . '/src/view/frontend');
 
 $twig = new Twig_Environment($loader, array(
     //'cache' => false,
@@ -20,10 +21,11 @@ try {
 
         case 'post':
         if (isset($_GET['id']) && $_GET['id'] > 0) {
+            $post = new FrontendController();
             echo $twig->render(
                 'postView.twig',
-                ['post'=> post()['post'],
-                'comments'=> post()['comments']]
+                ['post'=> $post->post()['post'],
+                'comments'=> $post->post()['comments']]
           );
         }
         else {
@@ -32,7 +34,8 @@ try {
         break;
 
         case 'accueil':
-        echo $twig->render('accueil.twig', ['posts'=> listPosts()]);
+        $listpost = new FrontendController();
+        echo $twig->render('accueil.twig', ['posts'=> $listpost->listPosts()]);
         break;
 
         case 'about': 
@@ -74,7 +77,9 @@ try {
 
             if (!empty($_POST['author']) && !empty($_POST['comment']) && !empty($_POST['civility'])) {
 
-                addComment($_GET['id'], $_POST['author'], $_POST['comment'], $_POST['civility']);
+                $addComment = new FrontendController();
+
+                $addComment->addComment($_GET['id'], $_POST['author'], $_POST['comment'], $_POST['civility']);
 
             }
 

@@ -1,6 +1,6 @@
 <?php 
-
-require_once 'model/Manager.php';
+namespace blog\src\model;
+use blog\src\model\Manager;
 
 class CommentManager extends Manager{
 

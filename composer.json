@@ -12,5 +12,12 @@
             "email": "sabri@hamda.ch"
         }
     ],
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+
+    "autoload": {
+        "psr-4": {"blog\\src\\": "src/"}
+        
+    }
+     
+
 }

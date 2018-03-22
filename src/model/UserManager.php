@@ -1,5 +1,6 @@
 <?php
-require_once 'model/Manager.php';
+namespace blog\model;
+use blog\src\model\Manager;
 
 class UserManager extends Manager{
 

@@ -1,17 +1,16 @@
 <?php
+namespace blog\src\controller;
+use blog\src\model\PostManager;
+use blog\src\model\CommentManager;
 
-require_once('model/PostManager.php');
-require_once('model/CommentManager.php');
-
-function page()
+/**
+* 
+*/
+class FrontendController
 {
-	$postManager = new PostManager();
-	$posts = $postManager->getPosts();
-	$title= 'mon blog';
-	
-}
 
-function listPosts()
+
+public function listPosts()
 
 {
 	$postManager = new PostManager();
@@ -24,7 +23,7 @@ function listPosts()
 }
 
 
-function post()
+public function post()
 
 {
 	$postManager = new PostManager();
@@ -42,7 +41,7 @@ function post()
 
 }
 
-function addComment($postId, $author, $comment, $civility)
+public function addComment($postId, $author, $comment, $civility)
 
 {
 	$commentManager = new CommentManager();
@@ -65,8 +64,10 @@ function addComment($postId, $author, $comment, $civility)
     
 
 }
-function errors($error){
+public function errors($error){
 	
 	require 'view/frontend/errorView.twig';
 } 
+
+}
 
