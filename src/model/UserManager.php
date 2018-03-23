@@ -13,7 +13,7 @@ class UserManager extends Manager{
 
 		$register = $db->prepare('INSERT INTO users(prenom, password, email, civilite, register_date, updated_date) VALUES(?, ?, ?, ?, NOW(), NOW())');
 
-		$affectedLines = $register->execute(array($prenom, md5($password), $email, $civility));
+		$affectedLines = $register->execute(array($prenom, $password, $email, $civility));
 
 
 		return $affectedLines;

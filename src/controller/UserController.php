@@ -12,7 +12,7 @@ class UserController
 
 {
 	$addUser = new UserManager();
-    $affectedLines = $addUser->registerUser($prenom, $password, $email, $civility);
+    $affectedLines = $addUser->registerUser($prenom, password_hash($password,PASSWORD_DEFAULT), $email, $civility);
 
 
     if ($affectedLines === false) {
