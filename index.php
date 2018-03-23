@@ -62,16 +62,16 @@ try {
 
 
         if (!isset($_POST['registerSubmit'])) {
-            $etat = "pas touché";
+            
             echo $twig->render('registerView.twig',['etat'=> $etat]);
         }
         else{
-            $etat = "touché coulé";
+            $role = "visitor";
             if (!empty($_POST['civility']) && !empty($_POST['prenom']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['passwordConfirm'])) {
 
                 if ($_POST['passwordConfirm'] == $_POST['password']) {
                       $addUser = new UserController;
-                      $addUser->addUser($_POST['prenom'],$_POST['password'],$_POST['email'],$_POST['civility']);
+                      $addUser->addUser($role, $_POST['prenom'],$_POST['password'],$_POST['email'],$_POST['civility']);
                 echo $twig->render('registerView.twig',['etat'=> $etat]);
             }
             else {

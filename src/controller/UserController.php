@@ -8,11 +8,11 @@ use blog\src\model\UserManager;
 class UserController
 {
 	
-	public function addUser($prenom, $password, $email, $civility)
+	public function addUser($role, $prenom, $password, $email, $civility)
 
 {
 	$addUser = new UserManager();
-    $affectedLines = $addUser->registerUser($prenom, password_hash($password,PASSWORD_DEFAULT), $email, $civility);
+    $affectedLines = $addUser->registerUser($role, $prenom, password_hash($password,PASSWORD_DEFAULT), $email, $civility);
 
 
     if ($affectedLines === false) {
