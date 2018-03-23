@@ -1,6 +1,6 @@
 <?php
-
 use blog\src\controller\FrontendController;
+use blog\src\controller\UserController;
 use blog\src\controller\Controller;
 require_once('vendor/autoload.php');
 
@@ -60,7 +60,28 @@ try {
         break;
         case 'register':
 
-        echo $twig->render('registerView.twig');
+
+        if (!isset($_POST['registerSubmit'])) {
+            $etat = "pas touché";
+            echo $twig->render('registerView.twig',['etat'=> $etat]);
+        }else{
+            $etat = "touché coulé";
+            if (!empty($_POST['civility']) && !empty($_POST['prenom']) && !empty($_POST['email']) && !empty($_POST['password'])) {
+                $addUser = new UserController;
+                $addUser->addUser($_POST['prenom'],$_POST['password'],$_POST['email'],$_POST['civility']);
+                echo $twig->render('registerView.twig',['etat'=> $etat]);
+            }
+            else {
+
+                throw new Exception("Impossible de vous enregistrer, Tous les champs ne sont pas remplis !");
+
+            }
+        }
+
+        break;
+        case 'login':
+
+        echo $twig->render('loginView.twig');
 
         break;
        

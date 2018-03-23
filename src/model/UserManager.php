@@ -1,19 +1,19 @@
 <?php
-namespace blog\model;
+namespace blog\src\model;
 use blog\src\model\Manager;
 
 class UserManager extends Manager{
 
 
-	public function registerUsers($nom, $prenom, $email, $civility)
+	public function registerUser($prenom, $password, $email, $civility)
 
 	{
 
 		$db = $this->dbConnect();
 
-		$register = $db->prepare('INSERT INTO users(nom, prenom,email,civilite, register_date, updated_date) VALUES(?, ?, ?, ?, NOW(),NOW())');
+		$register = $db->prepare('INSERT INTO users(prenom, password, email, civilite, register_date, updated_date) VALUES(?, ?, ?, ?, NOW(), NOW())');
 
-		$affectedLines = $register->execute(array($userId, $nom, $prenom, $email, $civility));
+		$affectedLines = $register->execute(array($prenom, md5($password), $email, $civility));
 
 
 		return $affectedLines;

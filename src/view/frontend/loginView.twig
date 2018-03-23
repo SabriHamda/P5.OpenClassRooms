@@ -11,43 +11,27 @@
 				
 				<div class="row">
 					<div class="col-md-4">
-						<h2>S'enregistrer {{ etat }}</h2>
+						<h2>Se Connecter</h2>
 					</div>
 				</div>
-				<form method="post" action="">
+				<form action="">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-12">
+									
 									<div class="form-group">
-										
-										<select class="c-select form-control" name="civility" required>
-
-											<option value="man">Je suis un Homme </option>
-											<option value="woman">Je suis une Femme</option>
-											
-										</select>
+										<input type="text" class="form-control" placeholder="Email">
 									</div>
 									<div class="form-group">
-										<input type="text" name="prenom" class="form-control" placeholder="Prenom" required>
+										<input type="text" class="form-control" placeholder="Mot de passe">
 									</div>
 									<div class="form-group">
-										<input type="email" name="email" class="form-control" placeholder="Email" required>
+										<input class="btn btn-primary btn-md" value="S'enregistrer" type="submit">
 									</div>
 									
 								</div>
-								<div class="col-md-6">
 								
-									<div class="form-group">
-										<input type="password" name="password" class="form-control" placeholder="Mot de passe" required>
-									</div>
-									<div class="form-group">
-										<input type="password" name="passwordConfirm" class="form-control" placeholder="Confirmer le Mot de passe" required>
-									</div>
-									<div class="form-group">
-										<input class="btn btn-primary btn-md" name="registerSubmit" value="S'enregistrer" type="submit">
-									</div>
-								</div>
 								
 							</div>
 						</div>
