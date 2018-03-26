@@ -4,13 +4,6 @@ use blog\src\controller\Controller;
 use blog\src\controller\UserController;
 use blog\src\controller\FrontendController;
 require_once('vendor/autoload.php');
-
-
-
-$controller = new Controller($loader,$twig);
-$loader = $controller->$loader;
-$twig = $controller->$twig;
-$twig->addGlobal('session', $_SESSION);
 $token= $_SESSION['token']= md5(uniqid(mt_rand(),true)); 
 
 
@@ -23,6 +16,7 @@ try {
     
 
     $page = $_GET['action']; 
+    $viewPage = new controller();
 
 
     switch($page) {
@@ -30,7 +24,7 @@ try {
         case 'post':
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             $post = new FrontendController();
-            echo $twig->render(
+            echo $viewPage->viewPage(
                 'postView.twig',
                 ['post'=> $post->post()['post'],
                 'comments'=> $post->post()['comments']]
@@ -44,29 +38,29 @@ try {
         case 'accueil':
         $listpost = new FrontendController();
         
-        echo $twig->render('accueil.twig', ['posts'=> $listpost->listPosts()]);
+        echo $viewPage->viewPage('accueil.twig', ['posts'=> $listpost->listPosts()]);
         break;
 
         case 'about': 
 
-        echo $twig->render('about.twig');
+        echo $viewPage->viewPage('about.twig');
 
         break;
 
         case 'blog': 
 
-        echo $twig->render('blog.twig');
+        echo $viewPage->viewPage('blog.twig');
 
         break;
 
         case 'portfolio':
 
-        echo $twig->render('portfolio.twig');
+        echo $viewPage->viewPage('portfolio.twig');
 
         break;
         case 'contact':
 
-        echo $twig->render('contact.twig');
+        echo $viewPage->viewPage('contact.twig');
 
         break;
         case 'register':
@@ -74,7 +68,7 @@ try {
 
         if (!isset($_POST['registerSubmit'])) {
             
-            echo $twig->render('registerView.twig',['etat'=> $etat]);
+            echo $viewPage->viewPage('registerView.twig',['etat'=> $etat]);
         }
         else{
             $role = "visitor";
@@ -83,7 +77,7 @@ try {
                 if ($_POST['passwordConfirm'] == $_POST['password']) {
                       $addUser = new UserController;
                       $addUser->addUser($role, $_POST['prenom'],$_POST['password'],$_POST['email'],$_POST['civility']);
-                echo $twig->render('registerView.twig',['prenom'=> $prenom]);
+                echo $viewPage->viewPage('registerView.twig',['prenom'=> $prenom]);
             }
             else {
 
@@ -102,7 +96,7 @@ try {
         break;
         case 'login':
         if (!isset($_POST['loginSubmit'])) {
-            echo $twig->render('loginView.twig');
+            echo $viewPage->viewPage('loginView.twig');
         }else{
             if (!empty($_POST['email'] && !empty($_POST['password']))) {
                 $login = new UserController();
@@ -155,13 +149,13 @@ try {
         case 'logout':
         $logout = new UserController();
         $logout->logout();
-        //echo $twig->render('accueil.twig');
+        //echo $viewPage->viewPage('accueil.twig');
 
         break;
 
         default :
 
-        echo $twig->render('accueil.twig');
+        echo $viewPage->viewPage('accueil.twig');
 
         break;
 
@@ -171,7 +165,7 @@ try {
 catch (Exception $e) {
 
     $error = $e->getMessage();
-    echo $twig->render('errorView.twig', ['error'=> $error]);
+    echo $viewPage->viewPage('errorView.twig', ['error'=> $error]);
     
 }
 

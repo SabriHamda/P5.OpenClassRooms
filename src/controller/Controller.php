@@ -8,25 +8,35 @@ class Controller
 
 protected $loader;
 protected $twig;
+protected $token;
 
 /**
  * Configure Twig to load templates.
  * @param obj $loader looks up the templates in the /src/view/frontend/ folder.
  * @param obj $twig   Twig uses a central object called the environment (of class Twig_Environment). Instances of this class are used to store the configuration and extensions, and are used to load templates from the file system or other locations.
  */
-	function __construct($loader,$twig)
+	function __construct()
 	{
-		$this->$loader = new \Twig_Loader_Filesystem('src/view/frontend');
+		$this->token = $_SESSION['token']= md5(uniqid(mt_rand(),true));
 
-		$this->$twig = new \Twig_Environment($this->$loader, array(
+		$this->loader = new \Twig_Loader_Filesystem('src/view/frontend');
+
+		$this->twig = new \Twig_Environment($this->loader, array(
     	//'cache' => false,
 		));
 
-		
+		$this->twig->addGlobal('session', $_SESSION);
 
-		return $twig;
+
+		return $this->twig;
 
 		
+	}
+
+	public function viewPage($page, array $params = array()){
+
+		$viewPage = $this->twig->render($page,$params);
+		return $viewPage;
 	}
 
 } 
