@@ -129,6 +129,7 @@ figure figcaption {
   font-size: 34px;
   height:70px;
   line-height: 70px;
+  
 }
 @media screen and (max-width: 768px) {
   #fh5co-aside #fh5co-logo {
@@ -495,7 +496,6 @@ body.offcanvas #fh5co-aside {
   -o-transform: translateX(0);
   transform: translateX(0);
   width: 270px;
-  background: #fff;
   z-index: 999;
   position: fixed;
 }

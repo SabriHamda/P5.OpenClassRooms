@@ -2,14 +2,16 @@
 namespace blog\src\controller;
 use blog\src\model\PostManager;
 use blog\src\model\CommentManager;
-
 /**
 * 
 */
 class FrontendController
 {
 
-
+/**
+ * [listPosts description]
+ * @return [type] [description]
+ */
 public function listPosts()
 
 {
@@ -22,7 +24,10 @@ public function listPosts()
 
 }
 
-
+/**
+ * [post description]
+ * @return [type] [description]
+ */
 public function post()
 
 {
@@ -40,7 +45,13 @@ public function post()
     //require ('view/frontend/postView.twig');
 
 }
-
+/**
+ * [addComment description]
+ * @param [type] $postId   [description]
+ * @param [type] $author   [description]
+ * @param [type] $comment  [description]
+ * @param [type] $civility [description]
+ */
 public function addComment($postId, $author, $comment, $civility)
 
 {
@@ -64,6 +75,12 @@ public function addComment($postId, $author, $comment, $civility)
     
 
 }
+
+/**
+ * [errors description]
+ * @param  [type] $error [description]
+ * @return [type]        [description]
+ */
 public function errors($error){
 	
 	require 'view/frontend/errorView.twig';

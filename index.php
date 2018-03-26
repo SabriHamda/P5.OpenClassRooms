@@ -1,16 +1,26 @@
 <?php
-use blog\src\controller\FrontendController;
-use blog\src\controller\UserController;
+session_start();
 use blog\src\controller\Controller;
+use blog\src\controller\UserController;
+use blog\src\controller\FrontendController;
 require_once('vendor/autoload.php');
+
 
 
 $controller = new Controller($loader,$twig);
 $loader = $controller->$loader;
 $twig = $controller->$twig;
+$twig->addGlobal('session', $_SESSION);
+$token= $_SESSION['token']= md5(uniqid(mt_rand(),true)); 
+
+
+
+
+
+
 
 try {
-
+    
 
     $page = $_GET['action']; 
 
@@ -33,6 +43,7 @@ try {
 
         case 'accueil':
         $listpost = new FrontendController();
+        
         echo $twig->render('accueil.twig', ['posts'=> $listpost->listPosts()]);
         break;
 
@@ -72,7 +83,7 @@ try {
                 if ($_POST['passwordConfirm'] == $_POST['password']) {
                       $addUser = new UserController;
                       $addUser->addUser($role, $_POST['prenom'],$_POST['password'],$_POST['email'],$_POST['civility']);
-                echo $twig->render('registerView.twig',['etat'=> $etat]);
+                echo $twig->render('registerView.twig',['prenom'=> $prenom]);
             }
             else {
 
@@ -90,8 +101,18 @@ try {
 
         break;
         case 'login':
+        if (!isset($_POST['loginSubmit'])) {
+            echo $twig->render('loginView.twig');
+        }else{
+            if (!empty($_POST['email'] && !empty($_POST['password']))) {
+                $login = new UserController();
+                $login->login($_POST['email'],$_POST['password']);
+            }else{
+                throw new Exception("Impossible de vous enregistrer, Veuillez vérifier vos informations de connection");
+            }
+        }
 
-        echo $twig->render('loginView.twig');
+        
 
         break;
        
@@ -128,6 +149,13 @@ try {
         }
 
         
+
+        break;
+
+        case 'logout':
+        $logout = new UserController();
+        $logout->logout();
+        //echo $twig->render('accueil.twig');
 
         break;
 

@@ -1,10 +1,25 @@
 {% block menu %}
+	{% if session.civility == "man" %} 
+							{% set avatar = "public/assets/images/man.svg" %}
+						{% else %} 
+							{% set avatar = "public/assets/images/woman.svg" %}
+						{% endif %}
 
 	<aside id="fh5co-aside" role="complementary" class="border js-fullheight color-grey">
 
-			<h1 id="fh5co-logo" style="margin-top: -50px;">
+		
+		{% if session.prenom|default %}
+			<h1 id="fh5co-logo" style="margin-top: -50px;width:100%;text-align:left;margin-left:10px;">
+				<img src="{{ avatar }}" class="img-circle" alt="Cinque Terre" width="60" height="60">
+				<a href="index.html">Bonjour {{ session.prenom }}</a></h1>
+
+			{% else %}
+				<h1 id="fh5co-logo" style="margin-top: -50px;">
 				<img src="https://hamda.ch/images/photos/PIC4.jpg" class="img-circle" alt="Cinque Terre" width="60" height="60">
-				<a href="index.html">sabri hamda</a></h1>
+				<a href="index.html">Sabri Hamda</a></h1>
+		{% endif %}
+
+					
 			<nav id="fh5co-main-menu" style="margin-top:-50px;" role="navigation">
 				<ul>
 					<li class="fh5co-active color-yellow"><a href="index.php?action=accueil">Accueil</a></li>
@@ -12,17 +27,24 @@
 					<li class="color-orange"><a href="index.php?action=portfolio">Creations</a></li>
 					<li class="color-red"><a href="index.php?action=blog">Blog</a></li>
 					<li class="color-pink"><a href="index.php?action=contact">Contact</a></li>
+					{% if session.prenom|default %}
+						<li id="register" class="color-pirple"><a href="index.php?action=logout">Déconnection</a></li>
+					{% else %}
 					<li id="login" class="color-pirple-light"><a href="index.php?action=login">Login</a></li>
 					<li id="register" class="color-pirple"><a href="index.php?action=register">Register</a></li>
+
+					{% endif %}
+
+
 				</ul>
 			</nav>
 
 			<div class="fh5co-footer">
 				<p><small>&copy; 2018 HAMDA All Rights Reserved.</span> <span>Designed by <a href="https://hamda.ch" target="_blank">&nbsp; Sabri Hamda</a> </span> <span>Web Site <a href="https://hamda.ch" target="_blank">&nbsp; www.hamda.ch</a></span></small></p>
 				<ul>
+					<li><a href="#"><i class="icon-google"></i></a></li>
 					<li><a href="#"><i class="icon-facebook2"></i></a></li>
-					<li><a href="#"><i class="icon-twitter2"></i></a></li>
-					<li><a href="#"><i class="icon-instagram"></i></a></li>
+					<li><a href="#"><i class="icon-github"></i></a></li>
 					<li><a href="#"><i class="icon-linkedin2"></i></a></li>
 				</ul>
 			</div>

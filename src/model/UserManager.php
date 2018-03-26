@@ -20,6 +20,18 @@ class UserManager extends Manager{
 		return $affectedLines;
 
 	}
+	public function userLogin($email,$password)
+
+	{
+		$db = $this->dbConnect();
+		$req = $db->prepare('SELECT role, prenom, password, email, civilite FROM users WHERE email = :email');
+		$req->bindValue(':email',$email,\PDO::PARAM_STR);
+		$req->execute();
+		$identity = $req->fetch();
+
+		return $identity;
+
+	}
 	
 
 }
