@@ -4,12 +4,6 @@ use blog\src\controller\Controller;
 use blog\src\controller\UserController;
 use blog\src\controller\FrontendController;
 require_once('vendor/autoload.php');
-$token= $_SESSION['token']= md5(uniqid(mt_rand(),true)); 
-
-
-
-
-
 
 
 try {
@@ -28,7 +22,7 @@ try {
                 'postView.twig',
                 ['post'=> $post->post()['post'],
                 'comments'=> $post->post()['comments']]
-          );
+            );
         }
         else {
             throw new Exception("aucun identifiant d'article envoyé");
@@ -75,91 +69,91 @@ try {
             if (!empty($_POST['civility']) && !empty($_POST['prenom']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['passwordConfirm'])) {
 
                 if ($_POST['passwordConfirm'] == $_POST['password']) {
-                      $addUser = new UserController;
-                      $addUser->addUser($role, $_POST['prenom'],$_POST['password'],$_POST['email'],$_POST['civility']);
-                echo $viewPage->viewPage('registerView.twig',['prenom'=> $prenom]);
-            }
-            else {
+                  $addUser = new UserController;
+                  $addUser->addUser($role, $_POST['prenom'],$_POST['password'],$_POST['email'],$_POST['civility']);
+                  echo $viewPage->viewPage('registerView.twig',['prenom'=> $prenom]);
+              }
+              else {
 
                 throw new Exception("Impossible de vous enregistrer, Les deux mot des passe ne sont pas identique");
 
             }
-                }else {
+        }else {
 
-                throw new Exception("Impossible de vous enregistrer, Tous les champs ne sont pas remplis !");
+            throw new Exception("Impossible de vous enregistrer, Tous les champs ne sont pas remplis !");
 
-            }
-
-              
         }
 
-        break;
-        case 'login':
-        if (!isset($_POST['loginSubmit'])) {
-            echo $viewPage->viewPage('loginView.twig');
+        
+    }
+
+    break;
+    case 'login':
+    if (!isset($_POST['loginSubmit'])) {
+        echo $viewPage->viewPage('loginView.twig');
+    }else{
+        if (!empty($_POST['email'] && !empty($_POST['password']))) {
+            $login = new UserController();
+            $login->login($_POST['email'],$_POST['password']);
         }else{
-            if (!empty($_POST['email'] && !empty($_POST['password']))) {
-                $login = new UserController();
-                $login->login($_POST['email'],$_POST['password']);
-            }else{
-                throw new Exception("Impossible de vous enregistrer, Veuillez vérifier vos informations de connection");
-            }
+            throw new Exception("Impossible de vous enregistrer, Veuillez vérifier vos informations de connection");
         }
+    }
 
-        
+    
 
-        break;
-       
-        
-        
+    break;
+    
+    
+    
 
-        
-        
-        case 'addComment':
+    
+    
+    case 'addComment':
 
-        if (isset($_GET['id']) && $_GET['id'] > 0) {
+    if (isset($_GET['id']) && $_GET['id'] > 0) {
 
-            if (!empty($_POST['author']) && !empty($_POST['comment']) && !empty($_POST['civility'])) {
+        if (!empty($_POST['author']) && !empty($_POST['comment']) && !empty($_POST['civility'])) {
 
-                $addComment = new FrontendController();
+            $addComment = new FrontendController();
 
-                $addComment->addComment($_GET['id'], $_POST['author'], $_POST['comment'], $_POST['civility']);
-
-            }
-
-            else {
-
-                throw new Exception("Tous les champs ne sont pas remplis !");
-
-            }
+            $addComment->addComment($_GET['id'], $_POST['author'], $_POST['comment'], $_POST['civility']);
 
         }
 
         else {
 
-            throw new Exception("aucun identifiant de billet envoyé");
-
+            throw new Exception("Tous les champs ne sont pas remplis !");
 
         }
 
-        
+    }
 
-        break;
+    else {
 
-        case 'logout':
-        $logout = new UserController();
-        $logout->logout();
-        //echo $viewPage->viewPage('accueil.twig');
+        throw new Exception("aucun identifiant de billet envoyé");
 
-        break;
-
-        default :
-
-        echo $viewPage->viewPage('accueil.twig');
-
-        break;
 
     }
+
+    
+
+    break;
+
+    case 'logout':
+    $logout = new UserController();
+    $logout->logout();
+        //echo $viewPage->viewPage('accueil.twig');
+
+    break;
+
+    default :
+
+    echo $viewPage->viewPage('accueil.twig');
+
+    break;
+
+}
 
 }
 catch (Exception $e) {

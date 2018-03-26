@@ -1,11 +1,21 @@
 <?php
 namespace blog\src\model;
 use blog\src\model\Manager;
-
+/**
+ * This class will connect to the data base to manage the users
+ */
 class UserManager extends Manager{
 	
 
-
+	/**
+	* this function inssert the user in the db.
+ 	* @param string $role     the role of user.
+ 	* @param string $prenom   the name of user.
+ 	* @param string $password the password of user.
+ 	* @param string $email    the email of user.
+ 	* @param string $civility the civility of user.
+	 * @return array          all information from the user.
+	 */
 	public function registerUser($role, $prenom, $password, $email, $civility)
 
 	{
@@ -20,6 +30,13 @@ class UserManager extends Manager{
 		return $affectedLines;
 
 	}
+	
+	/**
+	 * This function select user in db with the given email.
+	 * @param  string $email    the email of the user.
+	 * @param  string $password the password of the user.
+	 * @return array  $identity all informations from the user.
+	 */
 	public function userLogin($email,$password)
 
 	{

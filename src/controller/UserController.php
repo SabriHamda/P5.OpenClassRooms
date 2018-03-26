@@ -4,7 +4,7 @@ use blog\src\model\UserManager;
 
 
 /**
-* 
+* This class will users functions
 */
 
 class UserController
@@ -49,7 +49,12 @@ class UserController
     
 
 }
-
+    /**
+     * This function login and start session if user exist.
+     * @param  string $email    [description]
+     * @param  string $password [description]
+     * @return string session start   [description]
+     */
     public function login($email,$password)
 
 {
@@ -86,6 +91,11 @@ class UserController
     
 
 }
+
+/**
+ * This function close session.
+ * @return page return to the main page.
+ */
 public function logOut(){
     session_destroy();
     header('Location: index.php?action=accueil');
