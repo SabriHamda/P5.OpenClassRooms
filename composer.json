@@ -5,7 +5,8 @@
         "twbs/bootstrap": "^3.3",
         "twig/twig": "^2.4",
         "components/jquery": "^3.3",
-        "tinymce/tinymce": "4.7.9"
+        "tinymce/tinymce": "4.7.9",
+        "components/font-awesome": "^5.0"
     },
     "authors": [
         {

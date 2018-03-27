@@ -50,9 +50,10 @@
 	<link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.css">
 	<!-- Flexslider  -->
 	<link rel="stylesheet" href="public/assets/css/flexslider.css">
+	<!-- Font-awesome -->
+	<link rel="stylesheet" href="vendor/components/font-awesome/css/fontawesome-all.min.css">
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="public/assets/css/style.css">
-	
 
 	<!-- Modernizr JS -->
 	<script src="public/assets/js/modernizr-2.6.2.min.js"></script>
@@ -60,7 +61,16 @@
 	<!--[if lt IE 9]>
 	<script src="public/assets/js/respond.min.js"></script>
 	<![endif]-->
-    
+    <script src="vendor/tinymce/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript">
+  tinymce.init({
+    selector: '#mytextarea',
+    //inline: true,
+    images_upload_base_path: '/some/basepath',
+    theme: 'modern'
+
+  });
+  </script>
 
 	</head>
 	<body>

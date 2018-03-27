@@ -1,11 +1,11 @@
-{% block menu %}
+{% block backendMenu %}
 	{% if session.civility == "man" %} 
 							{% set avatar = "public/assets/images/man.svg" %}
 						{% else %} 
 							{% set avatar = "public/assets/images/woman.svg" %}
 						{% endif %}
-
-	<aside id="fh5co-aside" role="complementary" class="border js-fullheight color-grey">
+<div class="sub-menu" style="width:100vw;height:88px;position:fixed;top:0px;right:0px;background:#2d3038;"></div>
+	<aside id="fh5co-aside" role="complementary" class="border js-fullheight color-grey backend-menu">
 
 		
 		{% if session.prenom|default %}
@@ -22,15 +22,14 @@
 					
 			<nav id="fh5co-main-menu" style="margin-top:-50px;" role="navigation">
 				<ul>
-					<li class="fh5co-active color-yellow"><a href="index.php?action=accueil">Accueil</a></li>
+					<li class="fh5co-active color-yellow"><a href="index.php?action=accueil">
+						<i class="fas fa-home"></i></a></li>
 					<li class="color-orange-light"><a href="index.php?action=about">A Propos</a></li>
 					<li class="color-orange"><a href="index.php?action=portfolio">Creations</a></li>
 					<li class="color-red"><a href="index.php?action=blog">Blog</a></li>
 					<li class="color-pink"><a href="index.php?action=contact">Contact</a></li>
 					{% if session.prenom|default %}
-						{% if session.role == 'admin' %}
 						<li class="color-orange-light"><a href="index.php?action=dashboard">Dashboard</a></li>
-					{% endif %}	
 						<li id="register" class="color-pirple"><a href="index.php?action=logout">Déconnection</a></li>
 					{% else %}
 					<li id="login" class="color-pirple-light"><a href="index.php?action=login">Login</a></li>
@@ -43,7 +42,7 @@
 			</nav>
 
 			<div class="fh5co-footer">
-				<p><small>&copy; 2018 HAMDA All Rights Reserved.</span> <span>Designed by <a href="https://hamda.ch" target="_blank">&nbsp; Sabri Hamda</a> </span> <span>Web Site <a href="https://hamda.ch" target="_blank">&nbsp; www.hamda.ch</a></span></small></p>
+				<p><small>&copy; 2018 HAMDA All Rights Reserved backend.</span> <span>Designed by <a href="https://hamda.ch" target="_blank">&nbsp; Sabri Hamda</a> </span> <span>Web Site <a href="https://hamda.ch" target="_blank">&nbsp; www.hamda.ch</a></span></small></p>
 				<ul>
 					<li><a href="#"><i class="icon-google"></i></a></li>
 					<li><a href="#"><i class="icon-facebook2"></i></a></li>
@@ -54,4 +53,4 @@
 
 		</aside>
 
-{% endblock menu %}
+{% endblock backendMenu %}

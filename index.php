@@ -18,7 +18,7 @@ try {
         case 'post':
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             $post = new FrontendController();
-            echo $viewPage->viewPage(
+            echo $viewPage->viewFrontEnd(
                 'postView.twig',
                 ['post'=> $post->post()['post'],
                 'comments'=> $post->post()['comments']]
@@ -32,29 +32,29 @@ try {
         case 'accueil':
         $listpost = new FrontendController();
         
-        echo $viewPage->viewPage('accueil.twig', ['posts'=> $listpost->listPosts()]);
+        echo $viewPage->viewFrontEnd('accueil.twig', ['posts'=> $listpost->listPosts()]);
         break;
 
         case 'about': 
 
-        echo $viewPage->viewPage('about.twig');
+        echo $viewPage->viewFrontEnd('about.twig');
 
         break;
 
         case 'blog': 
 
-        echo $viewPage->viewPage('blog.twig');
+        echo $viewPage->viewFrontEnd('blog.twig');
 
         break;
 
         case 'portfolio':
 
-        echo $viewPage->viewPage('portfolio.twig');
+        echo $viewPage->viewFrontEnd('portfolio.twig');
 
         break;
         case 'contact':
 
-        echo $viewPage->viewPage('contact.twig');
+        echo $viewPage->viewFrontEnd('contact.twig');
 
         break;
         case 'register':
@@ -62,7 +62,7 @@ try {
 
         if (!isset($_POST['registerSubmit'])) {
             
-            echo $viewPage->viewPage('registerView.twig',['etat'=> $etat]);
+            echo $viewPage->viewFrontEnd('registerView.twig',['etat'=> $etat]);
         }
         else{
             $role = "visitor";
@@ -71,7 +71,7 @@ try {
                 if ($_POST['passwordConfirm'] == $_POST['password']) {
                   $addUser = new UserController;
                   $addUser->addUser($role, $_POST['prenom'],$_POST['password'],$_POST['email'],$_POST['civility']);
-                  echo $viewPage->viewPage('registerView.twig',['prenom'=> $prenom]);
+                  echo $viewPage->viewFrontEnd('registerView.twig',['prenom'=> $prenom]);
               }
               else {
 
@@ -90,7 +90,12 @@ try {
     break;
     case 'login':
     if (!isset($_POST['loginSubmit'])) {
-        echo $viewPage->viewPage('loginView.twig');
+        if (empty($_SESSION['role'])) {
+            echo $viewPage->viewFrontEnd('loginView.twig');
+        }else{
+            header('Location: index.php?action=accueil');
+        }
+        
     }else{
         if (!empty($_POST['email'] && !empty($_POST['password']))) {
             $login = new UserController();
@@ -140,16 +145,29 @@ try {
 
     break;
 
+
+    case 'dashboard':
+    if (!empty($_SESSION['prenom']) && !empty($_SESSION['password']) && !empty($_SESSION['role'])) {
+        if ($_SESSION['role'] == 'admin') {
+            $listpost = new FrontendController();
+            echo $viewPage->viewBackEnd('dashboard.twig',['posts'=> $listpost->listPosts()]);
+        }else{
+            header('Location: index.php?action=login');        }
+    }else{
+        header('Location: index.php?action=login');
+    }
+    break;
+
     case 'logout':
     $logout = new UserController();
     $logout->logout();
-        //echo $viewPage->viewPage('accueil.twig');
+        //echo $viewPage->viewFrontEnd('accueil.twig');
 
     break;
 
     default :
 
-    echo $viewPage->viewPage('accueil.twig');
+    echo $viewPage->viewFrontEnd('accueil.twig');
 
     break;
 
@@ -159,7 +177,7 @@ try {
 catch (Exception $e) {
 
     $error = $e->getMessage();
-    echo $viewPage->viewPage('errorView.twig', ['error'=> $error]);
+    echo $viewPage->viewFrontEnd('errorView.twig', ['error'=> $error]);
     
 }
 

@@ -8,7 +8,11 @@ class Controller
 
 	protected $loader;
 	protected $twig;
+	protected $backLoader;
+	protected $twigBack;
 	protected $token;
+	protected $viewFrontPage;
+	protected $viewBackPage;
 
 /**
  * Configure Twig to load templates.
@@ -19,29 +23,43 @@ function __construct()
 {
 	$this->token = $_SESSION['token']= md5(uniqid(mt_rand(),true));
 
-	$this->loader = new \Twig_Loader_Filesystem('src/view/frontend');
+}
+/**
+ * This function will render twig frontend views
+ * @param  string $page   the page to view
+ * @param  array  $params the params added to this view.
+ * @return string         the final page to view with it's params.
+ */
+public function viewFrontEnd($page, array $params = array()){
 
+	$this->loader = new \Twig_Loader_Filesystem('src/view/frontend');
 	$this->twig = new \Twig_Environment($this->loader, array(
     	//'cache' => false,
 	));
 
 	$this->twig->addGlobal('session', $_SESSION);
 
-
-	return $this->twig;
-
-
+	$this->viewFrontPage = $this->twig->render($page,$params);
+	return $this->viewFrontPage;
 }
 /**
- * This function will render twig views
+ * This function will render twig backend views
  * @param  string $page   the page to view
  * @param  array  $params the params added to this view.
  * @return string         the final page to view with it's params.
  */
-public function viewPage($page, array $params = array()){
+public function viewBackEnd($page, array $params = array()){
 
-	$viewPage = $this->twig->render($page,$params);
-	return $viewPage;
+	$this->backLoader = new \Twig_Loader_Filesystem('src/view/dashboard');
+	$this->twigBack = new \Twig_Environment($this->backLoader, array(
+    	//'cache' => false,
+	));
+
+	$this->twigBack->addGlobal('session', $_SESSION);
+	$this->viewBackPage = $this->twigBack->render($page,$params);
+
+
+	return $this->viewBackPage;
 }
 
 } 
