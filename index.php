@@ -3,6 +3,8 @@ session_start();
 use blog\src\controller\Controller;
 use blog\src\controller\UserController;
 use blog\src\controller\FrontendController;
+use blog\src\controller\BackendController;
+
 require_once('vendor/autoload.php');
 
 
@@ -150,7 +152,13 @@ try {
     if (!empty($_SESSION['prenom']) && !empty($_SESSION['password']) && !empty($_SESSION['role'])) {
         if ($_SESSION['role'] == 'admin') {
             $listpost = new FrontendController();
-            echo $viewPage->viewBackEnd('dashboard.twig',['posts'=> $listpost->listPosts()]);
+            $paginatePosts = new BackendController();
+            $page = $_GET['page']-1;
+            echo $viewPage->viewBackEnd('dashboard.twig',
+                [
+                    'posts'=> $paginatePosts->listPostPaginate(5),
+                    'page'=> $page,
+            ]);
         }else{
             header('Location: index.php?action=login');        }
     }else{
