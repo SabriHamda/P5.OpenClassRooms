@@ -1,4 +1,2 @@
-#RewriteEngine on
-#RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteCond %{REQUEST_FILENAME} !-d
-#RewriteRule ^*$ /index.php?action=accueil [L,QSA]
+RewriteEngine On
+Redirect permanent /blog/index.php /blog/index.php?action=accueil

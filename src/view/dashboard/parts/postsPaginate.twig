@@ -13,7 +13,14 @@
               </tr>
             </thead>
             <tbody>
-              {% for post in posts['paginate'][page] %}
+          
+              {% if page > (posts['nbPage']) %}
+                {% set myPage = ('0') %}
+                {% else %}
+                  {% set myPage = page %}
+              {% endif %}
+         
+              {% for post in posts['paginate'][myPage] %}
 
                 <tr>
                   <td class="text-center">{{ post.id }}</td>

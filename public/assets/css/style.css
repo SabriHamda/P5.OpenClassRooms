@@ -1166,6 +1166,44 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   -o-transition: 0.5s;
   transition: 0.5s;
 }
+/*custom dashboard*/
+.dashboard-menu #fh5co-aside{
+width: 88px;
+}
+.dashboard-menu .sub-menu{
+  width:100vw;
+  height:88px;
+  position:fixed;
+  top:0px;
+  right:0px;
+  background:#2d3038;
+}
+.dashboard-menu .empty{
+  height: 78px;
+  display: block;
+}
+.dashboard-main{
+  width: 94% !important;
+}
+.dashboard-menu #fh5co-logo ,.dashboard-menu #fh5co-logo a{   
+
+    text-align: right;
+    font-family: 'Sacramento', cursive;
+    text-transform: capitalize;
+    font-weight: 700;
+    margin-bottom: 1.7em;
+    font-size: 34px;
+    height: 70px;
+    line-height: 70px;
+    color:#ffffff !important;
+    margin-top: 10px;
+    width:28%;
+    margin-right:10px;
+}
+.dashboard-menu #fh5co-main-menu ul li i{
+  font-size: 26px;
+  line-height: 76px;
+}
 @media screen and (max-width: 768px) {
   .fh5co-nav-toggle {
     opacity: 1;

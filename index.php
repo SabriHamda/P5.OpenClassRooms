@@ -153,7 +153,17 @@ try {
         if ($_SESSION['role'] == 'admin') {
             $listpost = new FrontendController();
             $paginatePosts = new BackendController();
-            $page = $_GET['page']-1;
+            
+            $nbpage = $paginatePosts->$nbpage;
+            if (empty($_GET['page'])) {
+                $page=0;
+            }else{
+            $page = $_GET['page']-1;   
+            }
+
+
+
+            
             echo $viewPage->viewBackEnd('dashboard.twig',
                 [
                     'posts'=> $paginatePosts->listPostPaginate(5),
