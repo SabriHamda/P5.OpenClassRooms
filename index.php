@@ -164,10 +164,70 @@ try {
 
 
             
-            echo $viewPage->viewBackEnd('dashboard.twig',
+            echo $viewPage->viewBackEnd('dashboardView.twig',
                 [
                     'posts'=> BackendController::tablePaginate('posts', 5, 'creation_date DESC'),
-                    'comments'=> BackendController::tablePaginate('comments', 3, 'id'),
+                    'comments'=> BackendController::tablePaginate('comments', 3, 'comment_date DESC'),
+                    'page'=> $page,
+                    'pageName'=> $pageName
+            ]);
+        }else{
+            header('Location: index.php?action=login');        }
+    }else{
+        header('Location: index.php?action=login');
+    }
+    break;
+
+    case 'articles':
+    if (!empty($_SESSION['prenom']) && !empty($_SESSION['password']) && !empty($_SESSION['role'])) {
+        if ($_SESSION['role'] == 'admin') {
+            $listpost = new FrontendController();
+            $pageName = $_GET['action'];
+            
+            $nbpage = $paginatePosts->$nbpage;
+            if (empty($_GET['page'])) {
+                $page=0;
+            }else{
+            $page = $_GET['page']-1;   
+            }
+
+
+
+            
+            echo $viewPage->viewBackEnd('listArticlesView.twig',
+                [
+                    'posts'=> BackendController::tablePaginate('posts', 10, 'creation_date DESC'),
+                    'comments'=> BackendController::tablePaginate('comments', 3, 'comment_date DESC'),
+                    'page'=> $page,
+                    'pageName'=> $pageName
+            ]);
+        }else{
+            header('Location: index.php?action=login');        }
+    }else{
+        header('Location: index.php?action=login');
+    }
+    break;
+
+    case 'add-article':
+    if (!empty($_SESSION['prenom']) && !empty($_SESSION['password']) && !empty($_SESSION['role'])) {
+        if ($_SESSION['role'] == 'admin') {
+            $listpost = new FrontendController();
+            $pageName = $_GET['action'];
+            
+            $nbpage = $paginatePosts->$nbpage;
+            if (empty($_GET['page'])) {
+                $page=0;
+            }else{
+            $page = $_GET['page']-1;   
+            }
+
+
+
+            
+            echo $viewPage->viewBackEnd('addArticleView.twig',
+                [
+                    'posts'=> BackendController::tablePaginate('posts', 10, 'creation_date DESC'),
+                    'comments'=> BackendController::tablePaginate('comments', 3, 'comment_date DESC'),
                     'page'=> $page,
                     'pageName'=> $pageName
             ]);

@@ -111,11 +111,18 @@ color:#fff !important;
   margin-bottom: 20px;
 
 }
-.quick-view li a, .quick-view h4{
+.quick-view li a, .widget span a, .quick-view h4{
   color:#fff;
 }
 .quick-view li a:hover{
   color:#222;
+}
+.add-content-form input[type="file"]{
+  background: #eee;
+  padding:10px;
+}
+.add-content-form button{
+  color:#fff;
 }
 
 
