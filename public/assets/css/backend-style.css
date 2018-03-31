@@ -107,5 +107,15 @@ color:#fff !important;
 .widget-left .thumbnail{
   margin-bottom: 0px !important;
 }
+.quick-view{
+  margin-bottom: 20px;
+
+}
+.quick-view li a, .quick-view h4{
+  color:#fff;
+}
+.quick-view li a:hover{
+  color:#222;
+}
 
 
