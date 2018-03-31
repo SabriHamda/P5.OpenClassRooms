@@ -7,27 +7,19 @@ use blog\src\model\CommentManager;
 */
 class BackendController
 {
-	private $nbPage;
-	 /**
-	  * [listPostPaginate description]
-	  * @param  [type] $nbResult [description]
-	  * @return [type]           [description]
-	  */
-	 public function listPostPaginate($nbResult)
+	
+	 public static function tablePaginate($table, $nbResult,$orderBy)
 
     {
     	$postManager = new PostManager();
-        $countPosts = $postManager->countPosts(); // total number of rows in table
+        $countRows = $postManager->countTableRows($table); //count number of rows in table
         //$nbResult = 3; // number of results to view
-        $this->nbPage = round(($countPosts/$nbResult), 0, \PHP_ROUND_HALF_UP); //round up number of pages ex: 4,3 to 5
-        $paginatePosts = array();
-			for($i=0; $i<= $this->nbPage; $i++){
-				$paginatePosts[] = $postManager->getPaginatePosts(($nbResult*$i), $nbResult);
+        $nbPage = ceil($countRows/$nbResult); //round up number of pages ex: 4,3 to 5
+        $paginateTable = array();
+			for($i=0; $i<= $nbPage; $i++){
+				$paginateTable[] = $postManager->getPaginateTable($table,($nbResult*$i), $nbResult,$orderBy);
 	        }
-
-
-        //$paginatePosts = $postManager->getPaginatePosts($nbResult);
-        $results = ['nbPage'=> $this->nbPage, 'total'=> $countPosts,'paginate'=> $paginatePosts];
+        $results = ['nbPage'=> $nbPage, 'total'=> $countRows,'paginate'=> $paginateTable];
         return $results;
  
     }

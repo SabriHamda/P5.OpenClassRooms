@@ -152,7 +152,7 @@ try {
     if (!empty($_SESSION['prenom']) && !empty($_SESSION['password']) && !empty($_SESSION['role'])) {
         if ($_SESSION['role'] == 'admin') {
             $listpost = new FrontendController();
-            $paginatePosts = new BackendController();
+            $pageName = $_GET['action'];
             
             $nbpage = $paginatePosts->$nbpage;
             if (empty($_GET['page'])) {
@@ -166,8 +166,10 @@ try {
             
             echo $viewPage->viewBackEnd('dashboard.twig',
                 [
-                    'posts'=> $paginatePosts->listPostPaginate(5),
+                    'posts'=> BackendController::tablePaginate('posts', 5, 'creation_date DESC'),
+                    'comments'=> BackendController::tablePaginate('comments', 3, 'id'),
                     'page'=> $page,
+                    'pageName'=> $pageName
             ]);
         }else{
             header('Location: index.php?action=login');        }

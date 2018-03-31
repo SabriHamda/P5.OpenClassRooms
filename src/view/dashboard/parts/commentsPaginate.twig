@@ -1,0 +1,55 @@
+{% block recentComments %} 
+<div class="widget widget-right">
+
+  <h4>Commentaires récents</h4>
+            <br>
+            <div class="bs-example" data-example-id="media-alignment">
+
+            	{% if page > (comments['nbPage']) %}
+                {% set myPage = ('0') %}
+                {% else %}
+                  {% set myPage = page %}
+              {% endif %}
+
+         
+              {% for comment in comments['paginate'][myPage] %}
+              	 {% if comment.civilite == "man" %} 
+									{% set civility = "public/assets/images/man.svg" %}
+									{% else %} 
+										{% set civility = "public/assets/images/woman.svg" %}
+										{% endif %}
+
+               <div class="media comments-media">
+                  <div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" src="{{ civility }}" data-holder-rendered="true" style="width: 64px; height: 64px;"> </a> </div>
+                  <div class="media-body">
+                  	
+                     <h4 class="media-heading">{{comment.author}}</h4>
+                     <p>{{ comment.comment}}</p>
+                  </div>
+                  <span class="label label-primary">Voir</span>
+                    <span class="label label-success">Modifier</span>
+                    <span class="label label-danger">Suprimer</span>
+               </div>
+               {% endfor %}
+            </div>
+        {% if pageName == ('dashboard') %}
+
+          {% else %}
+
+        <nav aria-label="..." id="posts-pagination">
+            <ul class="pagination pagination-sm">
+              <li class="page-item"><a class="page-link" href="index.php?action=dashboard&page={{ i }}"> << </a></li>
+             {% for i in range(1, comments['nbPage']) %}
+              <li class="page-item"><a class="page-link" href="index.php?action=dashboard&page={{ i }}">{{ i }}</a></li>
+
+            {% endfor %}
+            <li class="page-item"><a class="page-link" href="index.php?action=dashboard&page={{ i }}"> >> </a></li>
+          </ul>
+        </nav>
+    	{% endif %}
+    	<br>
+    	  <button class="btn btn-primary" type="button">
+  Total <span class="badge"> {{ comments['total'] }}</span>
+</button>
+</div>
+    {% endblock recentComments %}

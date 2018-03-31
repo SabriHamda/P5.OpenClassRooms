@@ -23,19 +23,19 @@ class PostManager extends Manager{
 		return $post;
 	}
 
-	public function countPosts()
+	public function countTableRows($table)
 	{
 		$db = $this->dbConnect();
-		$req = $db->query("SELECT  COUNT(*) as totalPosts FROM posts" );
+		$req = $db->query('SELECT  COUNT(*) as totalRows FROM '. $table .'' );
 		$donnees = $req->fetch();
 		$req->closeCursor();
-		return $donnees['totalPosts'];
+		return $donnees['totalRows'];
 
 	}
-	public function getPaginatePosts($startLine, $nbResult)
+	public function getPaginateTable($table, $startLine, $nbResult, $orderBy)
 	{
 		$db = $this->dbConnect();
-		$req = $db->query('SELECT id, title, content,image, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts ORDER BY ID LIMIT ' . $startLine . ', '. $nbResult . '');
+		$req = $db->query('SELECT * FROM '. $table .' ORDER BY '. $orderBy .' LIMIT ' . $startLine . ', '. $nbResult . '');
 		
 
 		return $req;
