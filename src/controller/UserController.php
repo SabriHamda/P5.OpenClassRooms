@@ -60,7 +60,7 @@ class UserController
                 else{
 
                 $_SESSION['role'] = $identity['role'];
-                $_SESSION['civility'] = $identity['civility'];
+                $_SESSION['civility'] = $identity['civilite'];
                 $_SESSION['prenom'] = $identity['prenom'];
                 $_SESSION['password'] = $identity['password'];
                 $_SESSION['email'] = $identity['email'];

@@ -30,10 +30,10 @@
                 <tr>
                   <td class="text-center">{{ post.id }}</td>
                   <td><strong>{{ post.title }}</strong></td>
-                  <td>{% set array = post.content|split(' ', 6) %} {{ attribute(array, 0)}} {{ attribute(array, 1)}} {{ attribute(array, 2)}} {{ attribute(array, 3)}} {{ attribute(array, 4)}} ...</td>
-                  <td>{{ post.creation_date|date("m/d/Y H:i:s", "Europe/Paris") }}</td>
+                  <td>{% set array = post.content|split(' ', 6) %} {{ attribute(array, 0)|raw }} {{ attribute(array, 1)|raw }} {{ attribute(array, 2)|raw }} {{ attribute(array, 3)|raw }} {{ attribute(array, 4)|raw }} ...</td>
+                  <td>{{ post.created_at|date("d/m/Y", "Europe/Paris") }}</td>
                   <td class="text-right">
-                    <span class="label label-primary color-blue"><a href="#">Voir</a></span>
+                    <span class="label label-primary color-blue"><a href="index.php?action=post&id={{ post.id }}">Voir</a></span>
                     <span class="label label-success color-pirple"><a href="#">Modifier</a></span>
                     <span class="label label-danger color-red"><a href="#">Suprimer</a></span>
                   </td>
@@ -57,8 +57,8 @@
 {% endif %}
       </div>
       <br>
-      <button class="btn btn-primary" type="button">
-  Total <span class="badge"> {{ posts['total'] }}</span>
+      <button class="btn btn-primary color-blue total-btn" type="button">
+  <a href="index.php?action=articles">Total <span class="badge">{{ posts['total'] }}</a></span>
 </button>
     </div>
   {% endblock recentPosts %}

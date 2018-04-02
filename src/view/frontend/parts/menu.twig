@@ -9,14 +9,14 @@
 
 		
 		{% if session.prenom|default %}
-			<h1 id="fh5co-logo" style="margin-top: -50px;width:100%;text-align:left;margin-left:10px;">
+			<h1 id="fh5co-logo" style="font-size:29px;margin-top: -50px;width:100%;text-align:left;margin-left:10px;">
 				<img src="{{ avatar }}" class="img-circle" alt="Cinque Terre" width="60" height="60">
 				<a href="index.html">Bonjour {{ session.prenom }}</a></h1>
 
 			{% else %}
 				<h1 id="fh5co-logo" style="margin-top: -50px;">
 				<img src="https://hamda.ch/images/photos/PIC4.jpg" class="img-circle" alt="Cinque Terre" width="60" height="60">
-				<a href="index.html">Sabri Hamda</a></h1>
+				<a href="index.html" style="font-size:29px;">Sabri Hamda</a></h1>
 		{% endif %}
 
 					
@@ -31,7 +31,7 @@
 						{% if session.role == 'admin' %}
 						<li class="color-orange-light"><a href="index.php?action=dashboard">Dashboard</a></li>
 					{% endif %}	
-						<li id="register" class="color-pirple"><a href="index.php?action=logout">Déconnection</a></li>
+						<li id="register" class="color-pirple"><a href="index.php?action=logout">Déconnexion</a></li>
 					{% else %}
 					<li id="login" class="color-pirple-light"><a href="index.php?action=login">Login</a></li>
 					<li id="register" class="color-pirple"><a href="index.php?action=register">Register</a></li>

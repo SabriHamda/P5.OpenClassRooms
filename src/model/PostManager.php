@@ -8,19 +8,34 @@ class PostManager extends Manager{
 	public function getPosts()
 	{
 		$db = $this->dbConnect();
-		$req = $db->query('SELECT id, title, content,image, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts ORDER BY creation_date #DESC LIMIT 0, 5');
-
-		return $req;
+		$req = $db->query('SELECT id, title, content,image, DATE_FORMAT(created_at, \'%d/%m/%Y à %Hh%imin%ss\') AS created_at_fr FROM posts ORDER BY created_at #DESC LIMIT 0, 5');
+		$res = $req->fetchAll(\PDO::FETCH_ASSOC);
+		foreach ($res as $key =>$element) {
+			$element['image'] = urldecode($element['image']);
+			$res[$key] = $element;
+		}
+		return $res;
 	}
 
 	public function getPost($postId)
 	{
 		$db = $this->dbConnect();
-		$req = $db->prepare('SELECT id, title, content,image, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts WHERE id = ?');
+		$req = $db->prepare('SELECT id, title, content,image, DATE_FORMAT(created_at, \'%d/%m/%Y à %Hh%imin%ss\') AS created_at_fr FROM posts WHERE id = ?');
 		$req->execute(array($postId));
 		$post = $req->fetch();
-
+		$post['image'] = urldecode($post['image']);
 		return $post;
+	}
+	public function addArticle($articleTitle,$articleImageUrl,$articleContent)
+	{
+		$db = $this->dbConnect();
+		$req = $db->prepare('INSERT INTO posts (title, image, content) VALUES (:articleTitle, :articleImageUrl, :articleContent)');
+		$req->bindValue(':articleTitle',$articleTitle,\PDO::PARAM_STR);
+		$req->bindValue(':articleImageUrl',urlencode($articleImageUrl),\PDO::PARAM_STR);
+		$req->bindValue(':articleContent',$articleContent,\PDO::PARAM_STR);
+		$req->execute();
+
+		
 	}
 
 	public function countTableRows($table)

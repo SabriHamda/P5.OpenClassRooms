@@ -24,8 +24,9 @@
                   <div class="media-body">
                   	
                      <h4 class="media-heading">{{comment.author}}</h4>
-                     <p>{{ comment.comment}}</p>
+                     <p>{{ comment.comment|raw}}</p>
                   </div>
+                  <span style="float:right"><small>Posté le : {{ comment.created_at|date("d/m/Y", "Europe/Paris") }} </small></span>
                   <span class="label label-primary color-blue"><a href="#">Voir</a></span>
                     <span class="label label-success color-pirple"><a href="#">Modifier</a></span>
                     <span class="label label-danger color-red"><a href="#">Suprimer</a></span>
@@ -48,8 +49,8 @@
         </nav>
     	{% endif %}
     	<br>
-    	  <button class="btn btn-primary" type="button">
-  Total <span class="badge"> {{ comments['total'] }}</span>
+    	<button class="btn btn-primary color-blue total-btn" type="button">
+  <a href="index.php?action=comments">Total <span class="badge">{{ comments['total'] }}</a></span>
 </button>
 </div>
     {% endblock recentComments %}

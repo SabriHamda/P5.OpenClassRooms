@@ -161,16 +161,15 @@ try {
             $page = $_GET['page']-1;   
             }
 
-
-
-            
             echo $viewPage->viewBackEnd('dashboardView.twig',
                 [
-                    'posts'=> BackendController::tablePaginate('posts', 5, 'creation_date DESC'),
+                    'posts'=> BackendController::tablePaginate('posts', 5, 'created_at DESC'),
                     'comments'=> BackendController::tablePaginate('comments', 3, 'comment_date DESC'),
                     'page'=> $page,
                     'pageName'=> $pageName
             ]);
+
+
         }else{
             header('Location: index.php?action=login');        }
     }else{
@@ -196,7 +195,7 @@ try {
             
             echo $viewPage->viewBackEnd('listArticlesView.twig',
                 [
-                    'posts'=> BackendController::tablePaginate('posts', 10, 'creation_date DESC'),
+                    'posts'=> BackendController::tablePaginate('posts', 10, 'created_at DESC'),
                     'comments'=> BackendController::tablePaginate('comments', 3, 'comment_date DESC'),
                     'page'=> $page,
                     'pageName'=> $pageName
@@ -226,11 +225,38 @@ try {
             
             echo $viewPage->viewBackEnd('addArticleView.twig',
                 [
-                    'posts'=> BackendController::tablePaginate('posts', 10, 'creation_date DESC'),
+                    'posts'=> BackendController::tablePaginate('posts', 10, 'created_at DESC'),
                     'comments'=> BackendController::tablePaginate('comments', 3, 'comment_date DESC'),
                     'page'=> $page,
                     'pageName'=> $pageName
             ]);
+
+
+            // if submit the add article form
+            if (!isset($_POST['submit-article-add'])) {
+                # code...
+            }else{
+                if (!empty($_POST['title-article-add']) && !empty($_FILES['img-article-add']) && !empty($_POST['content-article-add'])) {
+                    $articleTitle = $_POST['title-article-add'];
+                    $articleImage = $_FILES['img-article-add'];
+                    $articleContent = $_POST['content-article-add'];
+                    $uploadMyFile = BackendController::uploadFile('img-article-add','public/assets/images/uploads/'.$articleImage["name"].'',FALSE,array('png','gif','jpg','jpeg'));
+
+                    if ($uploadMyFile) {
+                        echo '<script type="text/javascript"> alert("image bien enregistrer");</script>';
+                        BackendController::addArticle($articleTitle,'public/assets/images/uploads/'.$articleImage["name"].'',$articleContent);
+                    }else{
+                        echo '<script type="text/javascript"> alert("probleme avec l\'image");</script>';
+                    }
+
+                    
+                }else{
+                   echo '<script type="text/javascript"> alert("champs vide");</script>';
+                }
+
+                echo '<script type="text/javascript"> alert("toucher");</script>';
+            }
+
         }else{
             header('Location: index.php?action=login');        }
     }else{

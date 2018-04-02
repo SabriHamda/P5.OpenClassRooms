@@ -121,8 +121,13 @@ color:#fff !important;
   background: #eee;
   padding:10px;
 }
-.add-content-form button{
+.add-content-form button, .total-btn a{
   color:#fff;
 }
+.total-btn a span{
+  color:#2196F3;
+}
+
+
 
 
