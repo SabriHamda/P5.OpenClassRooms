@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Projet 5 OpenClassrooms - Créez votre premier blog en PHP 
 ## Parcours Développeur d'application - PHP / Symfony
 
@@ -7,6 +8,19 @@ Si vous voulez voir le code sur GitHub, cliquez [ICI](https://github.com/SabriHa
 
 I used the theme bootstrap Marble available [HERE](https://freehtml5.co/marble-free-html5-bootstrap-template-for-portfolio-or-multi-purpose-websites/)
 If you want to see the code on GitHub, go [HERE](https://github.com/SabriHamda/P5.OpenClassRooms)
+=======
+# P5.OpenClassRooms
+ Simple PHP blog system application based on the MVC pattern and written in PHP 7.0. This project can be used as a Base MVC "framework".
+
+## Parcours Développeur d'application - PHP / Symfony
+
+
+J'ai utilisé le thème bootstrap marble disponible [ici](https://freehtml5.co/marble-free-html5-bootstrap-template-for-portfolio-or-multi-purpose-websites/) pour réaliser la partie front de ce blog.
+Si vous voulez voir le code sur GitHub, cliquez sur le lien : [https://github.com/SabriHamda/P5.OpenClassRooms.git](https://github.com/SabriHamda/P5.OpenClassRooms)
+
+I used the theme bootstrap Marble available [here](https://freehtml5.co/marble-free-html5-bootstrap-template-for-portfolio-or-multi-purpose-websites/)
+If you want to see the code on GitHub, go here : [https://github.com/SabriHamda/P5.OpenClassRooms.git](https://github.com/SabriHamda/P5.OpenClassRooms)
+>>>>>>> d5afe255689c5614cfe4f9e0b4508ce1e9eaa3eb
 
 ## Installation
 
@@ -35,4 +49,7 @@ To use this blog, you must follow this steps :
 * Website: http://freehtml5.co/
 * Twitter: http://twitter.com/fh5co
 * Facebook: http://facebook.com/fh5co
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5afe255689c5614cfe4f9e0b4508ce1e9eaa3eb
