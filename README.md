@@ -17,7 +17,7 @@ Pour utiliser ce blog, il faut suivre les étapes suivantes :
 * enjoy !
 
 To use this blog, you must follow this steps :
-* Create a database and import the db-blog.sql file located in the db folder
+* Create a database and import the my_blog.sql file located in the src/db folder
 * Enter your connexion settings in the dev.ini file located in the config folder
 * To use the Contact Form, enter your email in the mail/contact_me.php file
 * enjoy !
