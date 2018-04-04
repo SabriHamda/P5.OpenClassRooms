@@ -154,7 +154,7 @@ try {
             $listpost = new FrontendController();
             $pageName = $_GET['action'];
             
-            $nbpage = $paginatePosts->$nbpage;
+            //$nbpage = $paginatePosts->$nbpage;
             if (empty($_GET['page'])) {
                 $page=0;
             }else{
@@ -166,7 +166,8 @@ try {
                     'posts'=> BackendController::tablePaginate('posts', 5, 'created_at DESC'),
                     'comments'=> BackendController::tablePaginate('comments', 3, 'comment_date DESC'),
                     'page'=> $page,
-                    'pageName'=> $pageName
+                    'pageName'=> $pageName,
+                    'nbPage'=>BackendController::tablePaginate('posts', 10, 'created_at DESC')
             ]);
 
 
@@ -183,7 +184,7 @@ try {
             $listpost = new FrontendController();
             $pageName = $_GET['action'];
             
-            $nbpage = $paginatePosts->$nbpage;
+            //$nbpage = $paginatePosts->$nbpage;
             if (empty($_GET['page'])) {
                 $page=0;
             }else{
@@ -198,7 +199,8 @@ try {
                     'posts'=> BackendController::tablePaginate('posts', 10, 'created_at DESC'),
                     'comments'=> BackendController::tablePaginate('comments', 3, 'comment_date DESC'),
                     'page'=> $page,
-                    'pageName'=> $pageName
+                    'pageName'=> $pageName,
+                    'nbPage'=>BackendController::tablePaginate('posts', 10, 'created_at DESC')
             ]);
         }else{
             header('Location: index.php?action=login');        }
@@ -213,7 +215,7 @@ try {
             $listpost = new FrontendController();
             $pageName = $_GET['action'];
             
-            $nbpage = $paginatePosts->$nbpage;
+            //$nbpage = $paginatePosts->$nbpage;
             if (empty($_GET['page'])) {
                 $page=0;
             }else{
@@ -228,7 +230,8 @@ try {
                     'posts'=> BackendController::tablePaginate('posts', 10, 'created_at DESC'),
                     'comments'=> BackendController::tablePaginate('comments', 3, 'comment_date DESC'),
                     'page'=> $page,
-                    'pageName'=> $pageName
+                    'pageName'=> $pageName,
+                    'nbPage' => BackendController::tablePaginate('posts', 10, 'created_at DESC')
             ]);
 
 
