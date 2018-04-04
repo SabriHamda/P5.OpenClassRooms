@@ -1,2 +1,0 @@
-RewriteEngine On
-Redirect permanent /blog/index.php /blog/index.php?action=accueil

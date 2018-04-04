@@ -8,10 +8,11 @@ use blog\src\controller\BackendController;
 require_once('vendor/autoload.php');
 
 
+
+
 try {
     
-
-    $page = $_GET['action']; 
+    $page = isset($_GET['action']) ?  $_GET['action'] : 'accueil';
     $viewPage = new controller();
 
 
@@ -281,7 +282,6 @@ try {
     break;
 
 }
-
 }
 catch (Exception $e) {
 
