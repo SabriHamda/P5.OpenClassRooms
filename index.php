@@ -9,15 +9,20 @@ require_once('vendor/autoload.php');
 
 
 
+/**
+ *  This is the router of the application
+ */
 
 try {
-    
+    /* If there's no action, default action is accueil */
     $page = isset($_GET['action']) ?  $_GET['action'] : 'accueil';
     $viewPage = new controller();
 
 
     switch($page) {
 
+/*************************************** POST ACTION ***********************************************/
+        
         case 'post':
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             $post = new FrontendController();
@@ -32,11 +37,14 @@ try {
         }
         break;
 
+/*************************************** ACCUEIL ACTION ***********************************************/
         case 'accueil':
         $listpost = new FrontendController();
         
         echo $viewPage->viewFrontEnd('accueil.twig', ['posts'=> $listpost->listPosts()]);
         break;
+
+/*************************************** ABOUT ACTION ***********************************************/
 
         case 'about': 
 
@@ -44,22 +52,32 @@ try {
 
         break;
 
+/*************************************** BLOG ACTION ***********************************************/
+
         case 'blog': 
 
         echo $viewPage->viewFrontEnd('blog.twig');
 
         break;
 
+/*************************************** PORTFOLIO ACTION ***********************************************/
+
         case 'portfolio':
 
         echo $viewPage->viewFrontEnd('portfolio.twig');
 
         break;
+
+/*************************************** CONTACT ACTION ***********************************************/
+
         case 'contact':
 
         echo $viewPage->viewFrontEnd('contact.twig');
 
         break;
+
+/*************************************** REGISTER ACTION ***********************************************/
+
         case 'register':
 
 
@@ -91,6 +109,9 @@ try {
     }
 
     break;
+
+/*************************************** LOGIN ACTION ***********************************************/
+
     case 'login':
     if (!isset($_POST['loginSubmit'])) {
         if (empty($_SESSION['role'])) {
@@ -107,15 +128,9 @@ try {
             throw new Exception("Impossible de vous enregistrer, Veuillez vérifier vos informations de connection");
         }
     }
-
-    
-
     break;
     
-    
-    
-
-    
+/*************************************** ADDCOMMENT ACTION ***********************************************/    
     
     case 'addComment':
 
@@ -143,25 +158,16 @@ try {
 
 
     }
-
-    
-
     break;
 
+/*************************************** DASHBOARD ACTION ***********************************************/
 
     case 'dashboard':
-    if (!empty($_SESSION['prenom']) && !empty($_SESSION['password']) && !empty($_SESSION['role'])) {
-        if ($_SESSION['role'] == 'admin') {
-            $listpost = new FrontendController();
+    $checkSession = new BackendController();
+    $checkSession->checkAdminSession();
+    if ($checkSession->$checkAdminSession == TRUE){
             $pageName = $_GET['action'];
-            
-            //$nbpage = $paginatePosts->$nbpage;
-            if (empty($_GET['page'])) {
-                $page=0;
-            }else{
-            $page = $_GET['page']-1;   
-            }
-
+            $page = empty($_GET['page']) ? 0 : $_GET['page']-1;
             echo $viewPage->viewBackEnd('dashboardView.twig',
                 [
                     'posts'=> BackendController::tablePaginate('posts', 5, 'created_at DESC'),
@@ -170,31 +176,19 @@ try {
                     'pageName'=> $pageName,
                     'nbPage'=>BackendController::tablePaginate('posts', 10, 'created_at DESC')
             ]);
-
-
-        }else{
-            header('Location: index.php?action=login');        }
     }else{
         header('Location: index.php?action=login');
     }
     break;
 
+/*************************************** ARTICLES ACTION ***********************************************/    
+
     case 'articles':
-    if (!empty($_SESSION['prenom']) && !empty($_SESSION['password']) && !empty($_SESSION['role'])) {
-        if ($_SESSION['role'] == 'admin') {
-            $listpost = new FrontendController();
+    $checkSession = new BackendController();
+    $checkSession->checkAdminSession();
+    if ($checkSession->$checkAdminSession == TRUE){
             $pageName = $_GET['action'];
-            
-            //$nbpage = $paginatePosts->$nbpage;
-            if (empty($_GET['page'])) {
-                $page=0;
-            }else{
-            $page = $_GET['page']-1;   
-            }
-
-
-
-            
+            $page = empty($_GET['page']) ? 0 : $_GET['page']-1;
             echo $viewPage->viewBackEnd('listArticlesView.twig',
                 [
                     'posts'=> BackendController::tablePaginate('posts', 10, 'created_at DESC'),
@@ -203,29 +197,19 @@ try {
                     'pageName'=> $pageName,
                     'nbPage'=>BackendController::tablePaginate('posts', 10, 'created_at DESC')
             ]);
-        }else{
-            header('Location: index.php?action=login');        }
     }else{
         header('Location: index.php?action=login');
     }
     break;
 
+/*************************************** ADD ARTICLE ACTION ***********************************************/    
+
     case 'add-article':
-    if (!empty($_SESSION['prenom']) && !empty($_SESSION['password']) && !empty($_SESSION['role'])) {
-        if ($_SESSION['role'] == 'admin') {
-            $listpost = new FrontendController();
+$checkSession = new BackendController();
+    $checkSession->checkAdminSession();
+    if ($checkSession->$checkAdminSession == TRUE){
             $pageName = $_GET['action'];
-            
-            //$nbpage = $paginatePosts->$nbpage;
-            if (empty($_GET['page'])) {
-                $page=0;
-            }else{
-            $page = $_GET['page']-1;   
-            }
-
-
-
-            
+            $page = empty($_GET['page']) ? 0 : $_GET['page']-1;
             echo $viewPage->viewBackEnd('addArticleView.twig',
                 [
                     'posts'=> BackendController::tablePaginate('posts', 10, 'created_at DESC'),
@@ -260,20 +244,19 @@ try {
 
                 echo '<script type="text/javascript"> alert("toucher");</script>';
             }
-
-        }else{
-            header('Location: index.php?action=login');        }
     }else{
         header('Location: index.php?action=login');
     }
     break;
 
+/*************************************** LOGOUT ACTION ***********************************************/
+
     case 'logout':
     $logout = new UserController();
     $logout->logout();
-        //echo $viewPage->viewFrontEnd('accueil.twig');
-
     break;
+
+/*************************************** DEFAULT ACTION ***********************************************/
 
     default :
 
@@ -282,6 +265,7 @@ try {
     break;
 
 }
+
 }
 catch (Exception $e) {
 

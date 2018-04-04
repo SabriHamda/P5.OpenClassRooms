@@ -7,6 +7,9 @@ use blog\src\model\CommentManager;
 */
 class BackendController
 {
+    protected $checkAdminSession;
+
+
 	/**
      * tablePaginate is function to paginate any table in the data base 
      * @param  [string] $table    [the name of the table to paginate]
@@ -52,5 +55,18 @@ class BackendController
         $addNewArticle = new PostManager();
         $addNewArticle->addArticle($articleTitle,$articleImageUrl,$articleContent);
 
+    }
+
+    public function checkAdminSession(){
+        if (!empty($_SESSION['prenom']) && !empty($_SESSION['password']) && !empty($_SESSION['role'])) {
+            if ($_SESSION['role'] == 'admin') {
+                $this->$checkAdminSession = TRUE;
+            }else{
+            $this->$checkAdminSession = FALSE;
+        }   
+        }else{
+            $this->$checkAdminSession = FALSE;
+        } 
+               
     }
 }
