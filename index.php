@@ -65,7 +65,7 @@ try {
 
         if (!isset($_POST['registerSubmit'])) {
             
-            echo $viewPage->viewFrontEnd('registerView.twig',['etat'=> $etat]);
+            echo $viewPage->viewFrontEnd('registerView.twig');
         }
         else{
             $role = "visitor";
