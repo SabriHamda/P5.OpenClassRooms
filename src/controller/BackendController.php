@@ -49,14 +49,22 @@ class BackendController
      if ($extensions !== FALSE AND !in_array($ext,$extensions)) return FALSE;
      return move_uploaded_file($_FILES[$index]['tmp_name'],$destination); //Move the file in the folder
     }
-
+    /**
+     * [addArticle description]
+     * @param [type] $articleTitle    [description]
+     * @param [type] $articleImageUrl [description]
+     * @param [type] $articleContent  [description]
+     */
     public static function addArticle($articleTitle,$articleImageUrl,$articleContent)
     {
         $addNewArticle = new PostManager();
         $addNewArticle->addArticle($articleTitle,$articleImageUrl,$articleContent);
 
     }
-
+    /**
+     * [checkAdminSession description]
+     * @return [type] [description]
+     */
     public function checkAdminSession(){
         if (!empty($_SESSION['prenom']) && !empty($_SESSION['password']) && !empty($_SESSION['role'])) {
             if ($_SESSION['role'] == 'admin') {

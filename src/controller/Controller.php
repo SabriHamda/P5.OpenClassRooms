@@ -1,5 +1,9 @@
 <?php
 namespace blog\src\controller;
+
+use blog\src\controller\UserController;
+use blog\src\controller\FrontendController;
+use blog\src\controller\BackendController;
 /**
 * This Class is the main controller of the application.
 */
@@ -61,6 +65,208 @@ class Controller
 		$this->twigBack->addGlobal('session', $_SESSION);
 		$this->viewBackPage = $this->twigBack->render($page,$params);
 		return $this->viewBackPage;
+	}
+	
+	public function actionHome(){
+		$listpost = new FrontendController();
+        echo $this->viewFrontEnd('home.twig', ['posts'=> $listpost->listPosts()]);
+	}
+
+	public function actionAbout(){
+        echo $this->viewFrontEnd('about.twig');
+	}
+
+	public function actionBlog(){
+        echo $this->viewFrontEnd('blog.twig');
+	}
+
+	public function actionPortfolio(){
+        echo $this->viewFrontEnd('portfolio.twig');
+	}
+
+	public function actionContact(){
+        echo $this->viewFrontEnd('contact.twig');
+	}
+
+	public function actionPost(){
+		if (isset($_GET['id']) && $_GET['id'] > 0) {
+            $post = new FrontendController();
+            echo $this->viewFrontEnd(
+                'postView.twig',
+                ['post'=> $post->post()['post'],
+                'comments'=> $post->post()['comments']]
+            );
+        }
+        else {
+            throw new Exception("aucun identifiant d'article envoyé");
+        }
+	}
+
+	public function actionRegister(){
+		if (!isset($_POST['registerSubmit'])) {
+
+			echo $this->viewFrontEnd('registerView.twig');
+		}
+		else{
+			$role = "visitor";
+			if (!empty($_POST['civility']) && !empty($_POST['prenom']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['passwordConfirm'])) {
+
+				if ($_POST['passwordConfirm'] == $_POST['password']) {
+					$addUser = new UserController;
+					$addUser->addUser($role, $_POST['prenom'],$_POST['password'],$_POST['email'],$_POST['civility']);
+					echo $this->viewFrontEnd('registerView.twig',['prenom'=> $prenom]);
+				}
+				else {
+
+					throw new Exception("Impossible de vous enregistrer, Les deux mot des passe ne sont pas identique");
+
+				}
+			}else {
+
+				throw new Exception("Impossible de vous enregistrer, Tous les champs ne sont pas remplis !");
+
+			}
+
+
+		}
+	}
+
+	public function actionLogin(){
+		if (!isset($_POST['loginSubmit'])) {
+			if (empty($_SESSION['role'])) {
+				echo $this->viewFrontEnd('loginView.twig');
+			}else{
+				header('Location: index.php?action=home');
+			}
+
+		}else{
+			if (!empty($_POST['email'] && !empty($_POST['password']))) {
+				$login = new UserController();
+				$login->login($_POST['email'],$_POST['password']);
+			}else{
+				throw new Exception("Impossible de vous enregistrer, Veuillez vérifier vos informations de connection");
+			}
+		}
+	}
+
+	public function actionAddComment(){
+		if (isset($_GET['id']) && $_GET['id'] > 0) {
+
+			if (!empty($_POST['author']) && !empty($_POST['comment']) && !empty($_POST['civility'])) {
+
+				$addComment = new FrontendController();
+
+				$addComment->addComment($_GET['id'], $_POST['author'], $_POST['comment'], $_POST['civility']);
+
+			}
+
+			else {
+
+				throw new Exception("Tous les champs ne sont pas remplis !");
+
+			}
+
+		}
+
+		else {
+
+			throw new Exception("aucun identifiant de billet envoyé");
+
+
+		}
+	}
+
+	public function actionDashboard(){
+		$checkSession = new BackendController();
+		$checkSession->checkAdminSession();
+		if ($checkSession->$checkAdminSession == TRUE){
+			$pageName = $_GET['action'];
+			$page = empty($_GET['page']) ? 0 : $_GET['page']-1;
+			echo $this->viewBackEnd('dashboardView.twig',
+				[
+					'posts'=> BackendController::tablePaginate('posts', 5, 'created_at DESC'),
+					'comments'=> BackendController::tablePaginate('comments', 3, 'comment_date DESC'),
+					'page'=> $page,
+					'pageName'=> $pageName,
+					'nbPage'=>BackendController::tablePaginate('posts', 10, 'created_at DESC')
+				]);
+		}else{
+			header('Location: index.php?action=login');
+		}
+	}
+
+	public function actionArticles(){
+		$checkSession = new BackendController();
+		$checkSession->checkAdminSession();
+		if ($checkSession->$checkAdminSession == TRUE){
+			$pageName = $_GET['action'];
+			$page = empty($_GET['page']) ? 0 : $_GET['page']-1;
+			echo $this->viewBackEnd('listArticlesView.twig',
+				[
+					'posts'=> BackendController::tablePaginate('posts', 10, 'created_at DESC'),
+					'comments'=> BackendController::tablePaginate('comments', 3, 'comment_date DESC'),
+					'page'=> $page,
+					'pageName'=> $pageName,
+					'nbPage'=>BackendController::tablePaginate('posts', 10, 'created_at DESC')
+				]);
+		}else{
+			header('Location: index.php?action=login');
+		}
+	}
+
+	public function actionAddArticles(){
+		$checkSession = new BackendController();
+		$checkSession->checkAdminSession();
+		if ($checkSession->$checkAdminSession == TRUE){
+			$pageName = $_GET['action'];
+			$page = empty($_GET['page']) ? 0 : $_GET['page']-1;
+			echo $this->viewBackEnd('addArticleView.twig',
+				[
+					'posts'=> BackendController::tablePaginate('posts', 10, 'created_at DESC'),
+					'comments'=> BackendController::tablePaginate('comments', 3, 'comment_date DESC'),
+					'page'=> $page,
+					'pageName'=> $pageName,
+					'nbPage' => BackendController::tablePaginate('posts', 10, 'created_at DESC')
+				]);
+
+
+            // if submit the add article form
+			if (!isset($_POST['submit-article-add'])) {
+                # code...
+			}else{
+				if (!empty($_POST['title-article-add']) && !empty($_FILES['img-article-add']) && !empty($_POST['content-article-add'])) {
+					$articleTitle = $_POST['title-article-add'];
+					$articleImage = $_FILES['img-article-add'];
+					$articleContent = $_POST['content-article-add'];
+					$uploadMyFile = BackendController::uploadFile('img-article-add','public/assets/images/uploads/'.$articleImage["name"].'',FALSE,array('png','gif','jpg','jpeg'));
+
+					if ($uploadMyFile) {
+						echo '<script type="text/javascript"> alert("image bien enregistrer");</script>';
+						BackendController::addArticle($articleTitle,'public/assets/images/uploads/'.$articleImage["name"].'',$articleContent);
+					}else{
+						echo '<script type="text/javascript"> alert("probleme avec l\'image");</script>';
+					}
+
+
+				}else{
+					echo '<script type="text/javascript"> alert("champs vide");</script>';
+				}
+
+				echo '<script type="text/javascript"> alert("toucher");</script>';
+			}
+		}else{
+			header('Location: index.php?action=login');
+		}
+	}
+
+	public function actionLogOut(){
+		$logout = new UserController();
+    	$logout->logout();
+	}
+
+	public function actionError(){
+		$error = $e->getMessage();
+    echo $this->viewFrontEnd('errorView.twig', ['error'=> $error]);
 	}
 
 } 

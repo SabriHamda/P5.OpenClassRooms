@@ -35,7 +35,7 @@ class UserController
                 $_SESSION['prenom'] = $prenom;
                 $_SESSION['password'] = $password;
                 $_SESSION['email'] = $email;
-                header('Location: index.php?action=accueil');
+                header('Location: index.php?action=home');
             }
         }
 
@@ -64,7 +64,7 @@ class UserController
                 $_SESSION['prenom'] = $identity['prenom'];
                 $_SESSION['password'] = $identity['password'];
                 $_SESSION['email'] = $identity['email'];
-                header('Location: index.php?action=accueil');
+                header('Location: index.php?action=home');
                 }   
             }
         }
@@ -75,6 +75,6 @@ class UserController
      */
     public function logOut(){
         session_destroy();
-        header('Location: index.php?action=accueil');
+        header('Location: index.php?action=home');
     }
 }

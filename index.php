@@ -14,263 +14,101 @@ require_once('vendor/autoload.php');
  */
 
 try {
-    /* If there's no action, default action is accueil */
-    $page = isset($_GET['action']) ?  $_GET['action'] : 'accueil';
-    $viewPage = new controller();
+    /* If there's no action, default action is Home page */
+    $page = isset($_GET['action']) ?  $_GET['action'] : 'home';
+    $action = new Controller();
 
 
     switch($page) {
 
-/*************************************** POST ACTION ***********************************************/
+        /*************************************** POST ACTION ***********************************************/
         
         case 'post':
-        if (isset($_GET['id']) && $_GET['id'] > 0) {
-            $post = new FrontendController();
-            echo $viewPage->viewFrontEnd(
-                'postView.twig',
-                ['post'=> $post->post()['post'],
-                'comments'=> $post->post()['comments']]
-            );
-        }
-        else {
-            throw new Exception("aucun identifiant d'article envoyé");
-        }
+        $action->actionPost();
         break;
 
-/*************************************** ACCUEIL ACTION ***********************************************/
-        case 'accueil':
-        $listpost = new FrontendController();
-        
-        echo $viewPage->viewFrontEnd('accueil.twig', ['posts'=> $listpost->listPosts()]);
+        /*************************************** HOME ACTION ***********************************************/
+
+        case 'home':
+        $action->actionHome();
         break;
 
-/*************************************** ABOUT ACTION ***********************************************/
+        /*************************************** ABOUT ACTION ***********************************************/
 
-        case 'about': 
-
-        echo $viewPage->viewFrontEnd('about.twig');
-
+        case 'about':
+        $action->actionAbout();
         break;
 
-/*************************************** BLOG ACTION ***********************************************/
+        /*************************************** BLOG ACTION ***********************************************/
 
-        case 'blog': 
-
-        echo $viewPage->viewFrontEnd('blog.twig');
-
+        case 'blog':
+        $action->actionBlog();
         break;
 
-/*************************************** PORTFOLIO ACTION ***********************************************/
+        /*************************************** PORTFOLIO ACTION ******************************************/
 
         case 'portfolio':
-
-        echo $viewPage->viewFrontEnd('portfolio.twig');
-
+        $action->actionPortfolio();
         break;
 
-/*************************************** CONTACT ACTION ***********************************************/
+        /*************************************** CONTACT ACTION *******************************************/
 
         case 'contact':
-
-        echo $viewPage->viewFrontEnd('contact.twig');
-
+        $action->actionContact();
         break;
 
-/*************************************** REGISTER ACTION ***********************************************/
+        /*************************************** REGISTER ACTION ********************************************/
 
         case 'register':
+        $action->actionRegister();
+        break;
 
+        /*************************************** LOGIN ACTION ***********************************************/
 
-        if (!isset($_POST['registerSubmit'])) {
-            
-            echo $viewPage->viewFrontEnd('registerView.twig');
-        }
-        else{
-            $role = "visitor";
-            if (!empty($_POST['civility']) && !empty($_POST['prenom']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['passwordConfirm'])) {
+        case 'login':
+        $action->actionLogin();
+        break;
 
-                if ($_POST['passwordConfirm'] == $_POST['password']) {
-                  $addUser = new UserController;
-                  $addUser->addUser($role, $_POST['prenom'],$_POST['password'],$_POST['email'],$_POST['civility']);
-                  echo $viewPage->viewFrontEnd('registerView.twig',['prenom'=> $prenom]);
-              }
-              else {
+        /*************************************** ADDCOMMENT ACTION ****************************************/    
 
-                throw new Exception("Impossible de vous enregistrer, Les deux mot des passe ne sont pas identique");
+        case 'addComment':
+        $action->actionAddComment();
+        break;
 
-            }
-        }else {
+        /*************************************** DASHBOARD ACTION *******************************************/
 
-            throw new Exception("Impossible de vous enregistrer, Tous les champs ne sont pas remplis !");
+        case 'dashboard':
+        $action->actionDashboard();
+        break;
 
-        }
+        /*************************************** ARTICLES ACTION ********************************************/    
 
-        
-    }
+        case 'articles':
+        $action->actionArticles();
+        break;
 
-    break;
+        /*************************************** ADD ARTICLE ACTION ***************************************/    
 
-/*************************************** LOGIN ACTION ***********************************************/
+        case 'add-article':
+        $action->actionAddArticles();
+        break;
 
-    case 'login':
-    if (!isset($_POST['loginSubmit'])) {
-        if (empty($_SESSION['role'])) {
-            echo $viewPage->viewFrontEnd('loginView.twig');
-        }else{
-            header('Location: index.php?action=accueil');
-        }
-        
-    }else{
-        if (!empty($_POST['email'] && !empty($_POST['password']))) {
-            $login = new UserController();
-            $login->login($_POST['email'],$_POST['password']);
-        }else{
-            throw new Exception("Impossible de vous enregistrer, Veuillez vérifier vos informations de connection");
-        }
-    }
-    break;
-    
-/*************************************** ADDCOMMENT ACTION ***********************************************/    
-    
-    case 'addComment':
+        /*************************************** LOGOUT ACTION ***********************************************/
 
-    if (isset($_GET['id']) && $_GET['id'] > 0) {
+        case 'logout':
+        $action->actionLogOut();
+        break;
 
-        if (!empty($_POST['author']) && !empty($_POST['comment']) && !empty($_POST['civility'])) {
+        /*************************************** DEFAULT ACTION ********************************************/
 
-            $addComment = new FrontendController();
-
-            $addComment->addComment($_GET['id'], $_POST['author'], $_POST['comment'], $_POST['civility']);
-
-        }
-
-        else {
-
-            throw new Exception("Tous les champs ne sont pas remplis !");
-
-        }
+        default :
+        $action->actionHome();
+        break;
 
     }
-
-    else {
-
-        throw new Exception("aucun identifiant de billet envoyé");
-
-
-    }
-    break;
-
-/*************************************** DASHBOARD ACTION ***********************************************/
-
-    case 'dashboard':
-    $checkSession = new BackendController();
-    $checkSession->checkAdminSession();
-    if ($checkSession->$checkAdminSession == TRUE){
-            $pageName = $_GET['action'];
-            $page = empty($_GET['page']) ? 0 : $_GET['page']-1;
-            echo $viewPage->viewBackEnd('dashboardView.twig',
-                [
-                    'posts'=> BackendController::tablePaginate('posts', 5, 'created_at DESC'),
-                    'comments'=> BackendController::tablePaginate('comments', 3, 'comment_date DESC'),
-                    'page'=> $page,
-                    'pageName'=> $pageName,
-                    'nbPage'=>BackendController::tablePaginate('posts', 10, 'created_at DESC')
-            ]);
-    }else{
-        header('Location: index.php?action=login');
-    }
-    break;
-
-/*************************************** ARTICLES ACTION ***********************************************/    
-
-    case 'articles':
-    $checkSession = new BackendController();
-    $checkSession->checkAdminSession();
-    if ($checkSession->$checkAdminSession == TRUE){
-            $pageName = $_GET['action'];
-            $page = empty($_GET['page']) ? 0 : $_GET['page']-1;
-            echo $viewPage->viewBackEnd('listArticlesView.twig',
-                [
-                    'posts'=> BackendController::tablePaginate('posts', 10, 'created_at DESC'),
-                    'comments'=> BackendController::tablePaginate('comments', 3, 'comment_date DESC'),
-                    'page'=> $page,
-                    'pageName'=> $pageName,
-                    'nbPage'=>BackendController::tablePaginate('posts', 10, 'created_at DESC')
-            ]);
-    }else{
-        header('Location: index.php?action=login');
-    }
-    break;
-
-/*************************************** ADD ARTICLE ACTION ***********************************************/    
-
-    case 'add-article':
-$checkSession = new BackendController();
-    $checkSession->checkAdminSession();
-    if ($checkSession->$checkAdminSession == TRUE){
-            $pageName = $_GET['action'];
-            $page = empty($_GET['page']) ? 0 : $_GET['page']-1;
-            echo $viewPage->viewBackEnd('addArticleView.twig',
-                [
-                    'posts'=> BackendController::tablePaginate('posts', 10, 'created_at DESC'),
-                    'comments'=> BackendController::tablePaginate('comments', 3, 'comment_date DESC'),
-                    'page'=> $page,
-                    'pageName'=> $pageName,
-                    'nbPage' => BackendController::tablePaginate('posts', 10, 'created_at DESC')
-            ]);
-
-
-            // if submit the add article form
-            if (!isset($_POST['submit-article-add'])) {
-                # code...
-            }else{
-                if (!empty($_POST['title-article-add']) && !empty($_FILES['img-article-add']) && !empty($_POST['content-article-add'])) {
-                    $articleTitle = $_POST['title-article-add'];
-                    $articleImage = $_FILES['img-article-add'];
-                    $articleContent = $_POST['content-article-add'];
-                    $uploadMyFile = BackendController::uploadFile('img-article-add','public/assets/images/uploads/'.$articleImage["name"].'',FALSE,array('png','gif','jpg','jpeg'));
-
-                    if ($uploadMyFile) {
-                        echo '<script type="text/javascript"> alert("image bien enregistrer");</script>';
-                        BackendController::addArticle($articleTitle,'public/assets/images/uploads/'.$articleImage["name"].'',$articleContent);
-                    }else{
-                        echo '<script type="text/javascript"> alert("probleme avec l\'image");</script>';
-                    }
-
-                    
-                }else{
-                   echo '<script type="text/javascript"> alert("champs vide");</script>';
-                }
-
-                echo '<script type="text/javascript"> alert("toucher");</script>';
-            }
-    }else{
-        header('Location: index.php?action=login');
-    }
-    break;
-
-/*************************************** LOGOUT ACTION ***********************************************/
-
-    case 'logout':
-    $logout = new UserController();
-    $logout->logout();
-    break;
-
-/*************************************** DEFAULT ACTION ***********************************************/
-
-    default :
-
-    echo $viewPage->viewFrontEnd('accueil.twig');
-
-    break;
-
-}
 
 }
 catch (Exception $e) {
-
-    $error = $e->getMessage();
-    echo $viewPage->viewFrontEnd('errorView.twig', ['error'=> $error]);
-    
+    $action->actionError();
 }
 
