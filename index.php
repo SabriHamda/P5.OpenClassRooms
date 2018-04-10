@@ -1,9 +1,6 @@
 <?php
 session_start();
 use blog\src\controller\Controller;
-use blog\src\controller\UserController;
-use blog\src\controller\FrontendController;
-use blog\src\controller\BackendController;
 
 require_once('vendor/autoload.php');
 
