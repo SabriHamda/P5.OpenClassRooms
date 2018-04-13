@@ -96,6 +96,12 @@ try {
         $action->actionLogOut();
         break;
 
+        /*************************************** TRANSLATE ACTION *******************************************/
+
+        case 'translate':
+        $action->actionTranslate();
+        break;
+
         /*************************************** DEFAULT ACTION ********************************************/
 
         default :

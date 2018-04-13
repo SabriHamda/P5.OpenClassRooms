@@ -1,22 +1,44 @@
     {% block recentPosts %}
+{% if page > (posts['nbPage']) %}
+                {% set myPage = ('0') %}
+                {% else %}
+                  {% set myPage = page %}
+              {% endif %}
 
-{% for post in posts %}
+{% for post in posts['paginate'][myPage] %}
 
 <div class="col-md-3 col-sm-6 col-padding animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
                         <div class="blog-entry">
-                            <a href="index.php?action=post&amp;id=<?= $post['id'] ?>" class="blog-img"><img src="{{ post.image }}" class="img-responsive" alt="image" style="width: 500px;height: 200px;"></a>
+                            <a href="index.php?action=post&amp;id={{ post.id }}" class="blog-img"><img src="{{ post.image }}" class="img-responsive" alt="image" style="width: 500px;height: 200px;"></a>
                             <div class="desc">
                                 <h3><a href="#">{{ post.title }}</a></h3>
-                                <span><small>Creer le : </small><small>{{ post.created_at_fr }}</small></span>
+                                <span><small>Creer le : </small><small>{{ post.created_at|date("d/m/Y", "Europe/Paris") }}</small></span>
                                 <div  style="max-height: 90px;overflow: hidden;">
-                                <p>{{ post.content }} </p>
+                                <p>{{ post.content|raw }} </p>
                                 </div>
                                 <p>. . .</p>
-                                <a href="index.php?action=post&amp;id=<?= $post['id'] ?>" class="lead">En savoir plus <i class="icon-arrow-right3"></i></a>
+                                <a href="index.php?action=post&amp;id={{ post.id }}" class="lead">En savoir plus <i class="icon-arrow-right3"></i></a>
                             </div>
                         </div>
                     </div>
 {% endfor %}
+
+{% if pageName == ('blog') %}
+<div class="col-md-12 col-sm-12 col-padding animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
+ <nav aria-label="..." id="posts-pagination">
+            <ul class="pagination pagination-sm">
+              <li class="page-item"><a class="page-link" href="index.php?action={{ pageName }}&page={{ i }}"> << </a></li>
+             {% for i in range(1, posts['nbPage']) %}
+              <li class="page-item"><a class="page-link" href="index.php?action={{ pageName }}&page={{ i }}">{{ i }}</a></li>
+
+            {% endfor %}
+            <li class="page-item"><a class="page-link" href="index.php?action={{ pageName }}&page={{ i }}"> >> </a></li>
+          </ul>
+        </nav>
+</div> 
+{% else %}
+  
+{% endif %}       
 {% endblock recentPosts %}
 
 

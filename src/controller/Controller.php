@@ -4,6 +4,9 @@ namespace blog\src\controller;
 use blog\src\controller\UserController;
 use blog\src\controller\FrontendController;
 use blog\src\controller\BackendController;
+use blog\src\tools\GoogleTranslate;
+use blog\src\tools\TablePaginate;
+
 /**
 * This Class is the main controller of the application.
 */
@@ -67,9 +70,27 @@ class Controller
 		return $this->viewBackPage;
 	}
 	
+	public function actionTranslate(){
+		if(isset($_GET['data']) && !empty($_GET['lang'])){
+	$translate = $_GET['data'];
+	$lang = $_GET['lang'];
+	$result = GoogleTranslate::translate('auto',$lang,$translate);
+	echo $result;
+}else{
+	echo 'aucune langue selectionée';
+}
+	}
+
 	public function actionHome(){
-		$listpost = new FrontendController();
-        echo $this->viewFrontEnd('home.twig', ['posts'=> $listpost->listPosts()]);
+		//$listpost = new FrontendController();
+		$pageName = $_GET['action'];
+		$page = empty($_GET['page']) ? 0 : $_GET['page']-1;
+        echo $this->viewFrontEnd(
+        	'homeView.twig', 
+        	['posts'=> TablePaginate::paginate('posts', 8, 'created_at DESC'),
+        	'nbPage'=>TablePaginate::paginate('posts', 8, 'created_at DESC'),
+        	'page'=> $page,
+			'pageName'=> $pageName]);
 	}
 
 	public function actionAbout(){
@@ -77,7 +98,14 @@ class Controller
 	}
 
 	public function actionBlog(){
-        echo $this->viewFrontEnd('blog.twig');
+        $pageName = $_GET['action'];
+		$page = empty($_GET['page']) ? 0 : $_GET['page']-1;
+        echo $this->viewFrontEnd(
+        	'blog.twig',
+        	['posts'=> TablePaginate::paginate('posts', 12, 'created_at DESC'),
+        	'nbPage'=>TablePaginate::paginate('posts', 12, 'created_at DESC'),
+        	'page'=> $page,
+			'pageName'=> $pageName]);
 	}
 
 	public function actionPortfolio(){
@@ -104,30 +132,22 @@ class Controller
 
 	public function actionRegister(){
 		if (!isset($_POST['registerSubmit'])) {
-
 			echo $this->viewFrontEnd('registerView.twig');
 		}
 		else{
 			$role = "visitor";
 			if (!empty($_POST['civility']) && !empty($_POST['prenom']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['passwordConfirm'])) {
-
 				if ($_POST['passwordConfirm'] == $_POST['password']) {
 					$addUser = new UserController;
 					$addUser->addUser($role, $_POST['prenom'],$_POST['password'],$_POST['email'],$_POST['civility']);
 					echo $this->viewFrontEnd('registerView.twig',['prenom'=> $prenom]);
 				}
 				else {
-
 					throw new Exception("Impossible de vous enregistrer, Les deux mot des passe ne sont pas identique");
-
 				}
 			}else {
-
 				throw new Exception("Impossible de vous enregistrer, Tous les champs ne sont pas remplis !");
-
 			}
-
-
 		}
 	}
 
@@ -151,28 +171,16 @@ class Controller
 
 	public function actionAddComment(){
 		if (isset($_GET['id']) && $_GET['id'] > 0) {
-
 			if (!empty($_POST['author']) && !empty($_POST['comment']) && !empty($_POST['civility'])) {
-
 				$addComment = new FrontendController();
-
 				$addComment->addComment($_GET['id'], $_POST['author'], $_POST['comment'], $_POST['civility']);
-
 			}
-
 			else {
-
 				throw new Exception("Tous les champs ne sont pas remplis !");
-
 			}
-
 		}
-
 		else {
-
 			throw new Exception("aucun identifiant de billet envoyé");
-
-
 		}
 	}
 
@@ -184,11 +192,11 @@ class Controller
 			$page = empty($_GET['page']) ? 0 : $_GET['page']-1;
 			echo $this->viewBackEnd('dashboardView.twig',
 				[
-					'posts'=> BackendController::tablePaginate('posts', 5, 'created_at DESC'),
-					'comments'=> BackendController::tablePaginate('comments', 3, 'comment_date DESC'),
+					'posts'=> TablePaginate::paginate('posts', 5, 'created_at DESC'),
+					'comments'=> TablePaginate::paginate('comments', 3, 'comment_date DESC'),
 					'page'=> $page,
 					'pageName'=> $pageName,
-					'nbPage'=>BackendController::tablePaginate('posts', 10, 'created_at DESC')
+					'nbPage'=>TablePaginate::paginate('posts', 10, 'created_at DESC')
 				]);
 		}else{
 			header('Location: index.php?action=login');
@@ -203,11 +211,11 @@ class Controller
 			$page = empty($_GET['page']) ? 0 : $_GET['page']-1;
 			echo $this->viewBackEnd('listArticlesView.twig',
 				[
-					'posts'=> BackendController::tablePaginate('posts', 10, 'created_at DESC'),
-					'comments'=> BackendController::tablePaginate('comments', 3, 'comment_date DESC'),
+					'posts'=> TablePaginate::paginate('posts', 10, 'created_at DESC'),
+					'comments'=> TablePaginate::paginate('comments', 3, 'comment_date DESC'),
 					'page'=> $page,
 					'pageName'=> $pageName,
-					'nbPage'=>BackendController::tablePaginate('posts', 10, 'created_at DESC')
+					'nbPage'=>TablePaginate::paginate('posts', 10, 'created_at DESC')
 				]);
 		}else{
 			header('Location: index.php?action=login');
@@ -222,36 +230,32 @@ class Controller
 			$page = empty($_GET['page']) ? 0 : $_GET['page']-1;
 			echo $this->viewBackEnd('addArticleView.twig',
 				[
-					'posts'=> BackendController::tablePaginate('posts', 10, 'created_at DESC'),
-					'comments'=> BackendController::tablePaginate('comments', 3, 'comment_date DESC'),
+					'posts'=> TablePaginate::paginate('posts', 10, 'created_at DESC'),
+					'comments'=> TablePaginate::paginate('comments', 3, 'comment_date DESC'),
 					'page'=> $page,
 					'pageName'=> $pageName,
-					'nbPage' => BackendController::tablePaginate('posts', 10, 'created_at DESC')
+					'nbPage' => TablePaginate::paginate('posts', 10, 'created_at DESC')
 				]);
 
 
             // if submit the add article form
 			if (!isset($_POST['submit-article-add'])) {
-                # code...
+                
 			}else{
 				if (!empty($_POST['title-article-add']) && !empty($_FILES['img-article-add']) && !empty($_POST['content-article-add'])) {
 					$articleTitle = $_POST['title-article-add'];
 					$articleImage = $_FILES['img-article-add'];
 					$articleContent = $_POST['content-article-add'];
 					$uploadMyFile = BackendController::uploadFile('img-article-add','public/assets/images/uploads/'.$articleImage["name"].'',FALSE,array('png','gif','jpg','jpeg'));
-
 					if ($uploadMyFile) {
 						echo '<script type="text/javascript"> alert("image bien enregistrer");</script>';
 						BackendController::addArticle($articleTitle,'public/assets/images/uploads/'.$articleImage["name"].'',$articleContent);
 					}else{
 						echo '<script type="text/javascript"> alert("probleme avec l\'image");</script>';
 					}
-
-
 				}else{
 					echo '<script type="text/javascript"> alert("champs vide");</script>';
 				}
-
 				echo '<script type="text/javascript"> alert("toucher");</script>';
 			}
 		}else{

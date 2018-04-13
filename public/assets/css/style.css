@@ -188,6 +188,31 @@ figure figcaption {
 .color-white{
   background-color: #fff;
 }
+#myLoader{
+  display:none;
+  text-align:center;
+  background-color:#e9eef0;
+  position:fixed;
+  top:0px;
+  left:0px;
+  z-index:999999;
+  width:100vw;
+  height:100vh;
+}
+#myLoader img{
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  width:auto;
+  height:auto;
+}
+#myLoader span{
+  position:relative;
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:-50px;
+}
 #fh5co-aside #fh5co-main-menu ul li a {
   color: #fff;
   text-decoration: none;
@@ -521,6 +546,7 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   width: 100%;
   float: left;
   background: #fff;
+  height: 500px;
 }
 @media screen and (max-width: 768px) {
   .blog-entry {

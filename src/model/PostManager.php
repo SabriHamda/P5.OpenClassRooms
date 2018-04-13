@@ -51,9 +51,15 @@ class PostManager extends Manager{
 	{
 		$db = $this->dbConnect();
 		$req = $db->query('SELECT * FROM '. $table .' ORDER BY '. $orderBy .' LIMIT ' . $startLine . ', '. $nbResult . '');
+		$res = $req->fetchAll(\PDO::FETCH_ASSOC);
+		foreach ($res as $key =>$element) {
+			$element['image'] = urldecode($element['image']);
+			$res[$key] = $element;
+		}
+		return $res;
 		
 
-		return $req;
+		
 	}
 	
 }
