@@ -3,7 +3,22 @@
   {% if pageName == ('dashboard') %}
             <h4>Articles récents</h4>
           {% else %}
+            <div class="container-fluid table-responsive" >
+
+            <form class="navbar-form navbar-left" role="search">
+              
+  <div class="form-group">
+    <p class="btn btn-primary color-blue"><a href="index.php?action=add-article" style="color:#fff">Ajouter un Article</a></p>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Recherche">
+  </div>
+  <button type="submit" class="btn btn-default">Chercher un Article</button>
+</form>
+</div><br>
             <h4>Liste des articles</h4>
+
+
   {% endif %}
         <br>
         <div class="table-responsive">
@@ -34,7 +49,7 @@
                   <td>{{ post.created_at|date("d/m/Y", "Europe/Paris") }}</td>
                   <td class="text-right">
                     <span class="label label-primary color-blue"><a href="index.php?action=post&id={{ post.id }}">Voir</a></span>
-                    <span class="label label-success color-pirple"><a href="#">Modifier</a></span>
+                    <span class="label label-success color-pirple"><a href="index.php?action=edit-article&id={{ post.id }}">Modifier</a></span>
                     <span class="label label-danger color-red"><a href="#">Suprimer</a></span>
                   </td>
                 </tr>

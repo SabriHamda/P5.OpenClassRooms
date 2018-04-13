@@ -3,12 +3,13 @@
 	
 	'use strict';
 	function browserLang(){
-		var userLang = navigator.language || navigator.userLanguage;
+		var userLang = window.navigator.language || window.navigator.userLanguage;
 		return userLang; 
 	}
 
 	function addClassTags(){
-		$( "h1,h2,h3,h4,h5,h6,p,a,span,button" )
+		
+		$( "h1,h2,h3,h4,h5,h6,p,a,span,button")
 		.contents()
 		.filter(function(){
 			return this.nodeType !== 1;
@@ -33,7 +34,7 @@
 	}
 
 	function translateContent(){
-		if (browserLang() == 'fr') {
+		if (browserLang().indexOf('fr') == 0) {
 
 		} else {
 			$('#myLoader').css({'display':'block'});

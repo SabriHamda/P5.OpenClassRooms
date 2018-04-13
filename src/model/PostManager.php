@@ -38,6 +38,24 @@ class PostManager extends Manager{
 		
 	}
 
+	public function updateArticle($articleId,$articleTitle,$articleImageUrl,$articleContent)
+	{
+		$db = $this->dbConnect();
+		if (empty($articleImageUrl)) {
+			$req = $db->prepare('UPDATE posts SET title = :articleTitle, content = :articleContent WHERE id = :articleId');
+		}else{
+			$req = $db->prepare('UPDATE posts SET title = :articleTitle, image = :articleImageUrl, content = :articleContent WHERE id = :articleId');
+			$req->bindValue(':articleImageUrl',urlencode($articleImageUrl),\PDO::PARAM_STR);
+		}
+		
+		$req->bindValue(':articleId',$articleId,\PDO::PARAM_INT);
+		$req->bindValue(':articleTitle',$articleTitle,\PDO::PARAM_STR);
+		$req->bindValue(':articleContent',$articleContent,\PDO::PARAM_STR);
+		$req->execute();
+
+		
+	}
+
 	public function countTableRows($table)
 	{
 		$db = $this->dbConnect();

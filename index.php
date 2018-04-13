@@ -90,6 +90,12 @@ try {
         $action->actionAddArticles();
         break;
 
+        /*************************************** UPDATE ARTICLE ACTION ************************************/
+
+        case 'edit-article':
+        $action->actionEditArticle();
+        break;
+
         /*************************************** LOGOUT ACTION ***********************************************/
 
         case 'logout':

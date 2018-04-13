@@ -40,6 +40,14 @@ class BackendController
         $addNewArticle->addArticle($articleTitle,$articleImageUrl,$articleContent);
 
     }
+
+    public static function updateArticle($articleId,$articleTitle,$articleImageUrl,$articleContent)
+    {
+        $updateArticle = new PostManager();
+        $updateArticle->updateArticle($articleId,$articleTitle,$articleImageUrl,$articleContent);
+
+    }
+
     /**
      * [checkAdminSession description]
      * @return [type] [description]

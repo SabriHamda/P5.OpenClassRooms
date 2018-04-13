@@ -263,6 +263,55 @@ class Controller
 		}
 	}
 
+	public function actionEditArticle(){
+		$checkSession = new BackendController();
+		$checkSession->checkAdminSession();
+		if ($checkSession->$checkAdminSession == TRUE){
+			if(!empty($_GET['id']) && $_GET['id'] > 0){
+				$post = new FrontendController();
+				$pageName = $_GET['action'];
+				$articleId = $_GET['id'];
+				echo $this->viewBackEnd('editArticleView.twig',
+				['post'=> $post->post()['post'],
+                'comments'=> $post->post()['comments']]
+				);
+
+
+            // if submit the update article form
+				if (!isset($_POST['submit-article-update'])) {
+
+				}else{
+					if (!empty($articleId) && !empty($_POST['title-article-update']) && !empty($_POST['content-article-update'])) {
+						$articleId = $_GET['id'];
+						$articleTitle = $_POST['title-article-update'];
+						$articleContent = $_POST['content-article-update'];
+						$articleImage = $_FILES['img-article-update'];
+						if (empty($articleImage['name'])) {
+							echo '<script type="text/javascript"> alert("il a compris que c\'est vide");</script>';
+							BackendController::updateArticle($articleId,$articleTitle,'',$articleContent);
+						}else{
+							$uploadMyFile = BackendController::uploadFile('img-article-update','public/assets/images/uploads/'.$articleImage["name"].'',FALSE,array('png','gif','jpg','jpeg'));
+						if ($uploadMyFile) {
+							echo '<script type="text/javascript"> alert("image bien enregistrer");</script>';
+							BackendController::updateArticle($articleId,$articleTitle,'public/assets/images/uploads/'.$articleImage["name"].'',$articleContent);
+						}else{
+							echo '<script type="text/javascript"> alert("probleme avec l\'image");</script>';
+						}
+						}
+						
+					}else{
+						echo '<script type="text/javascript"> alert("champs vide");</script>';
+					}
+					echo '<script type="text/javascript"> alert("toucher");</script>';
+				}
+			}else{
+				header('Location: index.php?action=login');
+			}
+		}else{
+			header('Location: index.php?action=login');
+		}
+	}
+
 	public function actionLogOut(){
 		$logout = new UserController();
     	$logout->logout();
