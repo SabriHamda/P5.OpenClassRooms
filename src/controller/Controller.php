@@ -242,21 +242,23 @@ class Controller
 			if (!isset($_POST['submit-article-add'])) {
                 
 			}else{
-				if (!empty($_POST['title-article-add']) && !empty($_FILES['img-article-add']) && !empty($_POST['content-article-add'])) {
+				if (!empty($_POST['title-article-add']) && !empty($_FILES['img-article-add']) && !empty($_POST['content-article-add']) && !empty($_POST['content-right-article-add'])) {
 					$articleTitle = $_POST['title-article-add'];
 					$articleImage = $_FILES['img-article-add'];
 					$articleContent = $_POST['content-article-add'];
+					$articleContentRight = $_POST['content-right-article-add'];
 					$uploadMyFile = BackendController::uploadFile('img-article-add','public/assets/images/uploads/'.$articleImage["name"].'',FALSE,array('png','gif','jpg','jpeg'));
 					if ($uploadMyFile) {
 						echo '<script type="text/javascript"> alert("image bien enregistrer");</script>';
-						BackendController::addArticle($articleTitle,'public/assets/images/uploads/'.$articleImage["name"].'',$articleContent);
+						BackendController::addArticle($articleTitle,'public/assets/images/uploads/'.$articleImage["name"].'',$articleContent,$articleContentRight);
+							header('Location: index.php?action=articles');
 					}else{
 						echo '<script type="text/javascript"> alert("probleme avec l\'image");</script>';
 					}
 				}else{
-					echo '<script type="text/javascript"> alert("champs vide");</script>';
+					echo '<script type="text/javascript"> alert("Veuillez remplir tous les champs");</script>';
 				}
-				echo '<script type="text/javascript"> alert("toucher");</script>';
+				//echo '<script type="text/javascript"> alert("toucher");</script>';
 			}
 		}else{
 			header('Location: index.php?action=login');
@@ -272,28 +274,36 @@ class Controller
 				$pageName = $_GET['action'];
 				$articleId = $_GET['id'];
 				echo $this->viewBackEnd('editArticleView.twig',
-				['post'=> $post->post()['post'],
-                'comments'=> $post->post()['comments']]
-				);
+					[
+					'posts'=> TablePaginate::paginate('posts', 10, 'created_at DESC'),	
+					'post'=> $post->post()['post'],
+            		'comments'=> TablePaginate::paginate('comments', 3, 'comment_date DESC'),
+					'page'=> $page,
+					'pageName'=> $pageName,
+					'nbPage' => TablePaginate::paginate('posts', 10, 'created_at DESC')
+				]);
 
 
             // if submit the update article form
 				if (!isset($_POST['submit-article-update'])) {
 
 				}else{
-					if (!empty($articleId) && !empty($_POST['title-article-update']) && !empty($_POST['content-article-update'])) {
+					if (!empty($articleId) && !empty($_POST['title-article-update']) && !empty($_POST['content-article-update']) && !empty($_POST['content-right-article-update'])) {
 						$articleId = $_GET['id'];
 						$articleTitle = $_POST['title-article-update'];
 						$articleContent = $_POST['content-article-update'];
+						$articleContentRight = $_POST['content-right-article-update'];
+
 						$articleImage = $_FILES['img-article-update'];
 						if (empty($articleImage['name'])) {
-							echo '<script type="text/javascript"> alert("il a compris que c\'est vide");</script>';
-							BackendController::updateArticle($articleId,$articleTitle,'',$articleContent);
+							BackendController::updateArticle($articleId,$articleTitle,'',$articleContent,$articleContentRight);
+							header("Refresh:0");
 						}else{
 							$uploadMyFile = BackendController::uploadFile('img-article-update','public/assets/images/uploads/'.$articleImage["name"].'',FALSE,array('png','gif','jpg','jpeg'));
 						if ($uploadMyFile) {
 							echo '<script type="text/javascript"> alert("image bien enregistrer");</script>';
-							BackendController::updateArticle($articleId,$articleTitle,'public/assets/images/uploads/'.$articleImage["name"].'',$articleContent);
+							BackendController::updateArticle($articleId,$articleTitle,'public/assets/images/uploads/'.$articleImage["name"].'',$articleContent,$articleContentRight);
+							header("Refresh:0");
 						}else{
 							echo '<script type="text/javascript"> alert("probleme avec l\'image");</script>';
 						}
@@ -302,7 +312,7 @@ class Controller
 					}else{
 						echo '<script type="text/javascript"> alert("champs vide");</script>';
 					}
-					echo '<script type="text/javascript"> alert("toucher");</script>';
+					//echo '<script type="text/javascript"> alert("toucher");</script>';
 				}
 			}else{
 				header('Location: index.php?action=login');
@@ -317,7 +327,7 @@ class Controller
     	$logout->logout();
 	}
 
-	public function actionError(){
+	public function actionError($e){
 		$error = $e->getMessage();
     echo $this->viewFrontEnd('errorView.twig', ['error'=> $error]);
 	}

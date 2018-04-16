@@ -34,17 +34,17 @@ class BackendController
      * @param [type] $articleImageUrl [description]
      * @param [type] $articleContent  [description]
      */
-    public static function addArticle($articleTitle,$articleImageUrl,$articleContent)
+    public static function addArticle($articleTitle,$articleImageUrl,$articleContent,$articleContentRight)
     {
         $addNewArticle = new PostManager();
-        $addNewArticle->addArticle($articleTitle,$articleImageUrl,$articleContent);
+        $addNewArticle->addArticle($articleTitle,$articleImageUrl,$articleContent,$articleContentRight);
 
     }
 
-    public static function updateArticle($articleId,$articleTitle,$articleImageUrl,$articleContent)
+    public static function updateArticle($articleId,$articleTitle,$articleImageUrl,$articleContent,$articleContentRight)
     {
         $updateArticle = new PostManager();
-        $updateArticle->updateArticle($articleId,$articleTitle,$articleImageUrl,$articleContent);
+        $updateArticle->updateArticle($articleId,$articleTitle,$articleImageUrl,$articleContent,$articleContentRight);
 
     }
 

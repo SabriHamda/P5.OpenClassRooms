@@ -5,6 +5,11 @@
 		{% include 'parts/menu.twig' %}
 		<div id="fh5co-main">
 			<div class="fh5co-narrow-content">
+				{% if session.role == 'admin' %}
+				<p><a href="index.php?action=edit-article&id={{ post.id }}" class="btn btn-primary">Modifier L'article</a></p>
+				{% else %}
+
+				{% endif %}
 				<div class="row row-bottom-padded-md">
 					<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
 						<img class="img-responsive" src="{{ post.image }}" alt="image" width="100%" height="100%">
@@ -14,10 +19,11 @@
 							{{ post.title }}
 							<br>
 							<small>Crée le {{ post.created_at_fr }}</small></h2>
-							<p id="mytextarea">{{ post.content|raw }}</p>
+							<p id="mytextarea">{{ post.content_right|raw }}</p>
 							
 						</div>
 					</div>
+					<p>{{ post.content|raw }}</p>
 				</div>
 
 				

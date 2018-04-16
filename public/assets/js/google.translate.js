@@ -24,7 +24,7 @@
 			var mine = $(this);
 			
 				$.get("index.php?action=translate&data=" + myData + "&lang=" + lang, function(data) {
-					console.log(data);
+					//console.log(data);
 					mine.text(data);
 					
 

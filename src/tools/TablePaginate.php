@@ -5,9 +5,9 @@ use blog\src\model\CommentManager;
 
 
 /**
- * GoogleTranslate.class.php
+ * TablePaginate.class.php
  *
- * This Class talk with Google Translator for free.
+ * This Class Paginate any table in the data base.
  */
 
 /**

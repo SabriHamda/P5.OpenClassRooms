@@ -40,8 +40,15 @@
         </div>
 
         <div class="input-groupe">
-          <label id="basic-addon1"><h4><i class="fab fa-pied-piper"></i>&nbsp; Contenu</h4></label>
-         <textarea id="editable-content" name="content-article-update" class="form-control" rows="20" id="comment">{{ post.content }}</textarea>
+          <label><h4><i class="fab fa-pied-piper"></i>&nbsp; Contenu a droite</h4></label>
+         <textarea name="content-right-article-update" class="editable-content form-control" rows="20">
+          {{ post.content_right }}</textarea>
+       </div> 
+
+        <div class="input-groupe">
+          <label><h4><i class="fab fa-pied-piper"></i>&nbsp; Contenu</h4></label>
+         <textarea name="content-article-update" class="editable-content form-control" rows="20">
+          {{ post.content }}</textarea>
        </div> 
        <br>
        <div class="input-groupe">

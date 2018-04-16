@@ -1,5 +1,15 @@
 {% extends 'template.twig' %}
 {% block content %}
+	<!--Facebook -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!--Facebook -->
 	<div id="fh5co-page">
 		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
 	{% include 'parts/menu.twig' %}
@@ -11,11 +21,35 @@
 						<img class="img-responsive" src="public/assets/images/apropos.png" alt="Free HTML5 Bootstrap Template by FreeHTML5.co">
 					</div>
 					<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-						<h2 class="fh5co-heading">About Company</h2>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Quisque sit amet efficitur nih. Interdum et malesuada fames ac ante ipsum primis in faucibus interda et malesuada parturient.</p>
-						<p>Quisque sit amet efficitur nih. Interdum et malesuada fames ac ante ipsum primis in faucibus interda et malesuada parturient.</p>
+						<h2 class="fh5co-heading">A PROPOS DE MOI</h2>
+						<p>Sabri Hamda, développeur web à Genève. je réalise des projets web pour une Clientèle du monde entier, Si mon coeur de métier est le développement, mon rôle au sein de votre projet est bien plus large et important : je suis votre référent et votre accompagnateur. </p>
+						<ul class="list-group">
+                    <li class="list-group-item color-yellow">
+                        <div class="text-left"><i class="fas fa-user"></i> Date de naissance</div>
+                        <div class="text-right">9 Mars 1980</div>
+                    </li>
+                    <li class="list-group-item color-orange-light">
+                        <div class="text-left"><i class="fas fa-language"></i> Langues</div>
+                        <div class="text-right">Anglais, Français, Arabe</div>
+                    </li>
+                    <li class="list-group-item color-orange">
+                        <div class="text-left"><i class="fas fa-futbol"></i> Hobbies</div>
+                        <div class="text-right">Basket-ball, Foot-ball, Music</div>
+                    </li>
+                    <li class="list-group-item color-red">
+                        <div class="text-left"><i class="fas fa-external-link-alt"></i> Website</div>
+                        <div class="text-right"><a style="color:#fff" href="https://hamda.ch">www.hamda.ch</a>
+                        </div>
+                    </li>
+                    <li class="list-group-item color-pink">
+                        <div class="text-left"><i class="fab fa-facebook"></i> Facebook</div>
+                        <div class="text-right"><a href="#"><div class="fb-like" data-href="https://www.facebook.com/HAMDA-1383715418391839/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div></a>
+                        </div>
+                    </li>
+                </ul>
 					</div>
 				</div>
+				<p>Je réalise tous types de projet web : aussi bien un site vitrine, e-commerce, sur mesure ou une application mobile... De plus, les sites internet développés sont également optimisés pour les différents navigateurs et moteurs de recherche. </p>
 			</div>
 
 			<div class="fh5co-narrow-content">

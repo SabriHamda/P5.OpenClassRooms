@@ -118,6 +118,6 @@ try {
 
 }
 catch (Exception $e) {
-    $action->actionError();
+    $action->actionError($e);
 }
 
