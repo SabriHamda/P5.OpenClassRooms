@@ -11,14 +11,14 @@ If you want to see the code on GitHub, go [here](https://github.com/SabriHamda/P
 ## Installation
 
 Pour utiliser ce blog, il faut suivre les étapes suivantes :
-* Créer une base de données et importer le fichier db-blog.sql situé dans le dossier db
-* Entrez vos identifiants de connexion à la base de données dans le fichier dev.ini situé dans le dossier config
+* Créer une base de données et importer le fichier db-blog.sql situé dans le dossier src/db
+* Entrez vos identifiants de connexion à la base de données dans le fichier Manager.php situé dans le dossier src/model
 * Pour le formulaire de Contact, entrez votre email dans le fichier mail/contact_me.php
 * enjoy !
 
 To use this blog, you must follow this steps :
 * Create a database and import the my_blog.sql file located in the src/db folder
-* Enter your connexion settings in the dev.ini file located in the config folder
+* Enter your connexion settings in the Manager.php file located in the src/model folder
 * To use the Contact Form, enter your email in the mail/contact_me.php file
 * enjoy !
 
