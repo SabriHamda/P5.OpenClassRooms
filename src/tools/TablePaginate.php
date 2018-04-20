@@ -25,7 +25,7 @@ class TablePaginate {
      * @param  [string] $orderBy  [the order of rows ex: ID DESC ]
      * @return [array] $result        [array with number of pages,total of rows and all pages]
      */
-	public static function paginate($table, $nbResult,$orderBy)
+	public static function paginate(string $table, int $nbResult, string $orderBy)
 
     {
     	$postManager = new PostManager();

@@ -20,7 +20,7 @@ class PostManager extends Manager{
 	public function getPost($postId)
 	{
 		$db = $this->dbConnect();
-		$req = $db->prepare('SELECT id, title, content,content_right,image, DATE_FORMAT(created_at, \'%d/%m/%Y à %Hh%imin%ss\') AS created_at_fr FROM posts WHERE id = ?');
+		$req = $db->prepare('SELECT id, title, content,content_right,image, created_at FROM posts WHERE id = ?');
 		$req->execute(array($postId));
 		$post = $req->fetch();
 		$post['image'] = urldecode($post['image']);

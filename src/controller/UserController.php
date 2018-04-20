@@ -74,6 +74,7 @@ class UserController
      * @return page return to the main page.
      */
     public function logOut(){
+        session_unset();
         session_destroy();
         header('Location: index.php?action=home');
     }

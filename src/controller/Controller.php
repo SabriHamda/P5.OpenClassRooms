@@ -6,6 +6,7 @@ use blog\src\controller\FrontendController;
 use blog\src\controller\BackendController;
 use blog\src\tools\GoogleTranslate;
 use blog\src\tools\TablePaginate;
+use blog\src\tools\UploadFile;
 
 /**
 * This Class is the main controller of the application.
@@ -33,14 +34,15 @@ class Controller
 		$this->token = $_SESSION['token']= md5(uniqid(mt_rand(),true));
 
 	}
-
+	
+	/*************************************** TWIG FRONTEND ENVIRONEMENT ****************************************/
 	/**
 	 * This function will render twig frontend views
 	 * @param  string $page   the page to view
 	 * @param  array  $params the params added to this view.
 	 * @return string         the final page to view with it's params.
 	 */
-	public function viewFrontEnd($page, array $params = array())
+	public function viewFrontEnd(string $page, array $params = array())
 
 	{
 		$this->loader = new \Twig_Loader_Filesystem('src/view/frontend');
@@ -52,6 +54,7 @@ class Controller
 		return $this->viewFrontPage;
 	}
 
+	/*************************************** TWIG BACKEND ENVIRONEMENT ****************************************/
 	/**
 	 * This function will render twig backend views
 	 * @param  string $page   the page to view
@@ -70,16 +73,20 @@ class Controller
 		return $this->viewBackPage;
 	}
 	
+	/*************************************** TRANSLATE ACTION *******************************************/
+
 	public function actionTranslate(){
 		if(isset($_GET['data']) && !empty($_GET['lang'])){
 	$translate = $_GET['data'];
 	$lang = $_GET['lang'];
 	$result = GoogleTranslate::translate('auto',$lang,$translate);
 	echo $result;
-}else{
+		}else{
 	echo 'aucune langue selectionée';
-}
+		}
 	}
+
+    /*************************************** HOME ACTION ***********************************************/
 
 	public function actionHome(){
 		//$listpost = new FrontendController();
@@ -93,9 +100,13 @@ class Controller
 			'pageName'=> $pageName]);
 	}
 
+    /*************************************** ABOUT ACTION ***********************************************/
+
 	public function actionAbout(){
         echo $this->viewFrontEnd('about.twig');
 	}
+
+    /*************************************** BLOG ACTION ***********************************************/
 
 	public function actionBlog(){
         $pageName = $_GET['action'];
@@ -108,13 +119,19 @@ class Controller
 			'pageName'=> $pageName]);
 	}
 
+    /*************************************** PORTFOLIO ACTION ******************************************/
+
 	public function actionPortfolio(){
         echo $this->viewFrontEnd('portfolio.twig');
 	}
 
+    /*************************************** CONTACT ACTION *******************************************/
+
 	public function actionContact(){
         echo $this->viewFrontEnd('contact.twig');
 	}
+
+	/*************************************** POST ACTION ***********************************************/
 
 	public function actionPost(){
 		if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -126,9 +143,11 @@ class Controller
             );
         }
         else {
-            throw new Exception("aucun identifiant d'article envoyé");
+            throw new \Exception("aucun identifiant d'article envoyé");
         }
 	}
+
+    /*************************************** REGISTER ACTION ********************************************/
 
 	public function actionRegister(){
 		if (!isset($_POST['registerSubmit'])) {
@@ -143,13 +162,15 @@ class Controller
 					echo $this->viewFrontEnd('registerView.twig',['prenom'=> $prenom]);
 				}
 				else {
-					throw new Exception("Impossible de vous enregistrer, Les deux mot des passe ne sont pas identique");
+					throw new \Exception("Impossible de vous enregistrer, Les deux mot des passe ne sont pas identique");
 				}
 			}else {
-				throw new Exception("Impossible de vous enregistrer, Tous les champs ne sont pas remplis !");
+				throw new \Exception("Impossible de vous enregistrer, Tous les champs ne sont pas remplis !");
 			}
 		}
 	}
+
+    /*************************************** LOGIN ACTION ***********************************************/
 
 	public function actionLogin(){
 		if (!isset($_POST['loginSubmit'])) {
@@ -164,10 +185,12 @@ class Controller
 				$login = new UserController();
 				$login->login($_POST['email'],$_POST['password']);
 			}else{
-				throw new Exception("Impossible de vous enregistrer, Veuillez vérifier vos informations de connection");
+				throw new \Exception("Impossible de vous enregistrer, Veuillez vérifier vos informations de connection");
 			}
 		}
 	}
+
+    /*************************************** ADDCOMMENT ACTION ****************************************/    
 
 	public function actionAddComment(){
 		if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -176,13 +199,15 @@ class Controller
 				$addComment->addComment($_GET['id'], $_POST['author'], $_POST['comment'], $_POST['civility']);
 			}
 			else {
-				throw new Exception("Tous les champs ne sont pas remplis !");
+				throw new \Exception("Tous les champs ne sont pas remplis !");
 			}
 		}
 		else {
-			throw new Exception("aucun identifiant de billet envoyé");
+			throw new \Exception("aucun identifiant de billet envoyé");
 		}
 	}
+
+    /*************************************** DASHBOARD ACTION *******************************************/
 
 	public function actionDashboard(){
 		$checkSession = new BackendController();
@@ -203,6 +228,8 @@ class Controller
 		}
 	}
 
+    /*************************************** ARTICLES ACTION ********************************************/    
+
 	public function actionArticles(){
 		$checkSession = new BackendController();
 		$checkSession->checkAdminSession();
@@ -221,6 +248,8 @@ class Controller
 			header('Location: index.php?action=login');
 		}
 	}
+
+    /*************************************** ADD ARTICLE ACTION ***************************************/    
 
 	public function actionAddArticles(){
 		$checkSession = new BackendController();
@@ -247,11 +276,11 @@ class Controller
 					$articleImage = $_FILES['img-article-add'];
 					$articleContent = $_POST['content-article-add'];
 					$articleContentRight = $_POST['content-right-article-add'];
-					$uploadMyFile = BackendController::uploadFile('img-article-add','public/assets/images/uploads/'.$articleImage["name"].'',FALSE,array('png','gif','jpg','jpeg'));
+					$uploadMyFile = UploadFile::uploadFile('img-article-add','public/assets/images/uploads/'.$articleImage["name"].'',FALSE,array('png','gif','jpg','jpeg'));
 					if ($uploadMyFile) {
 						echo '<script type="text/javascript"> alert("image bien enregistrer");</script>';
 						BackendController::addArticle($articleTitle,'public/assets/images/uploads/'.$articleImage["name"].'',$articleContent,$articleContentRight);
-							header('Location: index.php?action=articles');
+							echo '<script type="text/javascript"> window.location.replace("index.php?action=edit-article&id='.$articleId.'");</script>';
 					}else{
 						echo '<script type="text/javascript"> alert("probleme avec l\'image");</script>';
 					}
@@ -264,6 +293,8 @@ class Controller
 			header('Location: index.php?action=login');
 		}
 	}
+
+    /*************************************** UPDATE ARTICLE ACTION ************************************/
 
 	public function actionEditArticle(){
 		$checkSession = new BackendController();
@@ -297,16 +328,16 @@ class Controller
 						$articleImage = $_FILES['img-article-update'];
 						if (empty($articleImage['name'])) {
 							BackendController::updateArticle($articleId,$articleTitle,'',$articleContent,$articleContentRight);
-							header("Refresh:0");
+							echo '<script type="text/javascript"> window.location.replace("index.php?action=edit-article&id='.$articleId.'");</script>';
 						}else{
-							$uploadMyFile = BackendController::uploadFile('img-article-update','public/assets/images/uploads/'.$articleImage["name"].'',FALSE,array('png','gif','jpg','jpeg'));
-						if ($uploadMyFile) {
-							echo '<script type="text/javascript"> alert("image bien enregistrer");</script>';
-							BackendController::updateArticle($articleId,$articleTitle,'public/assets/images/uploads/'.$articleImage["name"].'',$articleContent,$articleContentRight);
-							header("Refresh:0");
-						}else{
-							echo '<script type="text/javascript"> alert("probleme avec l\'image");</script>';
-						}
+							$uploadMyFile = UploadFile::uploadFile('img-article-update','public/assets/images/uploads/'.$articleImage["name"].'',FALSE,array('png','gif','jpg','jpeg'));
+							if ($uploadMyFile) {
+								echo '<script type="text/javascript"> alert("image bien enregistrer");</script>';
+								BackendController::updateArticle($articleId,$articleTitle,'public/assets/images/uploads/'.$articleImage["name"].'',$articleContent,$articleContentRight);
+								echo '<script type="text/javascript"> window.location.replace("index.php?action=edit-article&id='.$articleId.'");</script>';
+							}else{
+								echo '<script type="text/javascript"> alert("probleme avec l\'image");</script>';
+							}
 						}
 						
 					}else{
@@ -322,10 +353,14 @@ class Controller
 		}
 	}
 
+    /*************************************** LOGOUT ACTION ***********************************************/
+
 	public function actionLogOut(){
 		$logout = new UserController();
     	$logout->logout();
 	}
+
+    /*************************************** ERRORS ACTION ********************************************/
 
 	public function actionError($e){
 		$error = $e->getMessage();

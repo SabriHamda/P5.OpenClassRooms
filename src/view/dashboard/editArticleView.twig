@@ -17,10 +17,23 @@
     <div class="col-md-10 animate-box fadeInLeft animated" style="float:right">
 
       <div class="widget widget-right">
+           <div class="container-fluid table-responsive" >
+
+            <form class="navbar-form navbar-left" role="search">
+              
+  <div class="form-group">
+    <p class="btn btn-primary color-blue"><a href="index.php?action=post&id={{post.id}}" style="color:#fff">Voir L'article</a></p>
+  </div>
+  <div class="form-group">
+    <p class="btn btn-primary color-red"><a href="index.php?action=delete-article&id={{post.id}}" style="color:#fff">Supprimer L'article</a></p>
+  </div>
+  
+</form>
+</div><br>
 
        <form id="form-article-update" method="post" action="" class="add-content-form" enctype="multipart/form-data">
         <div class="input-group"> 
-         <span class="input-group-addon" id="basic-addon1"><i class="fas fa-hand-point-right"></i>&nbsp;
+         <span class="input-group-addon" ><i class="fas fa-hand-point-right"></i>&nbsp;
 
            Titre</span> 
            <input type="text" class="form-control" name="title-article-update" value="{{post.title}}" placeholder="Titre" aria-describedby="basic-addon1"> 
@@ -40,7 +53,7 @@
         </div>
 
         <div class="input-groupe">
-          <label><h4><i class="fab fa-pied-piper"></i>&nbsp; Contenu a droite</h4></label>
+          <label><h4><i class="fab fa-pied-piper"></i>&nbsp; Chapô</h4></label>
          <textarea name="content-right-article-update" class="editable-content form-control" rows="20">
           {{ post.content_right }}</textarea>
        </div> 
