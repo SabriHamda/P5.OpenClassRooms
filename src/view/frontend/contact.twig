@@ -46,30 +46,31 @@
 				
 				<div class="row">
 					<div class="col-md-4">
+						<h3 style="color:#009688">{{ confirmation }}</h3>
 						<h2>Get In Touch</h2>
 					</div>
 				</div>
-				<form action="">
+				<form action="" method="post">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Name">
+										<input type="text" class="form-control" placeholder="Nom" name="contact-name">
 									</div>
 									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Email">
+										<input type="email" class="form-control" placeholder="Email" name="contact-email">
 									</div>
 									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Phone">
+										<input type="text" class="form-control" placeholder="Phone" name="contact-phone">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<textarea name="" id="message" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+										<textarea name="contact-message" id="message" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
 									</div>
 									<div class="form-group">
-										<input type="submit" class="btn btn-primary btn-md" value="Send Message">
+										<input type="submit" class="btn btn-primary btn-md" value="Envoyer" name="contact-submit">
 									</div>
 								</div>
 								

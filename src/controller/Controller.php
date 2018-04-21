@@ -7,6 +7,7 @@ use blog\src\controller\BackendController;
 use blog\src\tools\GoogleTranslate;
 use blog\src\tools\TablePaginate;
 use blog\src\tools\UploadFile;
+use blog\src\tools\EmailMe;
 
 /**
 * This Class is the main controller of the application.
@@ -128,7 +129,27 @@ class Controller
     /*************************************** CONTACT ACTION *******************************************/
 
 	public function actionContact(){
-        echo $this->viewFrontEnd('contact.twig');
+        if (!isset($_POST['contact-submit'])) {
+			echo $this->viewFrontEnd('contact.twig');
+		}
+		else{
+			//$role = "visitor";
+			if (!empty($_POST['contact-name']) && !empty($_POST['contact-email']) && !empty($_POST['contact-phone']) && !empty($_POST['contact-message'])) {
+				
+				
+					EmailMe::sendMessageMail('sabri@hamda.ch',
+						'Nom : '.$_POST['contact-name'].
+						'<br> Email : '.$_POST['contact-email'].
+						'<br> Phone : '.$_POST['contact-phone'].
+						'<br> Message : '.$_POST['contact-message'],
+						'Vous avez reçu un message de '.$_POST['contact-name']); 
+
+					echo $this->viewFrontEnd('contact.twig',['confirmation'=> 'Message envoyé']);
+				
+			}else {
+				throw new \Exception("Impossible d'envoyer, Tous les champs ne sont pas remplis !");
+			}
+		}
 	}
 
 	/*************************************** POST ACTION ***********************************************/
@@ -159,6 +180,7 @@ class Controller
 				if ($_POST['passwordConfirm'] == $_POST['password']) {
 					$addUser = new UserController;
 					$addUser->addUser($role, $_POST['prenom'],$_POST['password'],$_POST['email'],$_POST['civility']);
+					EmailMe::sendTemplateMail('sabri@hamda.ch','src/view/mail/registerMailView.twig','Bonjour '.$_POST['prenom']); 
 					echo $this->viewFrontEnd('registerView.twig',['prenom'=> $prenom]);
 				}
 				else {
