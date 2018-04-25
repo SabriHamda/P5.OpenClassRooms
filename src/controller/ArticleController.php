@@ -34,7 +34,7 @@ class ArticleController
     	$articleManager = new ArticleManager();
     	$commentManager = new CommentManager();
         $article = $articleManager->getArticle($articleId);
-        $comments = $commentManager->getComments($_GET['id']);
+        $comments = $commentManager->getComments($articleId);
         return ['post'=> $article, 'comments'=> $comments];
 
     }

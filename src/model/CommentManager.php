@@ -8,8 +8,8 @@ use blog\src\model\Manager;
 class CommentManager extends Manager{
 /**
  * [getComments description]
- * @param  [type] $articleId [description]
- * @return [type]         [description]
+ * @param  [INT] $articleId [description]
+ * @return [OBJ]         [description]
  */
 	public function getComments($articleId)
 	{
@@ -20,31 +20,37 @@ class CommentManager extends Manager{
 		return $comments;
 	}
 /**
- * [postComment description]
- * @param  [type] $articleId   [description]
- * @param  [type] $author   [description]
- * @param  [type] $comment  [description]
- * @param  [type] $civility [description]
- * @return [type]           [description]
+ * [addComment description]
+ * @param  [INT] $articleId   [description]
+ * @param  [STRING] $author   [description]
+ * @param  [STRING] $comment  [description]
+ * @param  [STRING] $civility [description]
+ * @return [OBJ]           [description]
  */
-	public function postComment($articleId, $author, $comment, $civility, $role)
+	public function addComment(CommentHydrate $comment)
 
 	{
 
 		$db = $this->dbConnect(); 
 		$comments = $db->prepare('INSERT INTO comments(post_id, author, comment,civilite, is_valid, comment_date) VALUES(?, ?, ?, ?, ?, NOW())');
-		$is_valid = ($role == 'admin') ? 1 : 0;
-		$affectedLines = $comments->execute(array($articleId, $author, $comment, $civility,$is_valid));
+		
+		$affectedLines = $comments->execute(array(
+			$comment->getId(),
+			$comment->getAuthor(),
+			$comment->getComment(),
+			$comment->getCivilite(),
+			$comment->getIsValid()
+		));
 
 
 		return $affectedLines;
 
 	}
 
-	public function updateCommentValidity($id){
+	public function updateCommentValidity(CommentHydrate $comment){
 		$db = $this->dbConnect();
 		$comments = $db->prepare('UPDATE comments SET is_valid = :is_valid WHERE id = :id');
-		$comments->bindValue(':id',$id,\PDO::PARAM_INT);
+		$comments->bindValue(':id',$comment->getId(),\PDO::PARAM_INT);
 		$comments->bindValue(':is_valid',1,\PDO::PARAM_INT);
 		$comments->execute();
 	}
