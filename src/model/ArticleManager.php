@@ -26,34 +26,33 @@ class ArticleManager extends Manager{
 		$post['image'] = urldecode($post['image']);
 		return $post;
 	}
-	public function addArticle($articleTitle,$articleImageUrl,$articleContent,$articleContentRight)
+	public function addArticle(ArticleHydrate $article)
 	{
 		$db = $this->dbConnect();
 		$req = $db->prepare('INSERT INTO posts (title, image, content, content_right) VALUES (:articleTitle, :articleImageUrl, :articleContent, :articleContentRight)');
-		$req->bindValue(':articleTitle',$articleTitle,\PDO::PARAM_STR);
-		$req->bindValue(':articleImageUrl',urlencode($articleImageUrl),\PDO::PARAM_STR);
-		$req->bindValue(':articleContent',$articleContent,\PDO::PARAM_STR);
-		$req->bindValue(':articleContentRight',$articleContentRight,\PDO::PARAM_STR);
+		$req->bindValue(':articleTitle',$article->getTitle(),\PDO::PARAM_STR);
+		$req->bindValue(':articleImageUrl',urlencode($article->getImage()),\PDO::PARAM_STR);
+		$req->bindValue(':articleContent',$article->getContent(),\PDO::PARAM_STR);
+		$req->bindValue(':articleContentRight',$article->getContentRight(),\PDO::PARAM_STR);
 
 		$req->execute();
 
 		
 	}
 
-	public function updateArticle($articleId,$articleTitle,$articleImageUrl,$articleContent,$articleContentRight)
+	public function updateArticle(ArticleHydrate $article)
 	{
 		$db = $this->dbConnect();
-		if (empty($articleImageUrl)) {
+		if (empty($article->getImage())) {
 			$req = $db->prepare('UPDATE posts SET title = :articleTitle, content = :articleContent, content_right = :articleContentRight WHERE id = :articleId');
 		}else{
 			$req = $db->prepare('UPDATE posts SET title = :articleTitle, image = :articleImageUrl, content = :articleContent, content_right = :articleContentRight WHERE id = :articleId');
-			$req->bindValue(':articleImageUrl',urlencode($articleImageUrl),\PDO::PARAM_STR);
+			$req->bindValue(':articleImageUrl',urlencode($article->getImage()),\PDO::PARAM_STR);
 		}
-		
-		$req->bindValue(':articleId',$articleId,\PDO::PARAM_INT);
-		$req->bindValue(':articleTitle',$articleTitle,\PDO::PARAM_STR);
-		$req->bindValue(':articleContent',$articleContent,\PDO::PARAM_STR);
-		$req->bindValue(':articleContentRight',$articleContentRight,\PDO::PARAM_STR);
+		$req->bindValue(':articleId',$article->getId(),\PDO::PARAM_INT);
+		$req->bindValue(':articleTitle',$article->getTitle(),\PDO::PARAM_STR);
+		$req->bindValue(':articleContent',$article->getContent(),\PDO::PARAM_STR);
+		$req->bindValue(':articleContentRight',$article->getContentRight(),\PDO::PARAM_STR);
 		$req->execute();
 
 		

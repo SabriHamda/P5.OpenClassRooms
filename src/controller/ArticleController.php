@@ -2,6 +2,7 @@
 namespace blog\src\controller;
 use blog\src\model\ArticleManager;
 use blog\src\model\CommentManager;
+use blog\src\model\ArticleHydrate;
 
 
 /**
@@ -46,15 +47,28 @@ class ArticleController
      */
     public static function addArticle($articleTitle,$articleImageUrl,$articleContent,$articleContentRight)
     {
+        $data = new ArticleHydrate();
+        $data->setTitle($articleTitle);
+        $data->setImage($articleImageUrl);
+        $data->setContent($articleContent);
+        $data->setContentRight($articleContentRight);
+
         $addNewArticle = new ArticleManager();
-        $addNewArticle->addArticle($articleTitle,$articleImageUrl,$articleContent,$articleContentRight);
+        $addNewArticle->addArticle($data);
 
     }
 
     public static function updateArticle($articleId,$articleTitle,$articleImageUrl,$articleContent,$articleContentRight)
     {
+        $data = new ArticleHydrate();
+        $data->setId($articleId);
+        $data->setTitle($articleTitle);
+        $data->setImage($articleImageUrl);
+        $data->setContent($articleContent);
+        $data->setContentRight($articleContentRight);
+
         $updateArticle = new ArticleManager();
-        $updateArticle->updateArticle($articleId,$articleTitle,$articleImageUrl,$articleContent,$articleContentRight);
+        $updateArticle->updateArticle($data);
 
     }
 
