@@ -2,12 +2,12 @@
 namespace blog\src\controller;
 
 use blog\src\controller\UserController;
-use blog\src\controller\FrontendController;
-use blog\src\controller\BackendController;
+use blog\src\controller\ArticleController;
 use blog\src\tools\GoogleTranslate;
 use blog\src\tools\TablePaginate;
 use blog\src\tools\UploadFile;
 use blog\src\tools\EmailMe;
+use blog\src\tools\CheckSession;
 
 /**
 * This Class is the main controller of the application.
@@ -76,21 +76,17 @@ class Controller
 	
 	/*************************************** TRANSLATE ACTION *******************************************/
 
-	public function actionTranslate(){
-		if(isset($_GET['data']) && !empty($_GET['lang'])){
-	$translate = $_GET['data'];
-	$lang = $_GET['lang'];
-	$result = GoogleTranslate::translate('auto',$lang,$translate);
-	echo $result;
-		}else{
-	echo 'aucune langue selectionée';
-		}
+	public function actionTranslate()
+	{
+		$translate = $_GET['data'];
+		$lang = $_GET['lang'];
+		$result = GoogleTranslate::translate('auto',$lang,$translate);
+		echo $result;
 	}
 
     /*************************************** HOME ACTION ***********************************************/
 
 	public function actionHome(){
-		//$listpost = new FrontendController();
 		$pageName = $_GET['action'];
 		$page = empty($_GET['page']) ? 0 : $_GET['page']-1;
         echo $this->viewFrontEnd(
@@ -152,20 +148,21 @@ class Controller
 		}
 	}
 
-	/*************************************** POST ACTION ***********************************************/
+	/*************************************** ARTICLE ACTION ***********************************************/
 
-	public function actionPost(){
-		if (isset($_GET['id']) && $_GET['id'] > 0) {
-            $post = new FrontendController();
-            echo $this->viewFrontEnd(
-                'postView.twig',
-                ['post'=> $post->post()['post'],
-                'comments'=> $post->post()['comments']]
-            );
-        }
-        else {
-            throw new \Exception("aucun identifiant d'article envoyé");
-        }
+	public function actionArticle(){
+		if (isset($_GET['id']) && $_GET['id'] > 0 && preg_match("#^\d+$#", $_GET['id'])) {
+			$articleId = $_GET['id'];
+			$article = new ArticleController();
+			echo $this->viewFrontEnd(
+				'postView.twig',
+				['post'=> $article->article($articleId)['post'],
+				'comments'=> $article->article($articleId)['comments']]
+			);
+		}
+		else {
+			throw new \Exception("aucun identifiant d'article envoyé");
+		}
 	}
 
     /*************************************** REGISTER ACTION ********************************************/
@@ -215,13 +212,13 @@ class Controller
     /*************************************** ADDCOMMENT ACTION ****************************************/    
 
 	public function actionAddComment(){
-		if (isset($_GET['id']) && $_GET['id'] > 0) {
-			if (!empty($_POST['author']) && !empty($_POST['comment']) && !empty($_POST['civility'])) {
-				$addComment = new FrontendController();
-				$addComment->addComment($_GET['id'], $_POST['author'], $_POST['comment'], $_POST['civility']);
+		if (isset($_GET['id']) && $_GET['id'] > 0 && preg_match("#^\d+$#", $_GET['id'])) {
+			if (!empty($_SESSION['prenom']) && !empty($_POST['comment']) && !empty($_SESSION['civility'])) {
+				$addComment = new CommentController();
+				$addComment->addComment($_GET['id'], $_SESSION['prenom'], $_POST['comment'], $_SESSION['civility'], $_SESSION['role']);
 			}
 			else {
-				throw new \Exception("Tous les champs ne sont pas remplis !");
+				throw new \Exception("Votre commentaire est vide !");
 			}
 		}
 		else {
@@ -232,15 +229,14 @@ class Controller
     /*************************************** DASHBOARD ACTION *******************************************/
 
 	public function actionDashboard(){
-		$checkSession = new BackendController();
-		$checkSession->checkAdminSession();
-		if ($checkSession->$checkAdminSession == TRUE){
+		$checkSession = CheckSession::checkAdminSession();
+		if ($checkSession == TRUE){
 			$pageName = $_GET['action'];
 			$page = empty($_GET['page']) ? 0 : $_GET['page']-1;
 			echo $this->viewBackEnd('dashboardView.twig',
 				[
 					'posts'=> TablePaginate::paginate('posts', 5, 'created_at DESC'),
-					'comments'=> TablePaginate::paginate('comments', 3, 'comment_date DESC'),
+					'comments'=> TablePaginate::paginate('comments', 10, 'comment_date DESC'),
 					'page'=> $page,
 					'pageName'=> $pageName,
 					'nbPage'=>TablePaginate::paginate('posts', 10, 'created_at DESC')
@@ -250,12 +246,52 @@ class Controller
 		}
 	}
 
+	/*************************************** COMMENTS ACTION ********************************************/    
+
+	public function actionComments(){
+		$checkSession = CheckSession::checkAdminSession();
+		if ($checkSession == TRUE){
+			$pageName = $_GET['action'];
+			$page = empty($_GET['page']) ? 0 : $_GET['page']-1;
+			echo $this->viewBackEnd('listCommentsView.twig',
+				[
+					'posts'=> TablePaginate::paginate('posts', 10, 'created_at DESC'),
+					'comments'=> TablePaginate::paginate('comments', 10, 'comment_date DESC'),
+					'page'=> $page,
+					'pageName'=> $pageName,
+					'nbPage'=>TablePaginate::paginate('posts', 10, 'created_at DESC')
+				]);
+		}else{
+			header('Location: index.php?action=login');
+		}
+	}
+
+	/*************************************** VALIDATE-COMMENT ACTION ********************************************/    
+
+	public function actionValidateComment(){
+		$checkSession = CheckSession::checkAdminSession();
+		if ($checkSession == TRUE){
+			if (isset($_GET['id']) && $_GET['id'] > 0) {
+				$id = $_GET['id'];
+				$validateComment = new CommentController();
+				$validateComment->validateThisComment($id);
+				header('Location: index.php?action=dashboard');
+			}
+			else {
+				throw new \Exception("operation impossible id incorrecte");
+
+			}
+		}else{
+			header('Location: index.php?action=login');
+		}
+
+	}
+
     /*************************************** ARTICLES ACTION ********************************************/    
 
 	public function actionArticles(){
-		$checkSession = new BackendController();
-		$checkSession->checkAdminSession();
-		if ($checkSession->$checkAdminSession == TRUE){
+		$checkSession = CheckSession::checkAdminSession();
+		if ($checkSession == TRUE){
 			$pageName = $_GET['action'];
 			$page = empty($_GET['page']) ? 0 : $_GET['page']-1;
 			echo $this->viewBackEnd('listArticlesView.twig',
@@ -273,10 +309,9 @@ class Controller
 
     /*************************************** ADD ARTICLE ACTION ***************************************/    
 
-	public function actionAddArticles(){
-		$checkSession = new BackendController();
-		$checkSession->checkAdminSession();
-		if ($checkSession->$checkAdminSession == TRUE){
+	public function actionAddArticle(){
+		$checkSession = CheckSession::checkAdminSession();
+		if ($checkSession == TRUE){
 			$pageName = $_GET['action'];
 			$page = empty($_GET['page']) ? 0 : $_GET['page']-1;
 			echo $this->viewBackEnd('addArticleView.twig',
@@ -301,8 +336,8 @@ class Controller
 					$uploadMyFile = UploadFile::uploadFile('img-article-add','public/assets/images/uploads/'.$articleImage["name"].'',FALSE,array('png','gif','jpg','jpeg'));
 					if ($uploadMyFile) {
 						echo '<script type="text/javascript"> alert("image bien enregistrer");</script>';
-						BackendController::addArticle($articleTitle,'public/assets/images/uploads/'.$articleImage["name"].'',$articleContent,$articleContentRight);
-							echo '<script type="text/javascript"> window.location.replace("index.php?action=edit-article&id='.$articleId.'");</script>';
+						ArticleController::addArticle($articleTitle,'public/assets/images/uploads/'.$articleImage["name"].'',$articleContent,$articleContentRight);
+							echo '<script type="text/javascript"> window.location.replace("index.php?action=dashboard");</script>';
 					}else{
 						echo '<script type="text/javascript"> alert("probleme avec l\'image");</script>';
 					}
@@ -319,17 +354,16 @@ class Controller
     /*************************************** UPDATE ARTICLE ACTION ************************************/
 
 	public function actionEditArticle(){
-		$checkSession = new BackendController();
-		$checkSession->checkAdminSession();
-		if ($checkSession->$checkAdminSession == TRUE){
-			if(!empty($_GET['id']) && $_GET['id'] > 0){
-				$post = new FrontendController();
+		$checkSession = CheckSession::checkAdminSession();
+		if ($checkSession == TRUE){
+			if(!empty($_GET['id']) && $_GET['id'] > 0 && preg_match("#^\d+$#", $_GET['id'])){
+				$article = new ArticleController();
 				$pageName = $_GET['action'];
 				$articleId = $_GET['id'];
 				echo $this->viewBackEnd('editArticleView.twig',
 					[
 					'posts'=> TablePaginate::paginate('posts', 10, 'created_at DESC'),	
-					'post'=> $post->post()['post'],
+					'post'=> $article->article($articleId)['post'],
             		'comments'=> TablePaginate::paginate('comments', 3, 'comment_date DESC'),
 					'page'=> $page,
 					'pageName'=> $pageName,
@@ -349,13 +383,13 @@ class Controller
 
 						$articleImage = $_FILES['img-article-update'];
 						if (empty($articleImage['name'])) {
-							BackendController::updateArticle($articleId,$articleTitle,'',$articleContent,$articleContentRight);
+							ArticleController::updateArticle($articleId,$articleTitle,'',$articleContent,$articleContentRight);
 							echo '<script type="text/javascript"> window.location.replace("index.php?action=edit-article&id='.$articleId.'");</script>';
 						}else{
 							$uploadMyFile = UploadFile::uploadFile('img-article-update','public/assets/images/uploads/'.$articleImage["name"].'',FALSE,array('png','gif','jpg','jpeg'));
 							if ($uploadMyFile) {
 								echo '<script type="text/javascript"> alert("image bien enregistrer");</script>';
-								BackendController::updateArticle($articleId,$articleTitle,'public/assets/images/uploads/'.$articleImage["name"].'',$articleContent,$articleContentRight);
+								ArticleController::updateArticle($articleId,$articleTitle,'public/assets/images/uploads/'.$articleImage["name"].'',$articleContent,$articleContentRight);
 								echo '<script type="text/javascript"> window.location.replace("index.php?action=edit-article&id='.$articleId.'");</script>';
 							}else{
 								echo '<script type="text/javascript"> alert("probleme avec l\'image");</script>';

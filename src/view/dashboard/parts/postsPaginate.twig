@@ -61,12 +61,16 @@
           {% else %}
           <nav aria-label="..." id="posts-pagination">
             <ul class="pagination pagination-sm">
-              <li class="page-item"><a class="page-link" href="index.php?action={{ pageName }}&page={{ i }}"> << </a></li>
+              <li class="page-item"><a class="page-link" href="index.php?action={{ pageName }}&page={{ i }}"><i class="fas fa-angle-double-left"></i>
+
+</a></li>
              {% for i in range(1, posts['nbPage']) %}
               <li class="page-item"><a class="page-link" href="index.php?action={{ pageName }}&page={{ i }}">{{ i }}</a></li>
 
             {% endfor %}
-            <li class="page-item"><a class="page-link" href="index.php?action={{ pageName }}&page={{ i }}"> >> </a></li>
+            <li class="page-item"><a class="page-link" href="index.php?action={{ pageName }}&page={{ i }}"><i class="fas fa-angle-double-right"></i>
+
+</a></li>
           </ul>
         </nav>
 {% endif %}

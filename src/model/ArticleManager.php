@@ -3,9 +3,9 @@ namespace blog\src\model;
 use blog\src\model\Manager;
 
 
-class PostManager extends Manager{
+class ArticleManager extends Manager{
 
-	public function getPosts()
+	public function getArticles()
 	{
 		$db = $this->dbConnect();
 		$req = $db->query('SELECT id, title, content,content_right,image, DATE_FORMAT(created_at, \'%d/%m/%Y à %Hh%imin%ss\') AS created_at_fr FROM posts ORDER BY created_at #DESC LIMIT 0, 5');
@@ -17,11 +17,11 @@ class PostManager extends Manager{
 		return $res;
 	}
 
-	public function getPost($postId)
+	public function getArticle($articleId)
 	{
 		$db = $this->dbConnect();
 		$req = $db->prepare('SELECT id, title, content,content_right,image, created_at FROM posts WHERE id = ?');
-		$req->execute(array($postId));
+		$req->execute(array($articleId));
 		$post = $req->fetch();
 		$post['image'] = urldecode($post['image']);
 		return $post;

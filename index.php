@@ -18,10 +18,10 @@ try {
 
     switch($page) {
 
-        /*************************************** POST ACTION ***********************************************/
+        /*************************************** ARTICLE ACTION ***********************************************/
         
         case 'post':
-        $action->actionPost();
+        $action->actionArticle();
         break;
 
         /*************************************** HOME ACTION ***********************************************/
@@ -84,10 +84,21 @@ try {
         $action->actionArticles();
         break;
 
+        /*************************************** COMMENTS ACTION ********************************************/    
+
+        case 'comments':
+        $action->actionComments();
+        break;
+
+        /*************************************** VALIDATE-COMMENT ACTION *********************************/    
+
+        case 'validate-comment':
+        $action->actionValidateComment();
+        break;
         /*************************************** ADD ARTICLE ACTION ***************************************/    
 
         case 'add-article':
-        $action->actionAddArticles();
+        $action->actionAddArticle();
         break;
 
         /*************************************** UPDATE ARTICLE ACTION ************************************/
@@ -105,7 +116,11 @@ try {
         /*************************************** TRANSLATE ACTION *******************************************/
 
         case 'translate':
-        $action->actionTranslate();
+            if(isset($_GET['data']) && !empty($_GET['lang'])){
+                $action->actionTranslate();
+            }else{
+                echo 'Aucune langue selectionée';
+            }
         break;
 
         /*************************************** ERRORS ACTION ********************************************/
