@@ -72,4 +72,13 @@ class ArticleController
 
     }
 
+    public static function deleteArticle($articleId)
+    {
+        $data = new ArticleHydrate();
+        $data->setId($articleId);
+
+        $delArticle = new ArticleManager();
+        $delArticle->deleteArticle($data);
+    }
+
 }

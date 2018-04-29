@@ -113,6 +113,12 @@ try {
         $action->actionLogOut();
         break;
 
+        /*************************************** DELETE ARTICLE ACTION **************************************/
+
+        case 'del-article':
+        $action->actionDelArticle();
+        break;
+
         /*************************************** TRANSLATE ACTION *******************************************/
 
         case 'translate':
