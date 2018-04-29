@@ -63,7 +63,7 @@
              <span class="label label-success color-green"><a href="index.php?action=validate-comment&id={{ comment.id}}">Valider</a></span>
              {% endif %}
              <span class="label label-primary color-blue"><a href="index.php?action=post&id={{ comment.post_id}}#comments">Voir</a></span>
-             <span class="label label-danger color-red"><a href="#">Supprimer</a></span>
+             <span class="label label-danger color-red"><a href="index.php?action=del-comment&id={{ comment.id}} ">Supprimer</a></span>
            </div>
          {% endfor %}
        </div>

@@ -55,4 +55,13 @@ class CommentController
         $updateComment->updateCommentValidity($data);
 
     }
+
+    public static function deleteComment($commentId)
+    {
+        $data = new CommentHydrate();
+        $data->setId($commentId);
+
+        $delComment = new CommentManager();
+        $delComment->deleteComment($data);
+    }
 }

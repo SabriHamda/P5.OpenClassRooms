@@ -119,6 +119,12 @@ try {
         $action->actionDelArticle();
         break;
 
+        /*************************************** DELETE COMMENT ACTION **************************************/
+
+        case 'del-comment':
+        $action->actionDelComment();
+        break;
+
         /*************************************** TRANSLATE ACTION *******************************************/
 
         case 'translate':

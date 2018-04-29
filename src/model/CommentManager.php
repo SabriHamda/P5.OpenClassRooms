@@ -61,5 +61,11 @@ class CommentManager extends Manager{
 		$comments->execute();
 	}
 	
+	public function deleteComment(CommentHydrate $comment)
+	{
+		$req = $this->db->prepare('DELETE FROM comments WHERE id = :commentId');
+		$req->bindValue(':commentId', $comment->getId(), \PDO::PARAM_INT);
+		$req->execute();
+	}
 
 }
