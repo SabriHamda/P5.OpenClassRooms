@@ -6,48 +6,66 @@ use blog\src\model\Manager;
  * 
  */
 class CommentManager extends Manager{
+
+	public function __construct()
+	{
+		$this->db = self::dbConnect();
+	}
+	
 /**
  * [getComments description]
- * @param  [type] $articleId [description]
- * @return [type]         [description]
+ * @param  [INT] $articleId [description]
+ * @return [OBJ]         [description]
  */
 	public function getComments($articleId)
 	{
-		$db = $this->dbConnect();
-		$comments = $db->prepare('SELECT id, author, comment,civilite,is_valid, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
+		
+		$comments = $this->db->prepare('SELECT id, author, comment,civilite,is_valid, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
 		$comments->execute(array($articleId));
 
 		return $comments;
 	}
 /**
- * [postComment description]
- * @param  [type] $articleId   [description]
- * @param  [type] $author   [description]
- * @param  [type] $comment  [description]
- * @param  [type] $civility [description]
- * @return [type]           [description]
+ * [addComment description]
+ * @param  [INT] $articleId   [description]
+ * @param  [STRING] $author   [description]
+ * @param  [STRING] $comment  [description]
+ * @param  [STRING] $civility [description]
+ * @return [OBJ]           [description]
  */
-	public function postComment($articleId, $author, $comment, $civility, $role)
+	public function addComment(CommentHydrate $comment)
 
 	{
 
-		$db = $this->dbConnect(); 
-		$comments = $db->prepare('INSERT INTO comments(post_id, author, comment,civilite, is_valid, comment_date) VALUES(?, ?, ?, ?, ?, NOW())');
-		$is_valid = ($role == 'admin') ? 1 : 0;
-		$affectedLines = $comments->execute(array($articleId, $author, $comment, $civility,$is_valid));
+		 
+		$comments = $this->db->prepare('INSERT INTO comments(post_id, author, comment,civilite, is_valid, comment_date) VALUES(?, ?, ?, ?, ?, NOW())');
+		
+		$affectedLines = $comments->execute(array(
+			$comment->getId(),
+			$comment->getAuthor(),
+			$comment->getComment(),
+			$comment->getCivilite(),
+			$comment->getIsValid()
+		));
 
 
 		return $affectedLines;
 
 	}
 
-	public function updateCommentValidity($id){
-		$db = $this->dbConnect();
-		$comments = $db->prepare('UPDATE comments SET is_valid = :is_valid WHERE id = :id');
-		$comments->bindValue(':id',$id,\PDO::PARAM_INT);
+	public function updateCommentValidity(CommentHydrate $comment){
+		
+		$comments = $this->db->prepare('UPDATE comments SET is_valid = :is_valid WHERE id = :id');
+		$comments->bindValue(':id',$comment->getId(),\PDO::PARAM_INT);
 		$comments->bindValue(':is_valid',1,\PDO::PARAM_INT);
 		$comments->execute();
 	}
 	
+	public function deleteComment(CommentHydrate $comment)
+	{
+		$req = $this->db->prepare('DELETE FROM comments WHERE id = :commentId');
+		$req->bindValue(':commentId', $comment->getId(), \PDO::PARAM_INT);
+		$req->execute();
+	}
 
 }

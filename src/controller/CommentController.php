@@ -1,6 +1,8 @@
 <?php
 namespace blog\src\controller;
 use blog\src\model\CommentManager;
+use blog\src\model\CommentHydrate;
+
 
 /**
 * 
@@ -20,8 +22,17 @@ class CommentController
     public function addComment($articleId, $author, $comment, $civility, $role)
 
     {
+    	$is = ($role == 'admin') ? 1 : 0;
+
+    	$data = new CommentHydrate();
+        $data->setId($articleId);
+        $data->setAuthor($author);
+        $data->setComment($comment);
+        $data->setCivilite($civility);
+        $data->setIsValid($is);
+
     	$commentManager = new CommentManager();
-        $affectedLines = $commentManager->postComment($articleId, $author, $comment, $civility, $role);
+        $affectedLines = $commentManager->addComment($data);
         if ($affectedLines === false) {
             throw new \Exception("Impossible d\'ajouter le commentaire !");
         }
@@ -37,8 +48,20 @@ class CommentController
 	 */
 	public function validateThisComment(int $id){
 
-        $updateComment = new CommentManager();
-        $updateComment->updateCommentValidity($id);
+		$data = new Commenthydrate();
+		$data->setId($id);
 
+        $updateComment = new CommentManager();
+        $updateComment->updateCommentValidity($data);
+
+    }
+
+    public static function deleteComment($commentId)
+    {
+        $data = new CommentHydrate();
+        $data->setId($commentId);
+
+        $delComment = new CommentManager();
+        $delComment->deleteComment($data);
     }
 }

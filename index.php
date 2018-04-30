@@ -18,11 +18,6 @@ try {
 
     switch($page) {
 
-        /*************************************** ARTICLE ACTION ***********************************************/
-        
-        case 'post':
-        $action->actionArticle();
-        break;
 
         /*************************************** HOME ACTION ***********************************************/
 
@@ -66,16 +61,16 @@ try {
         $action->actionLogin();
         break;
 
-        /*************************************** ADDCOMMENT ACTION ****************************************/    
-
-        case 'addComment':
-        $action->actionAddComment();
-        break;
-
         /*************************************** DASHBOARD ACTION *******************************************/
 
         case 'dashboard':
         $action->actionDashboard();
+        break;
+
+        /*************************************** ARTICLE ACTION ***********************************************/
+        
+        case 'post':
+        $action->actionArticle();
         break;
 
         /*************************************** ARTICLES ACTION ********************************************/    
@@ -84,17 +79,6 @@ try {
         $action->actionArticles();
         break;
 
-        /*************************************** COMMENTS ACTION ********************************************/    
-
-        case 'comments':
-        $action->actionComments();
-        break;
-
-        /*************************************** VALIDATE-COMMENT ACTION *********************************/    
-
-        case 'validate-comment':
-        $action->actionValidateComment();
-        break;
         /*************************************** ADD ARTICLE ACTION ***************************************/    
 
         case 'add-article':
@@ -105,6 +89,37 @@ try {
 
         case 'edit-article':
         $action->actionEditArticle();
+        break;
+
+        /*************************************** DELETE ARTICLE ACTION **************************************/
+
+        case 'del-article':
+        $action->actionDelArticle();
+        break;
+
+        /*************************************** COMMENTS ACTION ********************************************/    
+
+        case 'comments':
+        $action->actionComments();
+        break;
+
+        /*************************************** ADDCOMMENT ACTION ****************************************/    
+
+        case 'addComment':
+        $action->actionAddComment();
+        break;
+
+
+        /*************************************** DELETE COMMENT ACTION **************************************/
+
+        case 'del-comment':
+        $action->actionDelComment();
+        break;
+
+        /*************************************** VALIDATE-COMMENT ACTION *********************************/    
+
+        case 'validate-comment':
+        $action->actionValidateComment();
         break;
 
         /*************************************** LOGOUT ACTION ***********************************************/

@@ -408,6 +408,47 @@ class Controller
 			header('Location: index.php?action=login');
 		}
 	}
+	/*************************************** DELETE ARTICLE ACTION ***************************************/
+	public function actionDelArticle(){
+		$checkSession = CheckSession::checkAdminSession();
+		if ($checkSession == TRUE){
+			if (isset($_GET['id']) && $_GET['id'] > 0 && preg_match("#^\d+$#", $_GET['id'])) {
+				$articleId = $_GET['id'];
+			    ArticleController::deleteArticle($articleId);
+				echo '<script type="text/javascript"> window.location.replace("index.php?action=dashboard");</script>';
+				echo '<script type="text/javascript"> alert("Article suprimer avec succès");</script>';
+			}else{
+				echo '<script type="text/javascript"> window.location.replace("index.php?action=dashboard");</script>';
+				echo '<script type="text/javascript"> alert("Aucun Article a suprimer");</script>';
+
+			}
+			
+		}else{
+			header('Location: index.php?action=login');
+		}
+
+	}
+
+		/*************************************** DELETE COMMENT ACTION ***************************************/
+	public function actionDelComment(){
+		$checkSession = CheckSession::checkAdminSession();
+		if ($checkSession == TRUE){
+			if (isset($_GET['id']) && $_GET['id'] > 0 && preg_match("#^\d+$#", $_GET['id'])) {
+				$commentId = $_GET['id'];
+			    CommentController::deleteComment($commentId);
+				echo '<script type="text/javascript"> window.location.replace("index.php?action=dashboard");</script>';
+				echo '<script type="text/javascript"> alert("Commentaire suprimer avec succès");</script>';
+			}else{
+				echo '<script type="text/javascript"> window.location.replace("index.php?action=dashboard");</script>';
+				echo '<script type="text/javascript"> alert("Aucun Commentaire a suprimer");</script>';
+
+			}
+			
+		}else{
+			header('Location: index.php?action=login');
+		}
+
+	}
 
     /*************************************** LOGOUT ACTION ***********************************************/
 
