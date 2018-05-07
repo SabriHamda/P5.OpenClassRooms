@@ -65,7 +65,7 @@ class ArticleManager extends Manager{
 
 	public function countTableRows($table)
 	{
-		$queryString =  'SELECT  COUNT(*) as totalRows FROM '. $table;
+		$queryString =  "SELECT  COUNT(*) as totalRows FROM `$table`";
 		$req = $this->db->query($queryString);
 		$donnees = $req->fetch();
 		$req->closeCursor();
