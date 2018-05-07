@@ -65,8 +65,8 @@ class ArticleManager extends Manager{
 
 	public function countTableRows($table)
 	{
-		
-		$req = $this->db->query('SELECT  COUNT(*) as totalRows FROM '. $table .'' );
+		$queryString =  'SELECT  COUNT(*) as totalRows FROM '. $table;
+		$req = $this->db->query($queryString);
 		$donnees = $req->fetch();
 		$req->closeCursor();
 		return $donnees['totalRows'];
@@ -74,7 +74,6 @@ class ArticleManager extends Manager{
 	}
 	public function getPaginateTable($table, $startLine, $nbResult, $orderBy)
 	{
-		
 		$req = $this->db->query('SELECT * FROM '. $table .' ORDER BY '. $orderBy .' LIMIT ' . $startLine . ', '. $nbResult . '');
 		$res = $req->fetchAll(\PDO::FETCH_ASSOC);
 		foreach ($res as $key =>$element) {
