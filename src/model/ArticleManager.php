@@ -74,7 +74,12 @@ class ArticleManager extends Manager{
 	}
 	public function getPaginateTable($table, $startLine, $nbResult, $orderBy)
 	{
-		$req = $this->db->query('SELECT * FROM '. $table .' ORDER BY '. $orderBy .' LIMIT ' . $startLine . ', '. $nbResult . '');
+		$queryString= "SELECT * FROM `$table` ORDER BY :orderBy LIMIT :startLine, :nbResult";
+		$req = $this->db->prepare($queryString);
+		$req->bindValue(':orderBy',$orderBy, \PDO::PARAM_STR);
+		$req->bindValue(':startLine',$startLine, \PDO::PARAM_INT);
+		$req->bindValue(':nbResult',$nbResult, \PDO::PARAM_INT);
+		$req->execute();
 		$res = $req->fetchAll(\PDO::FETCH_ASSOC);
 		foreach ($res as $key =>$element) {
 			$element['image'] = urldecode($element['image']);
