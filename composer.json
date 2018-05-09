@@ -1,6 +1,7 @@
 {
     "name": "hamda/blog",
     "description": "P5 OpenClassRooms",
+    "license": "proprietary",
     "require": {
         "twbs/bootstrap": "^3.3",
         "twig/twig": "^2.4",
