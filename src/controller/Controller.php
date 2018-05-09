@@ -29,7 +29,7 @@ class Controller
 	 * @param obj $loader looks up the templates in the /src/view/frontend/ folder.
 	 * @param obj $twig   Twig uses a central object called the environment (of class Twig_Environment). Instances of this class are used to store the configuration and extensions, and are used to load templates from the file system or other locations.
 	 */
-	function __construct()
+	public function __construct()
 
 	{
 		$this->token = $_SESSION['token']= md5(uniqid(mt_rand(),true));
