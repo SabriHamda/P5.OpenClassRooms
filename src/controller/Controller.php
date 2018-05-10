@@ -89,12 +89,13 @@ class Controller
 	public function actionHome(){
 		$pageName = $_GET['action'];
 		$page = empty($_GET['page']) ? 0 : $_GET['page']-1;
-        echo $this->viewFrontEnd(
+        $data = $this->viewFrontEnd(
         	'homeView.twig', 
         	['posts'=> TablePaginate::paginate('posts', 8, 'created_at DESC'),
         	'nbPage'=>TablePaginate::paginate('posts', 8, 'created_at DESC'),
         	'page'=> $page,
 			'pageName'=> $pageName]);
+        return $data;
 	}
 
     /*************************************** ABOUT ACTION ***********************************************/
