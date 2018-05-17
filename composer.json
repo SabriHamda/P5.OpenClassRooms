@@ -11,16 +11,15 @@
     },
     "authors": [
         {
-            "name": "sabri",
+            "name": "Sabri Hamda",
             "email": "sabri@hamda.ch"
         }
     ],
     "minimum-stability": "stable",
 
     "autoload": {
-        "psr-4": {"blog\\src\\": "src/"}
-        
+        "psr-4": {
+            "blog\\":"blog/"
+        }
     }
-     
-
 }
