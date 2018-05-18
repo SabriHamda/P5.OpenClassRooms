@@ -1,9 +1,9 @@
 <?php
 
-namespace blog\etc\router;
+namespace etc\router;
 
-use blog\etc\router\Route;
-use blog\exceptions\NotFoundHttpException;
+use etc\router\Route;
+use src\exceptions\NotFoundHttpException;
 
 class Router {
 

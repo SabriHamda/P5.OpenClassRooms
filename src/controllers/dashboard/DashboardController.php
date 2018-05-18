@@ -1,5 +1,5 @@
 <?php
-namespace blog\controllers\dashboard;
+namespace src\controllers\dashboard;
 /**
  * Description of HomeController
  *

@@ -1,9 +1,9 @@
 <?php
 
-namespace blog;
+namespace src;
 
-use blog\etc\http\Request;
-use blog\etc\router\Router;
+use etc\http\Request;
+use etc\router\Router;
 
 
 class Blog {

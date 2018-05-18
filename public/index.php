@@ -1,7 +1,7 @@
 <?php 
-require __DIR__ . './../../vendor/autoload.php';
+require __DIR__ . './../vendor/autoload.php';
 
-use blog\Blog;
+use src\Blog;
 
 
 function dd($val, $exit = true){

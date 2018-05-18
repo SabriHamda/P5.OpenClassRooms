@@ -1,5 +1,5 @@
 <?php
-namespace blog\controllers\frontend;
+namespace src\controllers\frontend;
 /**
  * Description of HomeController
  *

@@ -1,5 +1,5 @@
 <?php
-namespace blog\controllers;
+namespace src\controllers;
 /**
  * Description of DashboardController
  *

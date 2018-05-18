@@ -1,5 +1,5 @@
 <?php
-namespace blog\exceptions;
+namespace src\exceptions;
 
 /**
  * Description of NotFoundHttpException

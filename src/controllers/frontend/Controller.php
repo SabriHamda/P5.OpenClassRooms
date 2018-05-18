@@ -1,13 +1,13 @@
 <?php
 
-namespace blog\controllers\frontend;
+namespace src\controllers\frontend;
 
 /**
  * Description of Controller
  *
  * @author Sabri Hamda
  */
-class Controller extends \blog\controllers\Controller{
+class Controller extends \src\controllers\Controller{
     public function getViewsBasePath(){
      return realpath('../views/frontend/');
     }

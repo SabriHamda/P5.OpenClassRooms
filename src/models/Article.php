@@ -1,5 +1,5 @@
 <?php
-namespace blog\models;
+namespace src\models;
 
 /**
  * Description of Article

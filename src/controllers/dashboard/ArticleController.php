@@ -1,7 +1,7 @@
 <?php
-namespace blog\controllers\dashboard;
-use blog\exceptions\NotFoundHttpException;
-use blog\models\Article;
+namespace src\controllers\dashboard;
+use src\exceptions\NotFoundHttpException;
+use src\models\Article;
 
 
 /**

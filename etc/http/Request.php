@@ -1,5 +1,5 @@
 <?php
-namespace blog\etc\http;
+namespace etc\http;
 /**
  * Description of Request
  *
