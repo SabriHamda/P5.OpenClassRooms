@@ -5,18 +5,20 @@ namespace etc\router;
 use etc\router\Route;
 use src\exceptions\NotFoundHttpException;
 
-class Router {
-
+class Router
+{
     private $routes = [];
     private $params;
     private $request;
 
-    public function __construct($request) {
+    public function __construct($request)
+    {
         $this->request = $request;
         $this->loadRoutes();
     }
 
-    public function loadRoutes() {
+    public function loadRoutes()
+    {
         $routes = require __DIR__ . './../../config/routes.php'; // tableau de routes ...
         foreach ($routes as $route) {
             $params = isset($route['params']) ? $route['params'] : null;
@@ -25,7 +27,8 @@ class Router {
         }
     }
 
-    public function handleRequest() {
+    public function handleRequest()
+    {
         $url = $this->request->getUri();
         $method = $this->request->getMethod();
         $hasHandler = false;
@@ -41,10 +44,10 @@ class Router {
         if (!$hasHandler) {
             throw new NotFoundHttpException(
             \sprintf(
-                    'Oops, looks like this path doesn\'t exist ! Given %s', $url
+                    'Oops, looks like this path doesn\'t exist ! Given %s',
+                $url
             )
             );
         }
     }
-
 }

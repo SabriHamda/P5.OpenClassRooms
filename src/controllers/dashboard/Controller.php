@@ -7,8 +7,10 @@ namespace src\controllers\dashboard;
  *
  * @author Sabri Hamda
  */
-class Controller extends \src\controllers\Controller{
-    public function getViewsBasePath(){
-     return realpath('../views/dashboard/');
+class Controller extends \src\controllers\Controller
+{
+    public function getViewsBasePath()
+    {
+        return realpath('../views/dashboard/');
     }
 }

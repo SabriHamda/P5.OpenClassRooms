@@ -1,39 +1,44 @@
 <?php
 namespace etc\http;
+
 /**
  * Description of Request
  *
  * @author Sabri Hamda
  */
-class Request {
-    
-    public function get($param = null, $default = null){
-        if($param !== null){
-            if(isset($_GET[$param])){
+class Request
+{
+    public function get($param = null, $default = null)
+    {
+        if ($param !== null) {
+            if (isset($_GET[$param])) {
                 return $_GET[$param];
-            }else{
+            } else {
                 return $default;
             }
         }
         return $_GET;
     }
     
-    public function post($param = null, $default = null){
-        if($param !== null){
-            if(isset($_POST[$param])){
+    public function post($param = null, $default = null)
+    {
+        if ($param !== null) {
+            if (isset($_POST[$param])) {
                 return $_POST[$param];
-            }else{
+            } else {
                 return $default;
             }
         }
         return $_POST;
     }
     
-    public function getUri(){
+    public function getUri()
+    {
         return $_SERVER['REQUEST_URI'];
     }
     
-    public function getMethod(){
+    public function getMethod()
+    {
         return $_SERVER['REQUEST_METHOD'];
     }
 }

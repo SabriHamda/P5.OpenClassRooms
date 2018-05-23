@@ -2,8 +2,8 @@
 
 namespace etc\router;
 
-class Route {
-
+class Route
+{
     const PARAMETERS_REGEX_FORMAT = '%s([\w]+)(\%s?)%s';
     const PARAMETERS_DEFAULT_REGEX = '[\w]+';
     protected $urlRegex = '/^%s\/?$/u';
@@ -17,7 +17,8 @@ class Route {
     private $method;
     private $parameters;
 
-    public function __construct($path, $controller, $action, $params = null, $method = 'GET') {
+    public function __construct($path, $controller, $action, $params = null, $method = 'GET')
+    {
         $this->path = $path;
         $this->controller = $controller;
         $this->action = $action;
@@ -25,56 +26,67 @@ class Route {
         $this->method = $method;
     }
 
-    public function getController() {
+    public function getController()
+    {
         return $this->controller;
     }
 
-    public function getPath() {
+    public function getPath()
+    {
         return $this->path;
     }
 
-    public function setPath($path) {
+    public function setPath($path)
+    {
         $this->path = $path;
     }
 
-    public function getMethod() {
+    public function getMethod()
+    {
         return $this->method;
     }
     
-    public function getAction(){
+    public function getAction()
+    {
         return $this->action;
     }
 
-    public function getParamName() {
-        if(is_array($this->params)){
-        reset($this->params);
-        return key($this->params);
+    public function getParamName()
+    {
+        if (is_array($this->params)) {
+            reset($this->params);
+            return key($this->params);
         }
         return false;
     }
     
-    public function getParameterValue(){
+    public function getParameterValue()
+    {
         $key = $this->getParamName();
-        if($key && !empty($this->parameters) && isset($this->parameters[$key])){
+        if ($key && !empty($this->parameters) && isset($this->parameters[$key])) {
             return $this->parameters[$key];
         }
         return false;
     }
 
-    public function match($url, $method) {
+    public function match($url, $method)
+    {
         $this->parameters  = $this->parseParameters($this->getPath(), $url);
-        if($this->parameters){
+        if ($this->parameters) {
             $key = $this->getParamName();
-            $this->setPath( str_replace('{' . $key . '}', $this->parameters[$key], $this->getPath()));
+            $this->setPath(str_replace('{' . $key . '}', $this->parameters[$key], $this->getPath()));
         }
         return $this->getPath() === $url && $this->getMethod() == $method;
     }
 
-    protected function parseParameters($route, $url, $parameterRegex = null) {
+    protected function parseParameters($route, $url, $parameterRegex = null)
+    {
         $regex = (strpos($route, $this->paramModifiers[0]) === false) ? null :
-                sprintf
-                        (
-                        static::PARAMETERS_REGEX_FORMAT, $this->paramModifiers[0], $this->paramOptionalSymbol, $this->paramModifiers[1]
+                sprintf(
+                        static::PARAMETERS_REGEX_FORMAT,
+                    $this->paramModifiers[0],
+                    $this->paramOptionalSymbol,
+                    $this->paramModifiers[1]
         );
         $url = '/' . ltrim($url, '/');
         $urlRegex = '';
@@ -111,5 +123,4 @@ class Route {
         }
         return $values;
     }
-
 }

@@ -5,6 +5,6 @@
  *
  * @author Sabri Hamda
  */
-class NotFound {
-  
+class NotFound
+{
 }

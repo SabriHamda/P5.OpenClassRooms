@@ -1,5 +1,4 @@
 <?php
-
 namespace src\controllers\frontend;
 
 /**
@@ -7,8 +6,10 @@ namespace src\controllers\frontend;
  *
  * @author Sabri Hamda
  */
-class Controller extends \src\controllers\Controller{
-    public function getViewsBasePath(){
-     return realpath('../views/frontend/');
+class Controller extends \src\controllers\Controller
+{
+    public function getViewsBasePath()
+    {
+        return realpath('../views/frontend/');
     }
 }

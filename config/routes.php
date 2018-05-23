@@ -31,7 +31,7 @@ return [
     'params' => [
       'id' => '[0-9]+'
     ]
-  ], 
+  ],
   'article_add' => [
     'path' => '/dashboard/articles/create',
     'controller' => src\controllers\dashboard\ArticleController::class,

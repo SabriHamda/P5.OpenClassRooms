@@ -6,8 +6,10 @@ namespace src\models;
  *
  * @author Sabri Hamda
  */
-class Article {
-    public static function find($condition){
+class Article
+{
+    public static function find($condition)
+    {
         return new self;
     }
 }

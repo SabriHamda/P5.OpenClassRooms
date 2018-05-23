@@ -6,6 +6,7 @@ namespace src\exceptions;
  *
  * @author Sabri Hamda
  */
-class NotFoundHttpException extends  \Exception{
+class NotFoundHttpException extends \Exception
+{
     #
 }
