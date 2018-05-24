@@ -5,20 +5,19 @@ namespace src;
 use etc\http\Request;
 use etc\router\Router;
 
-
-class Blog {
-    
+class Blog
+{
     protected $request;
     protected $router;
 
-
-    public function __construct() {
+    public function __construct()
+    {
         $this->request = new Request();
         $this->router = new Router($this->request);
     }
-    
-    public function run(){
+
+    public function run()
+    {
         $this->router->handleRequest();
     }
-    
 }

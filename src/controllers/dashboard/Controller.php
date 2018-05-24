@@ -3,12 +3,14 @@
 namespace src\controllers\dashboard;
 
 /**
- * Description of Controller
+ * Description of Controller.
  *
  * @author Sabri Hamda
  */
-class Controller extends \src\controllers\Controller{
-    public function getViewsBasePath(){
-     return realpath('../views/dashboard/');
+class Controller extends \src\controllers\Controller
+{
+    public function getViewsBasePath()
+    {
+        return realpath('../views/dashboard/');
     }
 }

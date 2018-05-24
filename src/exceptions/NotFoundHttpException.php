@@ -1,11 +1,12 @@
 <?php
+
 namespace src\exceptions;
 
 /**
- * Description of NotFoundHttpException
+ * Description of NotFoundHttpException.
  *
  * @author Sabri Hamda
  */
-class NotFoundHttpException extends  \Exception{
-    #
+class NotFoundHttpException extends \Exception
+{
 }

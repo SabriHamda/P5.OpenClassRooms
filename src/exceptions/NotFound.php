@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Description of NotFound
+ * Description of NotFound.
  *
  * @author Sabri Hamda
  */
-class NotFound {
-  
+class NotFound
+{
 }
