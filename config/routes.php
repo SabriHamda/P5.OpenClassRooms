@@ -13,6 +13,17 @@ return [
     'action' => 'index',
   ],
    /* Backend */
+  'adminLogin' => [
+    'path' => '/dashboard/login',
+    'controller' => src\controllers\dashboard\AuthController::class,
+    'action' => 'index',
+  ],
+  'adminLoginDo' => [
+    'path' => '/dashboard/login',
+    'controller' => src\controllers\dashboard\AuthController::class,
+    'action' => 'login',
+    'method'=> 'POST'
+  ],
   'homepage' => [
     'path' => '/dashboard',
     'controller' => src\controllers\dashboard\DashboardController::class,

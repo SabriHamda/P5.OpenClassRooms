@@ -4,7 +4,8 @@ namespace src;
 
 use etc\http\Request;
 use etc\router\Router;
-
+use etc\session\Identity;
+use etc\session\Session;
 class Blog
 {
     protected $request;
@@ -14,10 +15,20 @@ class Blog
     {
         $this->request = new Request();
         $this->router = new Router($this->request);
+        $session = new Session();
+        $this->identity = new Identity($session);
     }
 
     public function run()
     {
         $this->router->handleRequest();
+    }
+    
+    public function getUser(){
+        return $this->identity;
+    } 
+    
+    public function getRequest(){
+        return $this->request;
     }
 }
