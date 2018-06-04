@@ -15,10 +15,12 @@ namespace src\models;
  */
 class AdminUser extends Model {
 
-    private $email;
-    private $password;
+    
+    public $email;
+    public $password;
     
     protected $user;
+    
 
     public function validate() {
         $error = 'Invalid email address or password';
@@ -47,7 +49,7 @@ class AdminUser extends Model {
     }
 
     public function login() {
-        return false;
+        return blog()->getIdentity()->login($this->user->id, true);
     }
 
     public function setEmail($email) {
@@ -59,18 +61,20 @@ class AdminUser extends Model {
     }
 
     public function setPassword($password) {
-        $this->password = md5($password);
+        $this->password = $password;
     }
 
     protected function validatePassword($supliedPassword, $password) {
-        return $supliedPassword === $password;
+        return md5($supliedPassword) === $password;
     }
 
     public function getUser() {
-        $db = $this->getDb();
-        $query = $db->prepare('SELECT * FROM admins WHERE email = :email');
-        $query->bindParam(['email' => $this->getEmail()]);
-        $user = $query->excute();
+        $connection = $this->getDb()->getConnection();
+        $stmt = $connection->prepare('SELECT * FROM admin_users WHERE email = :email');
+        $stmt->bindParam(':email', $this->email);
+        $stmt->execute();
+        $stmt->setFetchMode(\PDO::FETCH_CLASS, self::class);
+        return  $stmt->fetch(); 
     }
 
 }

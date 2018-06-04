@@ -10,7 +10,7 @@ use src\models\Article;
  *
  * @author Sabri Hamda
  */
-class ArticleController extends AuthenticatedController
+class ArticleController extends ProtectedController
 {
     //List all articles
     public function index()

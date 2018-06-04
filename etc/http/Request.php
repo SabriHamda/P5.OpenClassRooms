@@ -31,17 +31,21 @@ class Request
                 return $default;
             }
         }
-
         return $_POST;
     }
 
     public function getUri()
     {
-        return $_SERVER['REQUEST_URI'];
+        return rtrim($_SERVER['REQUEST_URI'], '/');
     }
 
     public function getMethod()
     {
         return $_SERVER['REQUEST_METHOD'];
+    }
+    
+    public function redirect($url, $permanent = false){
+        header('Location: ' . $url, true, $permanent ? 301 : 302);
+        exit();
     }
 }

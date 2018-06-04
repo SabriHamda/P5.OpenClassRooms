@@ -24,6 +24,11 @@ return [
     'action' => 'login',
     'method'=> 'POST'
   ],
+  'adminLogout' => [
+    'path' => '/dashboard/logout',
+    'controller' => src\controllers\dashboard\AuthController::class,
+    'action' => 'logout',
+  ],  
   'homepage' => [
     'path' => '/dashboard',
     'controller' => src\controllers\dashboard\DashboardController::class,

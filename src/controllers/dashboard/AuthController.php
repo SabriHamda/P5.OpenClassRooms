@@ -20,10 +20,15 @@ class AuthController extends Controller{
         $user->setEmail($request->post('email'));
         $user->setPassword($request->post('password'));
         if($user->validate() && $user->login()){
-            echo 'woohhooo';
+           $request->redirect('/dashboard');
         }
         $errors = $user->getErrors();
         $message = array_shift($errors);
         echo $this->render('auth/login.twig',['message'=> $message]);
+    }
+    
+    public function logout(){
+        blog()->getIdentity()->logout();
+        $this->getRequest()->redirect('/dashboard/login');
     }
 }

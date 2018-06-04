@@ -13,18 +13,19 @@ class Session {
         session_start();
     }
     
-    public function setUserId($id){
-        $_SESSION['uid'] = $id;
+    public function set($key, $value){
+        $_SESSION[$key] = $value;
     }
     
-    public function getUserId(){
-        if(isset($_SESSION['uid'])){
-            return $_SESSION['uid'];
+    public function get($key, $default = null){
+        if(isset($_SESSION[$key])){
+            return $_SESSION[$key];
         }
-        return false;
+        return $default;
     }
     
-    public function unsetUserId(){
-        unset($_SESSION['uid']);
+    public function remove($key){
+        unset($_SESSION[$key]);
+        return true;
     }
 }

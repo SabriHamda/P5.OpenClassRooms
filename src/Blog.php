@@ -24,7 +24,7 @@ class Blog
         $this->router->handleRequest();
     }
     
-    public function getUser(){
+    public function getIdentity(){
         return $this->identity;
     } 
     

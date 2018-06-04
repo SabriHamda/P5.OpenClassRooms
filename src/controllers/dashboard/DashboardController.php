@@ -7,7 +7,7 @@ namespace src\controllers\dashboard;
  *
  * @author Sabri Hamda
  */
-class DashboardController extends AuthenticatedController
+class DashboardController extends ProtectedController
 {
     public function index()
     {

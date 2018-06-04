@@ -1,13 +1,7 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace src\models;
 
+use etc\db\Database;
 /**
  * Description of Model
  *
@@ -16,17 +10,21 @@ namespace src\models;
 abstract class Model {
 
     private $errors = [];
-
+    
+    private $db;
+    
+    public function getDb(){
+        if($this->db === null){
+        $this->db = Database::getInstance();
+        }
+        return $this->db;
+    }
     public function addError($attribute, $error) {
         $this->errors[$attribute] = $error;
     }
 
     public function getErrors() {
         return $this->errors;
-    }
-    
-    public function getDb(){
-        
     }
 
 }
