@@ -12,7 +12,12 @@ function dd($val, $exit = true){
     exit;
 }
 
+function blog(){
+    return $GLOBALS['blog'];
+}
+
 
 $blog = new Blog();
 $blog->run();
+$GLOBALS['blog'] = $blog;
 
