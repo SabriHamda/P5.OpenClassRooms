@@ -16,8 +16,18 @@ function blog(){
     return $GLOBALS['blog'];
 }
 
+try {
 
-$blog = new Blog();
-$blog->run();
-$GLOBALS['blog'] = $blog;
+    $blog = new Blog();
+    $blog->run();
+    $GLOBALS['blog'] = $blog;
 
+}catch (Exception $e){
+    $message = $e->getMessage();
+    if ($message === '404')
+    {
+        header('location: error');
+    }else{
+        header('location: home');
+    }
+}
