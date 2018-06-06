@@ -18,7 +18,10 @@ abstract class Controller
         $this->loader = new \Twig_Loader_Filesystem($this->getViewsBasePath());
         $this->twig = new \Twig_Environment($this->loader, array(
             //'cache' => false,
+            'debug' => true,
         ));
+        $this->twig->addExtension(new \Twig_Extension_Debug());
+        $this->twig->addGlobal('session', $_SESSION);
     }
 
     public function getRequest()
