@@ -1,6 +1,7 @@
 <?php
 
 namespace src\exceptions;
+use Throwable;
 
 /**
  * Description of NotFoundHttpException.
@@ -9,4 +10,5 @@ namespace src\exceptions;
  */
 class NotFoundHttpException extends \Exception
 {
+
 }
