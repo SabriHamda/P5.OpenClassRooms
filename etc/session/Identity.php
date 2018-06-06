@@ -30,10 +30,12 @@ class Identity {
     }
 
     public function logout() {
+        session_destroy();
         return $this->_session->remove($this->key);
     }
 
     public function isAdmin() {
-       return $this->_session->get('is_admin',false); 
+       return $this->_session->get('is_admin',false);
     }
+
 }

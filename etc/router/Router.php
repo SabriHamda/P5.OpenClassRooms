@@ -43,9 +43,10 @@ class Router
         if (!$hasHandler) {
             throw new NotFoundHttpException(
             \sprintf(
-                    'Oops, looks like this path doesn\'t exist ! Given %s', $url
+                    '404'
             )
             );
+
         }
     }
 }
