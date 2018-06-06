@@ -1,6 +1,6 @@
 # Projet 5 OpenClassrooms - Créez votre premier blog en PHP 
 ## Parcours Développeur d'application - PHP / Symfony
-
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/56de77e63685493f95f6d0d97dd5f098)](https://www.codacy.com/app/SabriHamda/P5.OpenClassRooms?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=SabriHamda/P5.OpenClassRooms&amp;utm_campaign=Badge_Grade)
 
 J'ai utilisé le thème bootstrap marble disponible [ici](https://freehtml5.co/marble-free-html5-bootstrap-template-for-portfolio-or-multi-purpose-websites/) pour réaliser la partie front de ce blog.
 Si vous voulez voir le code sur GitHub, cliquez [ici](https://github.com/SabriHamda/P5.OpenClassRooms)
