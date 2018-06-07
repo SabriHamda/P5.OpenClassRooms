@@ -21,7 +21,6 @@ abstract class Controller
             'debug' => true,
         ));
         $this->twig->addExtension(new \Twig_Extension_Debug());
-        $this->twig->addGlobal('session', $_SESSION);
     }
 
     public function getRequest()

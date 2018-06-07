@@ -59,6 +59,28 @@ return [
         'controller' => src\controllers\dashboard\AuthController::class,
         'action' => 'logout',
     ],
+    'adminRequestResetPassword'=> [
+        'path' => '/dashboard/auth/password-reset',
+        'controller' => src\controllers\dashboard\AuthController::class,
+        'action' => 'requestReset',
+    ],
+    'adminSentRecoveryToken'=> [
+        'path' => '/dashboard/auth/password-reset',
+        'controller' => src\controllers\dashboard\AuthController::class,
+        'action' => 'sendRecoveryToken',
+        'method'=> 'POST'
+    ],
+    'adminValidateResetToken'=> [
+        'path' => '/dashboard/auth/password-reset',
+        'controller' => src\controllers\dashboard\AuthController::class,
+        'action' => 'validateResetToken',
+    ],
+    'adminValidateResetToken'=> [
+        'path' => '/dashboard/auth/password-reset',
+        'controller' => src\controllers\dashboard\AuthController::class,
+        'action' => 'resetPassword',
+    ],
+    
     'homepage' => [
         'path' => '/dashboard',
         'controller' => src\controllers\dashboard\DashboardController::class,

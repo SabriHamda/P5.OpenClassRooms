@@ -2,6 +2,8 @@
 
 namespace etc\session;
 
+use src\models\AdminUser;
+use src\models\User;
 /**
  * Description of Identity
  *
@@ -36,6 +38,17 @@ class Identity {
 
     public function isAdmin() {
        return $this->_session->get('is_admin',false);
+    }
+    
+    public function getUser(){
+        $id = $this->_session->get($this->key);
+        if(!$id){
+            return null;
+        }
+        $isAdmin = $this->isAdmin();
+        $userClass = $isAdmin ? AdminUser::class : User::class;
+        $user = new $userClass;
+        return $user->getByPk($id);
     }
 
 }

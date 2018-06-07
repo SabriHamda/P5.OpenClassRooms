@@ -41,12 +41,7 @@ class Router
             }
         }
         if (!$hasHandler) {
-            throw new NotFoundHttpException(
-            \sprintf(
-                    '404'
-            )
-            );
-
+            throw new NotFoundHttpException('Page not found!');
         }
     }
 }
