@@ -17,7 +17,7 @@ class Mailer
             // Create the Transport
             $transport = (new \Swift_SmtpTransport('smtp.gmail.com', 587, 'tls'))
                 ->setUsername('hamda.sab@gmail.com')
-                ->setPassword('');
+                ->setPassword('cqasbbxixmespbqj');
             self::$instance = new \Swift_Mailer($transport);
         }
         return self::$instance;
@@ -27,7 +27,7 @@ class Mailer
     {
         $message = "Hello " . $user->getFullname() . "\n";
         $message .= "<a href=\"http://blog.local/dashboard/auth/password-reset?token={$user->password_reset_token}\">Click here</a> to reset your passowrd\n\n";
-        return $this->sendMessage('Password reset', 'no-reply@hamda.ch', $user->email, $message);
+        return $this->sendMessage('Resset your password', 'no-reply@hamda.ch', $user->email, $message);
     }
 
     private function sendMessage($subject, $from, $to, $body)
