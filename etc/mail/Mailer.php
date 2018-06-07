@@ -17,7 +17,7 @@ class Mailer
             // Create the Transport
             $transport = (new \Swift_SmtpTransport('smtp.gmail.com', 587, 'tls'))
                 ->setUsername('hamda.sab@gmail.com')
-                ->setPassword('saicosaico23000');
+                ->setPassword('');
             self::$instance = new \Swift_Mailer($transport);
         }
         return self::$instance;
