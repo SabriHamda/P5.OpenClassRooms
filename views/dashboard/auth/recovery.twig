@@ -1,0 +1,26 @@
+{% extends 'layout.twig' %}
+{% block content %}
+<div class="container">
+    <div class="login-box" style="max-width: 480px; margin-top: 20px;">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">We all forget sometimes</h2>
+            </div>
+            <div class="panel-body">
+                {% if message %}
+                    <div class="alert alert-danger">
+                        <p>{{message}}</p>
+                    </div>
+                {% endif %}
+                <form method="post">
+                    <div class="form-group">
+                        <label class="control-label">Email Address</label>
+                        <input type="email" name="email" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

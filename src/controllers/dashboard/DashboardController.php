@@ -11,6 +11,7 @@ class DashboardController extends ProtectedController
 {
     public function index()
     {
-        echo $this->render('dashboard.twig');
+        $user = blog()->getIdentity()->getUser();
+        echo $this->render('dashboard.twig', ['user'=> $user]);
     }
 }
