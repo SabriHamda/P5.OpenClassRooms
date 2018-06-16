@@ -1,6 +1,6 @@
 <?php
 
-namespace src\controllers\dashboard;
+namespace src\controllers\frontend;
 
 use src\exceptions\NotFoundHttpException;
 use src\models\ArticleManager;
@@ -10,7 +10,7 @@ use src\models\ArticleManager;
  *
  * @author Sabri Hamda
  */
-class ArticleController extends ProtectedController
+class ArticleController
 {
     //List all articles
     public function index()
@@ -44,15 +44,26 @@ class ArticleController extends ProtectedController
         echo 'article delete';
     }
 
-    // load article from database
-    // throw 404 if article is not found;
+    /**
+     * @param $id
+     * @return mixed
+     * @throws NotFoundHttpException
+     */
     private function getArticle($id)
     {
         $article = ArticleManager::find($id);
         if (null === $article) {
-            throw new NotFoundHttpException('ArticleManager doesn\'t exist!');
+            throw new NotFoundHttpException('Articles doesn\'t exist!');
         }
 
         return $article;
     }
+
+    public function getArticles()
+    {
+        $articleManager = new ArticleManager();
+        $articles = $articleManager->getArticles();
+        return $articles;
+    }
+
 }

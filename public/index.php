@@ -1,8 +1,10 @@
 <?php
 require __DIR__ . './../vendor/autoload.php';
 
+
 use src\exceptions\NotFoundHttpException;
 use src\Blog;
+
 
 function dd($val, $exit = true)
 {
@@ -17,12 +19,13 @@ function blog()
 {
     return $GLOBALS['blog'];
 }
+
 try {
     $blog = new Blog();
     $blog->run();
     $GLOBALS['blog'] = $blog;
 } catch (NotFoundHttpException $e) {
-    header('location: error');
+    throw $e;
 } catch (Exception $e) {
-    header('location: home');
+    echo $e->getmessage();
 }

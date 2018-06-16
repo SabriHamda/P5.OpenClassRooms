@@ -22,19 +22,19 @@
 					
 			<nav id="fh5co-main-menu" style="margin-top:-50px;" role="navigation">
 				<ul>
-					<li class="fh5co-active color-yellow"><a href="home">Accueil</a></li>
-					<li class="color-orange-light"><a href="about">à Propos</a></li>
+					<li class="fh5co-active color-yellow"><a href="http://blog.local/home">Accueil</a></li>
+					<li class="color-orange-light"><a href="/about/">à Propos</a></li>
 					<!--<li class="color-orange"><a href="index.php?action=portfolio">Creations</a></li>-->
-					<li class="color-red"><a href="blog">Blog</a></li>
-					<li class="color-pink"><a href="contact">Contact</a></li>
+					<li class="color-red"><a href="/blog/">Blog</a></li>
+					<li class="color-pink"><a href="/contact/">Contact</a></li>
 					{% if session.prenom|default %}
 						{% if session.role == 'admin' %}
 						<li class="color-orange-light"><a href="index.php?action=dashboard">Dashboard</a></li>
 					{% endif %}	
 						<li id="register" class="color-pirple"><a href="index.php?action=logout">Déconnexion</a></li>
 					{% else %}
-					<li id="login" class="color-pirple-light"><a href="login">Login</a></li>
-					<li id="register" class="color-pirple"><a href="register">Register</a></li>
+					<li id="login" class="color-pirple-light"><a href="/login/">Login</a></li>
+					<li id="register" class="color-pirple"><a href="/register/">Register</a></li>
 
 					{% endif %}
 

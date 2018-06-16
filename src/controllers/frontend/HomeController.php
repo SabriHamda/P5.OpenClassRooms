@@ -2,6 +2,8 @@
 
 namespace src\controllers\frontend;
 
+use src\controllers\frontend\ArticleController;
+
 /**
  * Description of HomeController.
  *
@@ -11,6 +13,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        echo $this->render('home.twig');
+        $articleController = new ArticleController();
+        $articles = $articleController->getArticles();
+
+
+        echo $this->render('home.twig', ['articles' => $articles]);
     }
 }

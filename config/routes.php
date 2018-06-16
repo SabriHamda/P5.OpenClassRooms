@@ -21,6 +21,19 @@ return [
         'path' => '/blog',
         'controller' => src\controllers\frontend\BlogController::class,
         'action' => 'index',
+        'method' => 'GET',
+        'params' => [
+            'page' => '[0-9]+',
+        ]
+    ],
+    'blog/page/{page}' => [
+        'path' => '/blog/page/{page}',
+        'controller' => src\controllers\frontend\BlogController::class,
+        'action' => 'index',
+        'method' => 'GET',
+        'params' => [
+            'page' => '[0-9]+',
+        ]
     ],
     'contact' => [
         'path' => '/contact',
@@ -59,28 +72,28 @@ return [
         'controller' => src\controllers\dashboard\AuthController::class,
         'action' => 'logout',
     ],
-    'adminRequestResetPassword'=> [
+    'adminRequestResetPassword' => [
         'path' => '/dashboard/auth/password-reset',
         'controller' => src\controllers\dashboard\AuthController::class,
         'action' => 'requestReset',
     ],
-    'adminSentRecoveryToken'=> [
+    'adminSentRecoveryToken' => [
         'path' => '/dashboard/auth/password-reset',
         'controller' => src\controllers\dashboard\AuthController::class,
         'action' => 'sendRecoveryToken',
-        'method'=> 'POST'
+        'method' => 'POST'
     ],
-    'adminValidateResetToken'=> [
+    'adminValidateResetToken' => [
         'path' => '/dashboard/auth/password-reset',
         'controller' => src\controllers\dashboard\AuthController::class,
         'action' => 'validateResetToken',
     ],
-    'adminValidateResetToken'=> [
+    'adminValidateResetToken' => [
         'path' => '/dashboard/auth/password-reset',
         'controller' => src\controllers\dashboard\AuthController::class,
         'action' => 'resetPassword',
     ],
-    
+
     'homepage' => [
         'path' => '/dashboard',
         'controller' => src\controllers\dashboard\DashboardController::class,

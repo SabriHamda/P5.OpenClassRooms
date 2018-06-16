@@ -65,8 +65,8 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `post_id`, `author`, `comment`, `civilite`, `is_valid`, `comment_date`) VALUES
-(1, 4, 'Stephane', 'Article très intéressant , je me demande si on peut vraiment se passer de jquery surtout pour l\'animation c\'est beaucoup plus simple.', 'man', 1, '2018-04-15 22:03:47'),
-(2, 4, 'Julie', 'Article top, explications complétes', 'woman', 1, '2018-04-16 20:36:38'),
+(1, 4, 'Stephane', 'ArticleManager très intéressant , je me demande si on peut vraiment se passer de jquery surtout pour l\'animation c\'est beaucoup plus simple.', 'man', 1, '2018-04-15 22:03:47'),
+(2, 4, 'Julie', 'ArticleManager top, explications complétes', 'woman', 1, '2018-04-16 20:36:38'),
 (6, 7, 'admin', '<p>Lorem ipsum <strong>dolor sit amet, consectetur adipiscing</strong> elit. Sed tempor nulla non vehicula tristique. Sed nec ullamcorper dui. Mauris enim turpis, tempus a tincidunt in, tempor eget mi. Aliquam vel vehicula justo. Ut condimentum velit sed metus pellentesque congue. Sed blandit leo dapibus dolor vestibulum, vel elementum leo aliquam. Etiam <em>non luctus orci</em>, sit amet auctor orci. Donec ut sem nec dui dignissim suscipit at eu massa.</p>', 'man', 1, '2018-04-21 22:53:13');
 
 -- --------------------------------------------------------

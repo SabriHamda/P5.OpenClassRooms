@@ -1,9 +1,4 @@
 {% block recentPosts %}
-    {% if page > (posts['nbPage']) %}
-        {% set myPage = ('0') %}
-    {% else %}
-        {% set myPage = page %}
-    {% endif %}
 
     {% for article in articles %}
 
@@ -26,6 +21,29 @@
             </div>
         </div>
     {% endfor %}
+
+    <div class="col-md-12 col-sm-12 col-padding animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
+        <nav aria-label="..." id="posts-pagination">
+            <ul class="pagination pagination-sm">
+                {% set count = countPages %}
+                {% set thisPage = page %}
+                {% if thisPage == 0 %}
+                    {% set thisPage = 1 %}
+                {% endif %}
+                <li class="page-item"><a class="page-link" href="/blog/page/{{ thisPage - 1 }}">
+                        << </a></li>
+                {% for i in range(1,count) %}
+                    {% if i == thisPage %}
+                        <li class="page-item active"><a class="page-link " href="/blog/page/{{ i }}">{{ i }}</a></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="/blog/page/{{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                <li class="page-item"><a class="page-link" href="/blog/page/{{ thisPage + 1 }}">
+                        >> </a></li>
+            </ul>
+        </nav>
+    </div>
 
 {% endblock recentPosts %}
 

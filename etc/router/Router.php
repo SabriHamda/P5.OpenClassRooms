@@ -40,8 +40,9 @@ class Router
                 break;
             }
         }
+
         if (!$hasHandler) {
-            throw new NotFoundHttpException('Page not found!');
+            throw new NotFoundHttpException();
         }
     }
 }

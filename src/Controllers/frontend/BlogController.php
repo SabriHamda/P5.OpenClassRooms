@@ -7,12 +7,21 @@
  */
 
 namespace src\Controllers\frontend;
+use src\models\Pagination;
 
 
 class BlogController extends Controller
 {
-    public function index()
+    public function index($page)
     {
-        echo $this->render('blog.twig');
+        if (empty($page)){
+            $page = 1;
+        }
+        $pagination = new Pagination();
+        $paginate = $pagination->run('posts', 4,$page);
+        $countPages = $pagination->countPages;
+
+        echo $this->render('blog.twig',['articles'=>$paginate,'page'=>$page,'countPages'=>$countPages]);
+
     }
 }
