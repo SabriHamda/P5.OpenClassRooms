@@ -129,7 +129,7 @@ class Pagination extends Model
         $retour_messages->bindValue(':resultsInPage', $resultsInPage, \PDO::PARAM_INT);
         $retour_messages->execute();
         $retour_messages->setFetchMode(\PDO::FETCH_CLASS, self::class);
-        dd($retour_messages->fetchAll());
+        $retour_messages->fetchAll();
 
 
 
