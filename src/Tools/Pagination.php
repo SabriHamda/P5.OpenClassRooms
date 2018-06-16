@@ -38,16 +38,6 @@ class Pagination extends Model
         return null;
     }
 
-    public function __sleep()
-    {
-        return array('id', 'title', 'content');
-    }
-
-    public function __wakeup()
-    {
-        $this->__construct();
-    }
-
     /**
      * @return mixed
      */
@@ -129,7 +119,7 @@ class Pagination extends Model
         $retour_messages->bindValue(':resultsInPage', $resultsInPage, \PDO::PARAM_INT);
         $retour_messages->execute();
         $retour_messages->setFetchMode(\PDO::FETCH_CLASS, self::class);
-        $retour_messages->fetchAll();
+        return $retour_messages->fetchAll();
 
 
 
