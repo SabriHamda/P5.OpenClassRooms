@@ -1,6 +1,6 @@
 <?php
 
-namespace src\controllers\frontend;
+namespace src\Controllers\Frontend;
 
 /**
  * Description of HomeController.

@@ -1,6 +1,6 @@
 <?php
 
-namespace etc\router;
+namespace etc\Router;
 
 class Route
 {

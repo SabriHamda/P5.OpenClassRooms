@@ -1,9 +1,9 @@
 <?php
 
-namespace src\controllers\dashboard;
+namespace src\Controllers\Dashboard;
 
-use src\exceptions\NotFoundHttpException;
-use src\models\ArticleManager;
+use src\Exceptions\NotFoundHttpException;
+use src\Repository\ArticleManager;
 
 /**
  * Description of PostController.

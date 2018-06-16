@@ -6,7 +6,7 @@
  * Time: 18:46
  */
 
-namespace src\Controllers\frontend;
+namespace src\Controllers\Frontend;
 
 
 class ContactController extends Controller

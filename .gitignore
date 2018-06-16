@@ -1,4 +1,4 @@
 /vendor/
 /.idea/
-/config/db.php
+/config/Db.php
 /etc/mail/Mailer.php

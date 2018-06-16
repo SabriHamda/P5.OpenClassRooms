@@ -1,8 +1,8 @@
 <?php
-namespace src\controllers\dashboard;
+namespace src\Controllers\Dashboard;
 
-use src\controllers\dashboard\Controller;
-use src\models\AdminUser;
+use src\Controllers\Dashboard\Controller;
+use src\Repository\AdminUser;
 
 /**
  * Description of PostController.

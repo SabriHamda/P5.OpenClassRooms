@@ -6,7 +6,7 @@
  * Time: 19:24
  */
 
-namespace src\Controllers\frontend;
+namespace src\Controllers\Frontend;
 
 
 class RegisterController extends Controller

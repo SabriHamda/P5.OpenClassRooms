@@ -1,13 +1,13 @@
 <?php
 
-namespace src\controllers\dashboard;
+namespace src\Controllers\Dashboard;
 
 /**
  * Description of Controller.
  *
  * @author Sabri Hamda
  */
-class Controller extends \src\controllers\Controller
+class Controller extends \src\Controllers\Controller
 {
     public function getViewsBasePath()
     {

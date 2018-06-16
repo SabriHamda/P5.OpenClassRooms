@@ -1,6 +1,6 @@
 <?php
 
-namespace src\controllers\dashboard;
+namespace src\Controllers\Dashboard;
 
 /**
  * Description of HomeController.

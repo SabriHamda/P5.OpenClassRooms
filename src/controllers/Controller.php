@@ -1,6 +1,6 @@
 <?php
 
-namespace src\controllers;
+namespace src\Controllers;
 
 /**
  * Description of DashboardController.

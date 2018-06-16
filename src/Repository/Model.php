@@ -1,7 +1,7 @@
 <?php
-namespace src\models;
+namespace src\Repository;
 
-use etc\db\Database;
+use etc\Db\Database;
 /**
  * Description of Model
  *

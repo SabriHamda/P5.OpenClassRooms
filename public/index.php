@@ -2,7 +2,7 @@
 require __DIR__ . './../vendor/autoload.php';
 
 
-use src\exceptions\NotFoundHttpException;
+use src\Exceptions\NotFoundHttpException;
 use src\Blog;
 
 

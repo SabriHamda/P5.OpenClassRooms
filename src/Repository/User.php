@@ -1,5 +1,5 @@
 <?php
-namespace src\models;
+namespace src\Repository;
 
 /**
  * Description of User

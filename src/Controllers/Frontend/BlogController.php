@@ -6,8 +6,8 @@
  * Time: 18:42
  */
 
-namespace src\Controllers\frontend;
-use src\models\Pagination;
+namespace src\Controllers\Frontend;
+use src\Tools\Pagination;
 
 
 class BlogController extends Controller

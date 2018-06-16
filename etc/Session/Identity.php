@@ -1,9 +1,9 @@
 <?php
 
-namespace etc\session;
+namespace etc\Session;
 
-use src\models\AdminUser;
-use src\models\User;
+use src\Repository\AdminUser;
+use src\Repository\User;
 /**
  * Description of Identity
  *

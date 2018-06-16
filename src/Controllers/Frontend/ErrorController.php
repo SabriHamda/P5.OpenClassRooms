@@ -6,7 +6,7 @@
  * Time: 20:13
  */
 
-namespace src\Controllers\frontend;
+namespace src\Controllers\Frontend;
 
 
 class ErrorController extends Controller

@@ -1,7 +1,7 @@
 <?php
 
-namespace src\controllers\dashboard;
-use src\exceptions\UnauthorizedHttpException;
+namespace src\Controllers\Dashboard;
+use src\Exceptions\UnauthorizedHttpException;
 
 /**
  * Description of UnauthorizedHttpException.

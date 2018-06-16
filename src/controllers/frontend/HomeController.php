@@ -1,8 +1,8 @@
 <?php
 
-namespace src\controllers\frontend;
+namespace src\Controllers\Frontend;
 
-use src\controllers\frontend\ArticleController;
+use src\Controllers\Frontend\ArticleController;
 
 /**
  * Description of HomeController.

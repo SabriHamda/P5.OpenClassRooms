@@ -2,11 +2,11 @@
 
 namespace src;
 
-use etc\http\Request;
-use etc\router\Router;
-use etc\session\Identity;
-use etc\session\Session;
-use etc\mail\Mailer;
+use etc\Http\Request;
+use etc\Router\Router;
+use etc\Session\Identity;
+use etc\Session\Session;
+use etc\Mail\Mailer;
 
 class Blog
 {

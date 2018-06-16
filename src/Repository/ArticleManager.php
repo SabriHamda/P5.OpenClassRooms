@@ -1,8 +1,8 @@
 <?php
 
-namespace src\models;
+namespace src\Repository;
 
-use src\exceptions\NotFoundHttpException;
+use src\Exceptions\NotFoundHttpException;
 
 /**
  * Description of ArticleManager.

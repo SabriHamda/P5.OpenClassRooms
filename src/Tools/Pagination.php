@@ -6,7 +6,8 @@
  * Time: 20:01
  */
 
-namespace src\models;
+namespace src\Tools;
+use src\Repository\Model;
 
 
 class Pagination extends Model

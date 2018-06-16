@@ -1,5 +1,5 @@
 <?php
-namespace etc\mail;
+namespace etc\Mail;
 
 /**
  * Description of Mailer
