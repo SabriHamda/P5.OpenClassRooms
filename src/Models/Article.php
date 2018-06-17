@@ -1,5 +1,5 @@
 <?php
-namespace src\Repository;
+namespace src\Models;
 /**
  * This Class hydrate the entities of articles
  */

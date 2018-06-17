@@ -3,7 +3,7 @@
 namespace src\Controllers\Dashboard;
 
 use src\Exceptions\NotFoundHttpException;
-use src\Repository\ArticleManager;
+use src\Repository\ArticleRepository;
 
 /**
  * Description of PostController.
@@ -48,9 +48,9 @@ class ArticleController extends ProtectedController
     // throw 404 if article is not found;
     private function getArticle($id)
     {
-        $article = ArticleManager::find($id);
+        $article = ArticleRepository::find($id);
         if (null === $article) {
-            throw new NotFoundHttpException('ArticleManager doesn\'t exist!');
+            throw new NotFoundHttpException('ArticleRepository doesn\'t exist!');
         }
 
         return $article;

@@ -3,7 +3,7 @@
 namespace src\Controllers\Frontend;
 
 use src\Exceptions\NotFoundHttpException;
-use src\Repository\ArticleManager;
+use src\Repository\ArticleRepository;
 
 /**
  * Description of PostController.
@@ -51,7 +51,7 @@ class ArticleController
      */
     private function getArticle($id)
     {
-        $article = ArticleManager::find($id);
+        $article = ArticleRepository::find($id);
         if (null === $article) {
             throw new NotFoundHttpException('Articles doesn\'t exist!');
         }
@@ -61,8 +61,8 @@ class ArticleController
 
     public function getArticles()
     {
-        $articleManager = new ArticleManager();
-        $articles = $articleManager->getArticles();
+        $articleRepository = new ArticleRepository();
+        $articles = $articleRepository->getArticles();
         return $articles;
     }
 

@@ -7,6 +7,7 @@
  */
 
 namespace src\Controllers\Frontend;
+use src\Models\Article;
 use src\Tools\Pagination;
 
 
@@ -17,9 +18,10 @@ class BlogController extends Controller
         if (empty($page)){
             $page = 1;
         }
+
         $pagination = new Pagination();
         $paginate = $pagination->run('posts', 4,$page);
-        $countPages = $pagination->countPages;
+        $countPages = $pagination->getCountPages();
 
         echo $this->render('blog.twig',['articles'=>$paginate,'page'=>$page,'countPages'=>$countPages]);
 
