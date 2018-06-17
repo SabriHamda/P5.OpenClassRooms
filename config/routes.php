@@ -35,6 +35,14 @@ return [
             'page' => '[0-9]+',
         ]
     ],
+    'article' => [
+        'path' => '/article/{articleId}',
+        'controller' => src\Controllers\Frontend\PostController::class,
+        'action' => 'index',
+        'params' => [
+            'articleId' => '[0-9]+',
+        ]
+    ],
     'contact' => [
         'path' => '/contact',
         'controller' => src\Controllers\Frontend\ContactController::class,

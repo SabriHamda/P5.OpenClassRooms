@@ -44,21 +44,6 @@ class ArticleController
         echo 'article delete';
     }
 
-    /**
-     * @param $id
-     * @return mixed
-     * @throws NotFoundHttpException
-     */
-    private function getArticle($id)
-    {
-        $article = ArticleRepository::find($id);
-        if (null === $article) {
-            throw new NotFoundHttpException('Articles doesn\'t exist!');
-        }
-
-        return $article;
-    }
-
     public function getArticles()
     {
         $articleRepository = new ArticleRepository();

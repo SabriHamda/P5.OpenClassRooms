@@ -9,7 +9,7 @@
 
         <div class="col-md-3 col-sm-6 col-padding animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
             <div class="blog-entry">
-                <a href="index.php?action=post&amp;id={{ article.id }}" class="blog-img"><img src="{{ article.image }}"
+                <a href="/article/{{ article.id }}" class="blog-img"><img src="{{ article.image }}"
                                                                                               class="img-responsive"
                                                                                               alt="image"
                                                                                               style="width: 500px;height: 200px;"></a>
@@ -20,7 +20,7 @@
                         <p>{{ article.content|raw }} </p>
                     </div>
                     <p>. . .</p>
-                    <a href="index.php?action=post&amp;id={{ article.id }}" class="lead">En savoir plus <i
+                    <a href="/article/{{ article.id }}" class="lead">En savoir plus <i
                                 class="icon-arrow-right3"></i></a>
                 </div>
             </div>

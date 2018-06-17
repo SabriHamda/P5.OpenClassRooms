@@ -13,7 +13,7 @@ class ArticleRepository extends Model
 {
 
     private $id;
-    public $title;
+    private $title;
     private $content;
     private $content_right;
     private $image;
