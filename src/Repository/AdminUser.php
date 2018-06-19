@@ -97,13 +97,14 @@ class AdminUser extends Model
      */
     protected function validatePassword($supliedPassword, $password)
     {
-        return md5($supliedPassword) === $password;
+        password_verify(password_hash($supliedPassword,PASSWORD_DEFAULT),$password);
+            return true;
     }
 
     public function getUserByEmail()
     {
         $connection = $this->getDb()->getConnection();
-        $stmt = $connection->prepare('SELECT * FROM admin_users WHERE email = :email');
+        $stmt = $connection->prepare('SELECT * FROM users WHERE email = :email');
         $stmt->bindParam(':email', $this->email);
         $stmt->execute();
         $stmt->setFetchMode(\PDO::FETCH_CLASS, self::class);
@@ -113,7 +114,7 @@ class AdminUser extends Model
     public function getByPk($id)
     {
         $connection = $this->getDb()->getConnection();
-        $stmt = $connection->prepare('SELECT * FROM admin_users WHERE id = :id');
+        $stmt = $connection->prepare('SELECT * FROM users WHERE id = :id');
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         $stmt->setFetchMode(\PDO::FETCH_CLASS, self::class);
