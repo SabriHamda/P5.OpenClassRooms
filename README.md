@@ -1,5 +1,3 @@
-![Logo of the project](https://hamda.ch/images/logo-sh-min.png)
-
 # Advanced PHP MVC Blog
 > Projet 5 OpenClassrooms
 
