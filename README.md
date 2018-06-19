@@ -85,13 +85,13 @@ This project is available online
 >I used the theme bootstrap Marble.
 ##### About Marble Theme
 
-* Marble is a free html5 bootstrap template with a clean and minimal design. Marble is ideal for portfolio or 
-* any other type of website you use it with. It has fixed left sidebar menu with offcanvas menu on mobile. 
-* Showcase your outstanding works professionally with the smooth animation upon scrolling on entire pages.
-* Alongside, share your amazing stories elegantly with the neat blog design of this Marble template.
+Marble is a free html5 bootstrap template with a clean and minimal design. Marble is ideal for portfolio or 
+any other type of website you use it with. It has fixed left sidebar menu with offcanvas menu on mobile. 
+Showcase your outstanding works professionally with the smooth animation upon scrolling on entire pages.
+Alongside, share your amazing stories elegantly with the neat blog design of this Marble template.
 
-* AUTHOR:
-* DESIGNED & DEVELOPED by FREEHTML5.co
+>AUthor :
+DESIGNED & DEVELOPED by FREEHTML5.co
 
 * Website: http://freehtml5.co/
 
