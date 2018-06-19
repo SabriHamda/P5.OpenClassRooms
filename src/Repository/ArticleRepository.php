@@ -11,14 +11,45 @@ use src\Exceptions\NotFoundHttpException;
  */
 class ArticleRepository extends Model
 {
-
+    /**
+     * @var
+     */
     private $id;
+    /**
+     * @var
+     */
     private $title;
+    /**
+     * @var
+     */
     private $content;
+    /**
+     * @var
+     */
     private $content_right;
+    /**
+     * @var string
+     */
     private $image;
+    /**
+     * @var
+     */
     private $created_at;
+    /**
+     * @var
+     */
     private $updated_at;
+
+    /**
+     * ArticleRepository constructor.
+     */
+    public function __construct()
+    {
+        if ($this->image) {
+            $this->image = urldecode($this->image);
+        }
+        return null;
+    }
 
 
     /**
@@ -78,6 +109,9 @@ class ArticleRepository extends Model
     }
 
 
+    /**
+     * @return array
+     */
     public function getArticles()
     {
         $connection = $this->getDb()->getConnection();
@@ -89,25 +123,36 @@ class ArticleRepository extends Model
 
     }
 
+    /**
+     * @param $articleId
+     * @return array
+     */
     public function getArticle($articleId)
     {
         $connection = $this->getDb()->getConnection();
         $stmt = $connection->prepare('SELECT id, title, content,content_right,image, created_at FROM posts WHERE id = :id');
-        $stmt->bindValue(':id',$articleId,\PDO::PARAM_INT);
+        $stmt->bindValue(':id', $articleId, \PDO::PARAM_INT);
         $stmt->execute();
         $stmt->setFetchMode(\PDO::FETCH_CLASS, self::class);
         return $stmt->fetchAll();
 
 
-
     }
 
+    /**
+     * @param $condition
+     * @return ArticleRepository
+     */
     public static function find($condition)
     {
         return new self();
     }
 
 
+    /**
+     * @param $id
+     * @throws NotFoundHttpException
+     */
     public function findOrFail($id)
     {
         $article = false;

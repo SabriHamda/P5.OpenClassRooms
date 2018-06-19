@@ -13,12 +13,19 @@ use src\Repository\ArticleRepository;
 class ArticleController
 {
     //List all articles
+    /**
+     *
+     */
     public function index()
     {
         echo $this->render('articles/index.twig');
     }
 
     // view article by id
+
+    /**
+     * @param $id
+     */
     public function view($id)
     {
         $article = $this->getArticle($id);
@@ -26,24 +33,40 @@ class ArticleController
     }
 
     //create a new article
+
+    /**
+     *
+     */
     public function create()
     {
         echo $this->render('articles/create.twig');
     }
 
     //update article
+
+    /**
+     * @param $id
+     */
     public function update($id)
     {
         echo $this->render('articles/update.twig');
     }
 
     //delete existing article
+
+    /**
+     * @param $id
+     */
     public function delete($id)
     {
         $article = $this->getArticle($id);
         echo 'article delete';
     }
 
+
+    /**
+     * @return array
+     */
     public function getArticles()
     {
         $articleRepository = new ArticleRepository();
