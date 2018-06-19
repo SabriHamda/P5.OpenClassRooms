@@ -21,7 +21,7 @@ and good development practice and organization.
 
 Before instalation you must configure virtual host on your machine click [here](http://www.numediaweb.com/configure-virtual-hosts/950) for more details.
 
-###Installation with composer
+### Installation with composer
 
 ```shell
 php composer.phar install
