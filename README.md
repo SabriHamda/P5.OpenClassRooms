@@ -71,9 +71,9 @@ This MVC application has several features including :
 
 
 ## Links
-This project is available online you can test it, here are some useful links
+This project is available online
 
-- Project homepage: https:p5.hamda.ch
+- Project homepage: https://p5.hamda.ch
 - Repository: https://github.com/SabriHamda/P5.OpenClassRooms
 - Issue tracker: https://github.com/SabriHamda/P5.OpenClassRooms/issues
   - In case of sensitive bugs like security vulnerabilities, please contact
