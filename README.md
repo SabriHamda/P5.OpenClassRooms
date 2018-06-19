@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/56de77e63685493f95f6d0d97dd5f098)](https://www.codacy.com/app/SabriHamda/P5.OpenClassRooms?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=SabriHamda/P5.OpenClassRooms&amp;utm_campaign=Badge_Grade)
 # Advanced PHP MVC Blog
 > Projet 5 OpenClassrooms
 
