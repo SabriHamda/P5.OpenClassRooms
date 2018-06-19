@@ -102,8 +102,6 @@ DESIGNED & DEVELOPED by FREEHTML5.co
 
 >The code in this project is licensed under MIT license.
 
-MIT License
-
 Copyright (c) 2018 Sabri Hamda
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
