@@ -4,6 +4,7 @@ namespace src\Controllers\Dashboard;
 
 use src\Exceptions\NotFoundHttpException;
 use src\Repository\ArticleRepository;
+use src\Tools\Pagination;
 
 /**
  * Description of PostController.
@@ -12,10 +13,25 @@ use src\Repository\ArticleRepository;
  */
 class ArticleController extends ProtectedController
 {
+    private $articlePaginate;
+    private $articleCountPages;
+    private $articlePage;
+
     //List all articles
-    public function index()
+    public function index($page)
     {
-        echo $this->render('articles/index.twig');
+        $uri = blog()->getRequest()->getUri();
+        $user = blog()->getIdentity()->getUser();
+        $this->paginateArticles($page);
+
+
+        echo $this->render('listArticlesView.twig', [
+            'user' => $user,
+            'uri' => $uri,
+            'articles' => $this->articlePaginate,
+            'page' => $this->articlePage,
+            'countPages' => $this->articleCountPages
+        ]);
     }
 
     // view article by id
@@ -54,5 +70,19 @@ class ArticleController extends ProtectedController
         }
 
         return $article;
+    }
+
+    private function paginateArticles($page)
+    {
+        if (empty($page)) {
+            $this->articlePage = 1;
+        }
+
+        $pagination = new Pagination();
+        $paginate = $pagination->run('posts', 4, $page);
+        $countPages = $pagination->getCountPages();
+        $this->articlePaginate = $paginate;
+        $this->articleCountPages = $countPages;
+        $this->articlePage = $page;
     }
 }

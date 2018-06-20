@@ -76,7 +76,7 @@ return [
         'method' => 'POST'
     ],
     'adminLogout' => [
-        'path' => '/dashboard/logout',
+        'path' => '/logout',
         'controller' => src\Controllers\Dashboard\AuthController::class,
         'action' => 'logout',
     ],
@@ -111,6 +111,14 @@ return [
         'path' => '/dashboard/articles',
         'controller' => src\Controllers\Dashboard\ArticleController::class,
         'action' => 'index',
+    ],
+    'articles/page/{page}' => [
+        'path' => '/dashboard/articles/page/{page}',
+        'controller' => src\Controllers\Dashboard\ArticleController::class,
+        'action' => 'index',
+        'params' => [
+            'page' => '[0-9]+',
+        ],
     ],
 
     'article_details' => [

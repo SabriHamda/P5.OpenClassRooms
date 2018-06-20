@@ -13,6 +13,6 @@ class LoginController extends Controller
 {
     public function index()
     {
-        echo $this->render('loginView.twig');
+        echo $this->render('loginView.twig',['user'=>$this->user]);
     }
 }

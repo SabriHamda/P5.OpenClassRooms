@@ -11,9 +11,12 @@ abstract class Controller
 {
     private $request;
     private $loader;
+    public $user;
 
     public function __construct($request)
     {
+        $this->user = blog()->getIdentity()->getUser();
+
         $this->request = $request;
         $this->loader = new \Twig_Loader_Filesystem($this->getViewsBasePath());
         $this->twig = new \Twig_Environment($this->loader, array(

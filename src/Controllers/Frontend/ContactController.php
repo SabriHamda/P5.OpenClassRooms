@@ -13,6 +13,6 @@ class ContactController extends Controller
 {
     public function index()
     {
-        echo $this->render('contact.twig');
+        echo $this->render('contact.twig',['user'=>$this->user]);
     }
 }

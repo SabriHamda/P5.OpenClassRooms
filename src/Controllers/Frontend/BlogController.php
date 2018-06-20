@@ -23,7 +23,7 @@ class BlogController extends Controller
         $paginate = $pagination->run('posts', 4,$page);
         $countPages = $pagination->getCountPages();
 
-        echo $this->render('blog.twig',['articles'=>$paginate,'page'=>$page,'countPages'=>$countPages]);
+        echo $this->render('blog.twig',['articles'=>$paginate,'page'=>$page,'countPages'=>$countPages,'user'=>$this->user]);
 
     }
 }

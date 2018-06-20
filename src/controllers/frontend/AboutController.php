@@ -11,6 +11,6 @@ class AboutController extends Controller
 {
     public function index()
     {
-        echo $this->render('about.twig');
+        echo $this->render('about.twig',['user'=>$this->user]);
     }
 }

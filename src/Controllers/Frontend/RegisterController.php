@@ -13,6 +13,6 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        echo $this->render('registerView.twig');
+        echo $this->render('registerView.twig',['user'=>$this->user]);
     }
 }

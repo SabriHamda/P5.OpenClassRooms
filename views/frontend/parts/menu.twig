@@ -29,9 +29,9 @@
 					<li class="color-pink"><a href="/contact/">Contact</a></li>
 					{% if user.prenom|default %}
 						{% if user.role == 'admin' %}
-						<li class="color-orange-light"><a href="index.php?action=dashboard">Dashboard</a></li>
+						<li class="color-orange-light"><a href="/dashboard/">Dashboard</a></li>
 					{% endif %}	
-						<li id="register" class="color-pirple"><a href="index.php?action=logout">Déconnexion</a></li>
+						<li id="register" class="color-pirple"><a href="/logout/">Déconnexion</a></li>
 					{% else %}
 					<li id="login" class="color-pirple-light"><a href="/login/">Login</a></li>
 					<li id="register" class="color-pirple"><a href="/register/">Register</a></li>
@@ -43,7 +43,7 @@
 			</nav>
 
 			<div class="fh5co-footer">
-				<p><small>&copy; 2018 HAMDA All Rights Reserved.</span> <span>Designed by <a href="https://hamda.ch" target="_blank">&nbsp; Sabri Hamda</a> </span> <span>Web Site <a href="https://hamda.ch" target="_blank">&nbsp; www.hamda.ch</a></span> <span>Admin <a href="dashboard/login" target="_blank">&nbsp; Login</a></span></small></p>
+				<p><small>&copy; 2018 HAMDA All Rights Reserved.</span> <span>Designed by <a href="https://hamda.ch" target="_blank">&nbsp; Sabri Hamda</a> </span> <span>Web Site <a href="https://hamda.ch" target="_blank">&nbsp; www.hamda.ch</a></span> <span>Admin <a href="/dashboard/login" target="_blank">&nbsp; Login</a></span></small></p>
 				<ul>
 					<li><a href="#"><i class="icon-google"></i></a></li>
 					<li><a href="#"><i class="icon-facebook2"></i></a></li>

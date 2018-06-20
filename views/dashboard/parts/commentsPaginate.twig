@@ -1,0 +1,95 @@
+{% block recentComments %} 
+  <div class="widget widget-right">
+
+    {% if pageName == ('dashboard') %}
+            <h4>Commentaires récents</h4>
+          {% else %}
+            <div class="container-fluid table-responsive" >
+
+            <form class="navbar-form navbar-left" role="search">
+              
+  <div class="form-group">
+    <p class="btn btn-primary color-blue"><a href="index.php?action=add-article" style="color:#fff">Ajouter un Article</a></p>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Recherche">
+  </div>
+  <button type="submit" class="btn btn-default">Chercher un Article</button>
+</form>
+</div><br>
+            <h4>Liste des commentaires</h4>
+
+
+  {% endif %}
+    <br>
+    <div class="bs-example" data-example-id="media-alignment">
+
+     {% if page > (comments['nbPage']) %}
+      {% set myPage = ('0') %}
+      {% else %}
+        {% set myPage = page %}
+        {% endif %}
+
+
+        {% for comment in comments['paginate'][myPage] %}
+          {% if comment.civilite == "man" %} 
+           {% set civility = "public/assets/images/man.svg" %}
+           {% else %} 
+            {% set civility = "public/assets/images/woman.svg" %}
+            {% endif %}
+
+            {% if comment.is_valid == 1 %}
+              {% set validity = 'Validé' %}
+                {% set color = 'color-green' %}
+              {% else %}
+                {% set validity = 'Non Validé'%}
+                {% set color = 'color-red' %}
+            {% endif %}
+
+            <div class="media comments-media">
+              <div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" src="{{ civility }}" data-holder-rendered="true" style="width: 64px; height: 64px;"> </a> </div>
+              <div class="media-body">
+
+               <h4 class="media-heading">{{comment.author}}</h4>
+               <p>{{ comment.comment|raw}}</p>
+             </div>
+             <span style="float:right">
+
+              <small>Posté le : {{ comment.created_at|date("d/m/Y", "Europe/Paris") }} </small>
+              <p class="btn btn-primary {{ color }}"><a href="index.php?action=add-article" style="color:#fff">{{ validity }}</a></p>
+            </span>
+            {% if comment.is_valid == 1 %}
+            {% else %}
+             <span class="label label-success color-green"><a href="index.php?action=validate-comment&id={{ comment.id}}">Valider</a></span>
+             {% endif %}
+             <span class="label label-primary color-blue"><a href="index.php?action=post&id={{ comment.post_id}}#comments">Voir</a></span>
+             <span class="label label-danger color-red"><a href="index.php?action=del-comment&id={{ comment.id}} ">Supprimer</a></span>
+           </div>
+         {% endfor %}
+       </div>
+       {% if pageName == ('dashboard') %}
+
+       {% else %}
+
+        <nav aria-label="..." id="posts-pagination">
+          <ul class="pagination pagination-sm">
+            <li class="page-item"><a class="page-link" href="index.php?action=dashboard&page={{ i }}"><i class="fas fa-angle-double-left"></i>
+
+</a></li>
+            {% for i in range(1, comments['nbPage']) %}
+              <li class="page-item"><a class="page-link" href="index.php?action=dashboard&page={{ i }}">{{ i }}</a></li>
+
+            {% endfor %}
+            <li class="page-item"><a class="page-link" href="index.php?action=dashboard&page={{ i }}"><i class="fas fa-angle-double-right"></i>
+
+</a></li>
+          </ul>
+        </nav>
+      {% endif %}
+      <br>
+      <button class="btn btn-primary color-blue total-btn" type="button">
+        <a href="index.php?action=comments">Total <span class="badge">{{ comments['total'] }}</a></span>
+      </button>
+    </div>
+  {% endblock recentComments %}
+  

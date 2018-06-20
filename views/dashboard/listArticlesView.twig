@@ -1,0 +1,23 @@
+{% extends 'layout.twig' %}
+{% block content %}
+<section class="dashboard-content animate-box fadeIn animated">
+   {% include 'parts/menu.twig' %}
+   <ol class="breadcrumb">
+      <li><a href="index.php?action=dashboard">Dashboard</a></li>
+      <li class="active">Articles</li>
+         
+   </ol>
+   <div class="container-fluid center">
+      <div class="row" style="margin:auto;">
+         <div class="widget-left col-md-2 color-grey">
+            {% include('parts/quickView.twig') %}
+            {% include('parts/profile.twig') %}
+         </div>
+         <div class="col-md-10 animate-box fadeInLeft animated" style="float:right">
+            {% include('parts/postsPaginate.twig') %}
+         </div>
+      </div>
+   </div>
+</section>
+
+{% endblock content %}

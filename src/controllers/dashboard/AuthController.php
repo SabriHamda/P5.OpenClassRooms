@@ -14,16 +14,21 @@ class AuthController extends Controller
 
     public function index()
     {
+        if ($this->user)
+        {
+            $this->getRequest()->redirect('/dashboard');
+        }
         echo $this->render('auth/login.twig');
     }
 
     public function login()
     {
+
         $user = new AdminUser();
         $request = $this->getRequest();
         $user->setEmail($request->post('email'));
         $user->setPassword($request->post('password'));
-        if ($user->validate() && $user->login()) {
+        if ($user->validate() && $user->login() && $use->role == 'admin') {
             $request->redirect('/dashboard');
         }
         $errors = $user->getErrors();
@@ -34,7 +39,7 @@ class AuthController extends Controller
     public function logout()
     {
         blog()->getIdentity()->logout();
-        $this->getRequest()->redirect('/dashboard/login');
+        $this->getRequest()->redirect('/home');
     }
 
     public function requestReset()
@@ -57,11 +62,11 @@ class AuthController extends Controller
 
     public function validateResetToken()
     {
-        
+
     }
 
     public function resetPassword()
     {
-        
+
     }
 }

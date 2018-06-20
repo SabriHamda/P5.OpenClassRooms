@@ -1,0 +1,110 @@
+{% block recentPosts %}
+    <div class="widget widget-right">
+        {% if uri == ('/dashboard') %}
+            <h4>Articles récents</h4>
+        {% else %}
+            <div class="container-fluid table-responsive">
+
+                <form class="navbar-form navbar-left" role="search">
+
+                    <div class="form-group">
+                        <p class="btn btn-primary color-blue"><a href="index.php?action=add-article" style="color:#fff">Ajouter
+                                un Article</a></p>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Recherche">
+                    </div>
+                    <button type="submit" class="btn btn-default">Chercher un Article</button>
+                </form>
+            </div><br>
+            <h4>Liste des articles</h4>
+
+
+        {% endif %}
+        <br>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th class="text-center">Id</th>
+                    <th>Titre</th>
+                    <th>Contenu</th>
+                    <th>Date de creation</th>
+                    <th class="text-right">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% if page > (posts['nbPage']) %}
+                    {% set myPage = ('0') %}
+                {% else %}
+                    {% set myPage = page %}
+                {% endif %}
+
+                {% for article in articles %}
+
+                    <tr>
+                        <td class="text-center">{{ article.id }}</td>
+                        <td><strong>{{ article.title }}</strong></td>
+                        <td>{% set array = article.content|split(' ', 6) %} {{ attribute(array, 0)|raw }} {{ attribute(array, 1)|raw }} {{ attribute(array, 2)|raw }} {{ attribute(array, 3)|raw }} {{ attribute(array, 4)|raw }}
+                            ...
+                        </td>
+                        <td>{{ article.created_at|date("d/m/Y", "Europe/Paris") }}</td>
+                        <td class="text-right">
+                            <span class="label label-primary color-blue"><a
+                                        href="/article/{{ article.id }}">Voir</a></span>
+                            <span class="label label-success color-pirple"><a
+                                        href="index.php?action=edit-article&id={{ article.id }}">Modifier</a></span>
+                            <span class="label label-danger color-red"><a
+                                        href="index.php?action=del-article&id={{ article.id }}">Supprimer</a></span>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% if uri == ('/dashboard') %}
+
+            {% else %}
+                <nav aria-label="..." id="posts-pagination">
+                    <ul class="pagination pagination-sm">
+                        <!-- Set pagination href -->
+
+                        
+                        <!-- End Set pagination href -->
+                        {% set count = countPages %}
+                        {% set thisPage = page %}
+                        {% if thisPage == 0 %}
+                            {% set thisPage = 1 %}
+                        {% endif %}
+                        <li class="page-item"><a class="page-link" href="/dashboard/articles/page/{{ thisPage - 1 }}">
+                                << </a></li>
+                        {% for i in range(1,count) %}
+                            {% if i == thisPage %}
+                                <li class="page-item active"><a class="page-link " href="/dashboard/articles/page/{{ i }}">{{ i }}</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="/dashboard/articles/page/{{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        <li class="page-item"><a class="page-link" href="/dashboard/articles/page/{{ thisPage + 1 }}">
+                                >> </a></li>
+                    </ul>
+                </nav>
+            {% endif %}
+        </div>
+        <br>
+        <button class="btn btn-primary color-blue total-btn" type="button">
+            <a href="/dashboard/articles">Total <span class="badge">{{ posts['total'] }}</a></span>
+        </button>
+    </div>
+{% endblock recentPosts %}
+  
+
+
+
+
+
+
+
+
+

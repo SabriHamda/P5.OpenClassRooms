@@ -1,0 +1,69 @@
+{% block backendMenu %}
+	{% if user.civilite == "man" %} 
+		{% set avatar = "/assets/images/man.svg" %}
+		{% else %} 
+			{% set avatar = "/assets/images/woman.svg" %}
+			{% endif %}
+
+			<div class="sub-menu">
+				{% if user.prenom|default %}
+					<nav class="navbar navbar-default">
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+								<div class="identity">
+								<a class="navbar-brand" href="#"><!--<img src="{{ avatar }}" class="img-circle" alt="Cinque Terre">--> bonjour {{ user.prenom }}</a>
+								</div>
+							</div>
+							<div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+								<ul class="nav navbar-nav">
+									<li class="fh5co-active color-yellow"><a href="/home">home</a></li>
+					<li class="color-orange-light"><a href="/about">A Propos</a></li>
+					<!--<li class="color-orange"><a href="index.php?action=portfolio">Creations</a></li>-->
+					<li class="color-red"><a href="/blog">Blog</a></li>
+					<li class="color-pink"><a href="/contact">Contact</a></li>
+					{% if user.prenom|default %}
+						{% if user.role == 'admin' %}
+						<li class="color-orange-light"><a href="/dashboard">Dashboard</a></li>
+					{% endif %}	
+						<li id="register" class="color-pirple"><a href="/logout">Déconnexion</a></li>
+					{% else %}
+					<li id="login" class="color-pirple-light"><a href="/login">Login</a></li>
+					<li id="register" class="color-pirple"><a href="/register">Register</a></li>
+
+					{% endif %}
+								</ul>
+								<ul class="nav navbar-nav navbar-right">
+									<li class="color-red dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Articles <span class="caret"></span></a>
+										<ul class="color-red dropdown-menu">
+											<li><a href="/dashboard/articles">Tous</a></li>
+											<li><a href="index.php?action=add-article">Ajouter</a></li>
+											<li><a href="#">Modifier</a></li>
+										</ul>
+									</li>
+									<li class="color-blue dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Commentaires <span class="caret"></span></a>
+										<ul class="color-blue dropdown-menu">
+											<li><a href="#">Valider</a></li>
+											<li><a href="#">Modifer</a></li>
+											<li><a href="#">Supprimer</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div><!--/.nav-collapse -->
+						</div><!--/.container-fluid -->
+					</nav>
+				{% else %}
+					<!-- menu non connecté -->
+				{% endif %}
+			</div>
+
+	
+
+{% endblock backendMenu %}
