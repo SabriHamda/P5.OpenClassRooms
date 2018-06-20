@@ -17,14 +17,14 @@ class PostController extends Controller
     public function index($articleId)
     {
 
-
+        $user = blog()->getIdentity()->getUser();
         $articleRepository = new ArticleRepository();
         $data = $articleRepository->getArticle($articleId);
-        foreach($data as $article){
+        foreach ($data as $article)
+        {
             $contentRight = $article->getContentRight();
-
         }
-        echo $this->render('articleView.twig', ['data' => $data,'contentRight'=>$contentRight]);
+        echo $this->render('articleView.twig', ['data' => $data, 'contentRight' => $contentRight, 'user' => $user]);
 
     }
 

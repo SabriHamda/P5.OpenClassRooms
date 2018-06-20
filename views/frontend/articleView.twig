@@ -7,7 +7,7 @@
 
             <div class="fh5co-narrow-content">
 
-                {% if session.role == 'admin' %}
+                {% if user.role == 'admin' %}
                     <p><a href="index.php?action=edit-article&id={{ article.id }}" class="btn btn-primary">Modifier L'article</a></p>
                 {% else %}
 
@@ -50,7 +50,7 @@
 
                     <div class="row row-bottom-padded-md animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
 
-                        {% if session.role is empty %}
+                        {% if user.role is empty %}
                             <div id="form-add-comment" class="row" style="display: none; background-color:rgba(0, 0, 0, 0.1);padding: 30px;">
                                 <h2>Pour ajouter un commentaire veuillez vous identifier ou vous enregistrer <a href="index.php?action=register"> ici</h2></p>
                             </div>
@@ -58,7 +58,7 @@
 
                         {% else %}
                             <div id="form-add-comment" style="display: none;border-bottom:solid 1px #2d3038;border-top:solid 1px #2d3038" class="fh5co-narrow-content animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
-                                {% if session.civility == "man" %}
+                                {% if user.civility == "man" %}
                                     {% set civility = "/assets/images/man.svg" %}
                                 {% else %}
                                     {% set civility = "/assets/images/woman.svg" %}
@@ -71,7 +71,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group form-check form-check-inline" style="height: 100px">
                                                         <label class="form-check-label" for="inlineRadio2"><img src="{{civility}}" width="64px" height="64px"></label>
-                                                        <label class="col-form-label"> &nbsp; Bonjour <span style="color:#873e95">{{session.prenom}}</span> vous pouvez directement ajouter un commentaire ci-dessous.</label>
+                                                        <label class="col-form-label"> &nbsp; Bonjour <span style="color:#873e95">{{user.prenom}}</span> vous pouvez directement ajouter un commentaire ci-dessous.</label>
                                                     </div>
 
 

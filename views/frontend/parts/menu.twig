@@ -1,5 +1,5 @@
 {% block menu %}
-	{% if session.civility == "man" %} 
+	{% if user.civilite == "man" %} 
 							{% set avatar = "/assets/images/man.svg" %}
 						{% else %} 
 							{% set avatar = "/assets/images/woman.svg" %}
@@ -8,10 +8,10 @@
 	<aside id="fh5co-aside" role="complementary" class="border js-fullheight color-grey">
 
 		
-		{% if session.prenom|default %}
+		{% if user.prenom|default %}
 			<h1 id="fh5co-logo" style="font-size:29px;margin-top: -50px;width:100%;text-align:left;margin-left:10px;">
 				<img src="{{ avatar }}" class="img-circle" alt="Cinque Terre" width="60" height="60">
-				<a href="index.html">&nbsp;Bonjour {{ session.prenom }}</a></h1>
+				<a href="index.html">&nbsp;Bonjour {{ user.prenom }}</a></h1>
 
 			{% else %}
 				<h1 id="fh5co-logo" style="margin-top: -50px;">
@@ -27,8 +27,8 @@
 					<!--<li class="color-orange"><a href="index.php?action=portfolio">Creations</a></li>-->
 					<li class="color-red"><a href="/blog/">Blog</a></li>
 					<li class="color-pink"><a href="/contact/">Contact</a></li>
-					{% if session.prenom|default %}
-						{% if session.role == 'admin' %}
+					{% if user.prenom|default %}
+						{% if user.role == 'admin' %}
 						<li class="color-orange-light"><a href="index.php?action=dashboard">Dashboard</a></li>
 					{% endif %}	
 						<li id="register" class="color-pirple"><a href="index.php?action=logout">Déconnexion</a></li>
