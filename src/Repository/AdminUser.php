@@ -11,7 +11,7 @@ namespace src\Repository;
  *
  * @author Sabri Hamda
  */
-class AdminUser extends Model
+class AdminUser extends DBConnexion
 {
 
     public $firstname;

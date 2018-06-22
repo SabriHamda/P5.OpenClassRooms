@@ -3,11 +3,11 @@ namespace src\Repository;
 
 use etc\Db\Database;
 /**
- * Description of Model
+ * Description of DBConnexion
  *
  * @author Sabri Hamda
  */
-abstract class Model {
+abstract class DBConnexion {
 
     private $errors = [];
     

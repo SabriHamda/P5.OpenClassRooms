@@ -10,7 +10,7 @@ use src\Exceptions\NotFoundHttpException;
  *
  * @author Sabri Hamda
  */
-class ArticleRepository extends Model
+class ArticleRepository extends DBConnexion
 {
     /**
      * @var

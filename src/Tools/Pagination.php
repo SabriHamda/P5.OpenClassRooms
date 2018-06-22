@@ -8,10 +8,10 @@
 
 namespace src\Tools;
 
-use src\Repository\Model;
+use src\Repository\DBConnexion;
 
 
-class Pagination extends Model
+class Pagination extends DBConnexion
 {
 
     /**

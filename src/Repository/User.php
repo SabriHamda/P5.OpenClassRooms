@@ -6,7 +6,7 @@ namespace src\Repository;
  *
  * @author Sabri Hamda <sabri@hamda.ch>
  */
-class User extends Model
+class User extends DBConnexion
 {
 
     public $email;
