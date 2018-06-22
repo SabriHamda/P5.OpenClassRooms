@@ -1,6 +1,7 @@
 <?php
 
 namespace src\Repository;
+use src\models\Article;
 
 use src\Exceptions\NotFoundHttpException;
 
@@ -134,30 +135,25 @@ class ArticleRepository extends Model
         $stmt->bindValue(':id', $articleId, \PDO::PARAM_INT);
         $stmt->execute();
         $stmt->setFetchMode(\PDO::FETCH_CLASS, self::class);
-        return $stmt->fetchAll();
+        return $stmt->fetch();
 
 
     }
 
-    /**
-     * @param $condition
-     * @return ArticleRepository
-     */
-    public static function find($condition)
+    public function updateArticle(Article $article)
     {
-        return new self();
-    }
-
-
-    /**
-     * @param $id
-     * @throws NotFoundHttpException
-     */
-    public function findOrFail($id)
-    {
-        $article = false;
-        if (!$article) {
-            throw new NotFoundHttpException('This article doesnt exist!');
+        $connection = $this->getDb()->getConnection();
+        if (empty($article->getImage())) {
+            $stmt = $connection->prepare('UPDATE posts SET title = :articleTitle, content = :articleContent, content_right = :articleContentRight WHERE id = :articleId');
+        }else{
+            $stmt = $connection->prepare('UPDATE posts SET title = :articleTitle, image = :articleImageUrl, content = :articleContent, content_right = :articleContentRight WHERE id = :articleId');
+            $stmt->bindValue(':articleImageUrl',urlencode($article->getImage()),\PDO::PARAM_STR);
         }
+        $stmt->bindValue(':articleId',$article->getId(),\PDO::PARAM_INT);
+        $stmt->bindValue(':articleTitle',$article->getTitle(),\PDO::PARAM_STR);
+        $stmt->bindValue(':articleContent',$article->getContent(),\PDO::PARAM_STR);
+        $stmt->bindValue(':articleContentRight',$article->getContentRight(),\PDO::PARAM_STR);
+        $stmt->execute();
+
     }
 }

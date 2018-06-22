@@ -5,6 +5,9 @@ namespace src\Controllers\Dashboard;
 use src\Exceptions\NotFoundHttpException;
 use src\Repository\ArticleRepository;
 use src\Tools\Pagination;
+use src\Tools\UploadFile;
+use src\Controllers\Dashboard\Validation\Validator;
+use src\Models\Article;
 
 /**
  * Description of PostController.
@@ -13,63 +16,95 @@ use src\Tools\Pagination;
  */
 class ArticleController extends ProtectedController
 {
+    private $uri;
+    public $user;
     private $articlePaginate;
     private $articleCountPages;
     private $articlePage;
+    public $article;
+    public $message = array();
+
+    public function __construct($request)
+    {
+        parent::__construct($request);
+        $this->uri = blog()->getRequest()->getUri();
+        $this->user = blog()->getIdentity()->getUser();
+    }
 
     //List all articles
     public function index($page)
     {
-        $uri = blog()->getRequest()->getUri();
-        $user = blog()->getIdentity()->getUser();
         $this->paginateArticles($page);
-
-
         echo $this->render('listArticlesView.twig', [
-            'user' => $user,
-            'uri' => $uri,
+            'user' => $this->user,
+            'uri' => $this->uri,
             'articles' => $this->articlePaginate,
             'page' => $this->articlePage,
             'countPages' => $this->articleCountPages
         ]);
     }
 
-    // view article by id
-    public function view($id)
+
+    public function editArticle($id)
     {
-        $article = $this->getArticle($id);
-        echo $this->render('articles/view.twig');
+        $this->article = $this->getArticle($id);
+        echo $this->render('editArticleView.twig', [
+            'article' => $this->article,
+            'user' => $this->user,
+            'uri' => $this->uri,
+            'message' => $this->message
+        ]);
+
     }
 
-    //create a new article
-    public function create()
+    public function updateArticle($id)
     {
-        echo $this->render('articles/create.twig');
+        if (Validator::articleValidate($id)) {
+            $articleId = $id;
+            $articleTitle = $_POST['title-article-update'];
+            $articleContent = $_POST['content-article-update'];
+            $articleContentRight = $_POST['content-right-article-update'];
+            $articleImage = $_FILES['img-article-update'];
+            if (empty($articleImage['name'])) {
+                $data = new Article();
+                $data->setId($articleId);
+                $data->setTitle($articleTitle);
+                $data->setContent($articleContent);
+                $data->setContentRight($articleContentRight);
+                $updateArticle = new ArticleRepository();
+                $updateArticle->updateArticle($data);
+                $this->message = ['status'=>'alert-success','message'=>"<strong>Succès ! </strong> Article modifié avec succès"];
+                $this->editArticle($id);              } else {
+                $uploadMyFile = UploadFile::uploadFile('img-article-update', 'assets/images/uploads/' . $articleImage["name"] . '', FALSE, array('png', 'gif', 'jpg', 'jpeg'));
+                if ($uploadMyFile) {
+                    $this->message = ['status'=>'alert-success','message'=>"<strong>Succès ! </strong> Article modifié avec succès"];
+                    $this->editArticle($id);                      $data = new Article();
+                    $data->setId($articleId);
+                    $data->setTitle($articleTitle);
+                    $data->setImage('/assets/images/uploads/' . $articleImage["name"] . '');
+                    $data->setContent($articleContent);
+                    $data->setContentRight($articleContentRight);
+                    $updateArticle = new Articlerepository();
+                    $updateArticle->updateArticle($data);
+                } else {
+                    $this->message = ['status' => 'alert-danger', 'message' => "<strong>Erreur ! </strong> Le format de votre image est incorrect"];
+                    $this->editArticle($id);
+                }
+            }
+
+        } else {
+            $this->message = ['status' => 'alert-danger', 'message' => "<strong>Erreur!</strong> un ou plusieurs champs sont vide."];
+            $this->editArticle($id);
+
+        }
     }
 
-    //update article
-    public function update($id)
-    {
-        echo $this->render('articles/update.twig');
-    }
 
-    //delete existing article
-    public function delete($id)
-    {
-        $article = $this->getArticle($id);
-        echo 'article delete';
-    }
-
-    // load article from database
-    // throw 404 if article is not found;
     private function getArticle($id)
     {
-        $article = ArticleRepository::find($id);
-        if (null === $article) {
-            throw new NotFoundHttpException('ArticleRepository doesn\'t exist!');
-        }
-
-        return $article;
+        $articleRepository = new ArticleRepository();
+        $this->article = $articleRepository->getArticle($id);
+        return $this->article;
     }
 
     private function paginateArticles($page)
@@ -77,7 +112,6 @@ class ArticleController extends ProtectedController
         if (empty($page)) {
             $this->articlePage = 1;
         }
-
         $pagination = new Pagination();
         $paginate = $pagination->run('posts', 4, $page);
         $countPages = $pagination->getCountPages();

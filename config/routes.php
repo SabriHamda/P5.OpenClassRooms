@@ -121,10 +121,19 @@ return [
         ],
     ],
 
-    'article_details' => [
-        'path' => '/dashboard/articles/view/{id}',
+    'article_edit' => [
+        'path' => '/dashboard/article/edit/{id}',
         'controller' => src\Controllers\Dashboard\ArticleController::class,
-        'action' => 'view',
+        'action' => 'editArticle',
+        'params' => [
+            'id' => '[0-9]+',
+        ],
+    ],
+    'article_update' => [
+        'path' => '/dashboard/article/edit/{id}',
+        'controller' => src\Controllers\Dashboard\ArticleController::class,
+        'action' => 'updateArticle',
+        'method' => 'POST',
         'params' => [
             'id' => '[0-9]+',
         ],
@@ -134,18 +143,5 @@ return [
         'controller' => src\Controllers\Dashboard\ArticleController::class,
         'action' => 'create',
     ],
-    'article_update' => [
-        'path' => '/dashboard/articles/update',
-        'controller' => src\Controllers\Dashboard\ArticleController::class,
-        'action' => 'update',
-    ],
-    'article_delete' => [
-        'path' => '/dashboard/articles/delete/{id}',
-        'method' => 'POST',
-        'controller' => src\Controllers\Dashboard\ArticleController::class,
-        'action' => 'delete',
-        'params' => [
-            'id' => '[0-9]+',
-        ],
-    ],
+
 ];

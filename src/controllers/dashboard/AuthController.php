@@ -28,7 +28,7 @@ class AuthController extends Controller
         $request = $this->getRequest();
         $user->setEmail($request->post('email'));
         $user->setPassword($request->post('password'));
-        if ($user->validate() && $user->login() && $use->role == 'admin') {
+        if ($user->validate() && $user->login()) {
             $request->redirect('/dashboard');
         }
         $errors = $user->getErrors();

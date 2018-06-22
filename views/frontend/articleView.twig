@@ -8,11 +8,10 @@
             <div class="fh5co-narrow-content">
 
                 {% if user.role == 'admin' %}
-                    <p><a href="index.php?action=edit-article&id={{ article.id }}" class="btn btn-primary">Modifier L'article</a></p>
+                    <p><a href="/dashboard/article/edit/{{ article.id }}" class="btn btn-primary">Modifier L'article</a></p>
                 {% else %}
 
                 {% endif %}
-                {% for article in data %}
 
                 <div class="row row-bottom-padded-md">
                     <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
@@ -24,14 +23,13 @@
                             <br>
                             <small>Crée le {{ article.created_at|date("d/m/Y", "Europe/Paris") }}</small></h2>
 
-                        <p id="mytextarea"> {{ contentRight|raw }} </p>
+                        <p id="mytextarea"> {{ article.contentRight|raw }} </p>
 
 
                     </div>
                 </div>
                 <p>{{ article.content|raw }}</p>
             </div>
-{% endfor %}
 
             <div class="fh5co-narrow-content">
                 <div class="row row-bottom-padded-md">

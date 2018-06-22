@@ -54,9 +54,9 @@
                             <span class="label label-primary color-blue"><a
                                         href="/article/{{ article.id }}">Voir</a></span>
                             <span class="label label-success color-pirple"><a
-                                        href="index.php?action=edit-article&id={{ article.id }}">Modifier</a></span>
+                                        href="/dashboard/article/edit/{{ article.id }}">Modifier</a></span>
                             <span class="label label-danger color-red"><a
-                                        href="index.php?action=del-article&id={{ article.id }}">Supprimer</a></span>
+                                        href="/article/{{ article.id }}">Supprimer</a></span>
                         </td>
                     </tr>
                 {% endfor %}
