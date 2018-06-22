@@ -45,9 +45,9 @@ class ArticleController extends ProtectedController
     }
 
 
-    public function editArticle($id)
+    public function editArticle($articleId)
     {
-        $this->article = $this->getArticle($id);
+        $this->article = $this->getArticle($articleId);
         echo $this->render('editArticleView.twig', [
             'article' => $this->article,
             'user' => $this->user,
@@ -57,10 +57,9 @@ class ArticleController extends ProtectedController
 
     }
 
-    public function updateArticle($id)
+    public function updateArticle($articleId)
     {
-        if (Validator::articleValidate($id)) {
-            $articleId = $id;
+        if (Validator::articleValidate($articleId)) {
             $articleTitle = $_POST['title-article-update'];
             $articleContent = $_POST['content-article-update'];
             $articleContentRight = $_POST['content-right-article-update'];
@@ -73,12 +72,14 @@ class ArticleController extends ProtectedController
                 $data->setContentRight($articleContentRight);
                 $updateArticle = new ArticleRepository();
                 $updateArticle->updateArticle($data);
-                $this->message = ['status'=>'alert-success','message'=>"<strong>Succès ! </strong> Article modifié avec succès"];
-                $this->editArticle($id);              } else {
+                $this->message = ['status' => 'alert-success', 'message' => "<strong>Succès ! </strong> Article modifié avec succès"];
+                $this->editArticle($articleId);
+            } else {
                 $uploadMyFile = UploadFile::uploadFile('img-article-update', 'assets/images/uploads/' . $articleImage["name"] . '', FALSE, array('png', 'gif', 'jpg', 'jpeg'));
                 if ($uploadMyFile) {
-                    $this->message = ['status'=>'alert-success','message'=>"<strong>Succès ! </strong> Article modifié avec succès"];
-                    $this->editArticle($id);                      $data = new Article();
+                    $this->message = ['status' => 'alert-success', 'message' => "<strong>Succès ! </strong> Article modifié avec succès"];
+                    $this->editArticle($articleId);
+                    $data = new Article();
                     $data->setId($articleId);
                     $data->setTitle($articleTitle);
                     $data->setImage('/assets/images/uploads/' . $articleImage["name"] . '');
@@ -88,22 +89,22 @@ class ArticleController extends ProtectedController
                     $updateArticle->updateArticle($data);
                 } else {
                     $this->message = ['status' => 'alert-danger', 'message' => "<strong>Erreur ! </strong> Le format de votre image est incorrect"];
-                    $this->editArticle($id);
+                    $this->editArticle($articleId);
                 }
             }
 
         } else {
             $this->message = ['status' => 'alert-danger', 'message' => "<strong>Erreur!</strong> un ou plusieurs champs sont vide."];
-            $this->editArticle($id);
+            $this->editArticle($articleId);
 
         }
     }
 
 
-    private function getArticle($id)
+    private function getArticle($articleId)
     {
         $articleRepository = new ArticleRepository();
-        $this->article = $articleRepository->getArticle($id);
+        $this->article = $articleRepository->getArticle($articleId);
         return $this->article;
     }
 

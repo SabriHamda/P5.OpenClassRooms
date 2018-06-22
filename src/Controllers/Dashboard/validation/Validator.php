@@ -10,9 +10,9 @@ namespace src\Controllers\Dashboard\Validation;
 
 class Validator
 {
-    public static function articleValidate($id)
+    public static function articleValidate($articleId)
     {
-        if (!empty($id) && !empty($_POST['title-article-update']) && !empty($_POST['content-article-update']) && !empty($_POST['content-right-article-update'])) {
+        if (!empty($articleId) && !empty($_POST['title-article-update']) && !empty($_POST['content-article-update']) && !empty($_POST['content-right-article-update'])) {
 
             return true;
         }
