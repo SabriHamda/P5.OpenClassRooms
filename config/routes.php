@@ -135,7 +135,7 @@ return [
         'action' => 'updateArticle',
         'method' => 'POST',
         'params' => [
-            'id' => '[0-9]+',
+            'id' => ('[0-9]+'),
         ],
     ],
     'article_add' => [

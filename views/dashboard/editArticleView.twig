@@ -20,9 +20,11 @@
                     <div class="widget widget-right">
                         <div class="container-fluid table-responsive">
                             {% if message %}
-                            <div class="alert {{ message.status|raw }}">
-                                {{ message.message|raw }}
+                                {% for messages in message %}
+                            <div class="alert {{ messages.status|raw }}">
+                                {{ messages.message|raw }}
                             </div>
+                                {% endfor %}
                             {% endif %}
                             <form class="navbar-form navbar-left" role="search">
                                 <div class="form-group">
@@ -69,7 +71,7 @@
 
                             <div class="input-groupe">
                                 <label><h4><i class="fab fa-pied-piper"></i>&nbsp; Chapô</h4></label>
-                                <textarea name="content-right-article-update" class="editable-content form-control"
+                                <textarea name="contentRight-article-update" class="editable-content form-control"
                                           rows="20">
           {{ article.contentRight|raw }}</textarea>
                             </div>
