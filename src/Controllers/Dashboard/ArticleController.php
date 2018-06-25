@@ -26,6 +26,7 @@ class ArticleController extends ProtectedController
     private $articlePage;
     public $article;
     public $message = array();
+    private $articleId;
 
     public function __construct($request)
     {
@@ -50,7 +51,8 @@ class ArticleController extends ProtectedController
 
     public function editArticle($articleId)
     {
-        $this->article = $this->getArticle($articleId);
+        $this->articleId = $articleId;
+        $this->article = $this->getArticle($this->getArticleId());
         echo $this->render('editArticleView.twig', [
             'article' => $this->article,
             'user' => $this->user,
@@ -61,9 +63,10 @@ class ArticleController extends ProtectedController
 
     public function updateArticle(int $articleId)
     {
+        $this->articleId = $articleId;
         $validator = new Validator();
         $updateViolations = $validator->validate($_POST, [new IsNotEmpty()]);
-        $idViolations = $validator->validate($articleId, [new IsNotEmpty(), new IsInteger()]);
+        $idViolations = $validator->validate($this->getArticleId(), [new IsNotEmpty(), new IsInteger()]);
         if ($updateViolations && $idViolations) {
             $articleTitle = $_POST['title-article-update'];
             $articleContent = $_POST['content-article-update'];
@@ -71,14 +74,14 @@ class ArticleController extends ProtectedController
             $articleImage = $_FILES['img-article-update'];
             if (empty($articleImage['name'])) {
                 $data = new Article();
-                $data->setId($articleId);
+                $data->setId($this->getArticleId());
                 $data->setTitle($articleTitle);
                 $data->setContent($articleContent);
                 $data->setContentRight($articleContentRight);
                 $updateArticle = new ArticleRepository();
                 $updateArticle->updateArticle($data);
                 $this->message = $validator->getAlertMessages();
-                $this->editArticle($articleId);
+                $this->editArticle($this->getArticleId());
             } else {
                 $uploadMyFile = UploadFile::uploadFile('img-article-update', 'assets/images/uploads/' . $articleImage["name"] . '', FALSE, array('png', 'gif', 'jpg', 'jpeg'));
                 if ($uploadMyFile) {
@@ -130,5 +133,13 @@ class ArticleController extends ProtectedController
         $this->articlePaginate = $paginate;
         $this->articleCountPages = $countPages;
         $this->articlePage = $page;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticleId()
+    {
+        return $this->articleId;
     }
 }
