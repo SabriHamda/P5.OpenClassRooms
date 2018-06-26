@@ -1,5 +1,5 @@
 <?php
-namespace src\Controllers\Dashboard;
+namespace src\Controllers\Dashboard\Articles;
 
 use src\Controllers\Dashboard\Controller;
 use src\Repository\AdminUser;

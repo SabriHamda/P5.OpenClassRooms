@@ -5,11 +5,11 @@
  * Time: 21:04
  */
 
-namespace src\Controllers\Dashboard\Validator\Constraints;
+namespace src\Validator\Constraints;
 
 /**
  * Class IsEmail
- * @package src\Controllers\Dashboard\Validator\Constraints
+ * @package src\Controllers\Dashboard\Articles\Validator\Constraints
  */
 class IsEmail
 {

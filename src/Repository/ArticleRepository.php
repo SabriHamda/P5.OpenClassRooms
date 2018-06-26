@@ -27,7 +27,7 @@ class ArticleRepository extends DBConnexion
     /**
      * @var
      */
-    private $content_right;
+    private $chapo;
     /**
      * @var string
      */
@@ -80,9 +80,9 @@ class ArticleRepository extends DBConnexion
     /**
      * @return mixed
      */
-    public function getContentRight()
+    public function getChapo()
     {
-        return $this->content_right;
+        return $this->chapo;
     }
 
     /**
@@ -131,7 +131,7 @@ class ArticleRepository extends DBConnexion
     public function getArticle($articleId)
     {
         $connection = $this->getDb()->getConnection();
-        $stmt = $connection->prepare('SELECT id, title, content,content_right,image, created_at FROM posts WHERE id = :id');
+        $stmt = $connection->prepare('SELECT id, title, content,chapo,image, created_at FROM posts WHERE id = :id');
         $stmt->bindValue(':id', $articleId, \PDO::PARAM_INT);
         $stmt->execute();
         $stmt->setFetchMode(\PDO::FETCH_CLASS, self::class);
@@ -144,15 +144,15 @@ class ArticleRepository extends DBConnexion
     {
         $connection = $this->getDb()->getConnection();
         if (empty($article->getImage())) {
-            $stmt = $connection->prepare('UPDATE posts SET title = :articleTitle, content = :articleContent, content_right = :articleContentRight WHERE id = :articleId');
+            $stmt = $connection->prepare('UPDATE posts SET title = :articleTitle, content = :articleContent, chapo = :articleChapo WHERE id = :articleId');
         }else{
-            $stmt = $connection->prepare('UPDATE posts SET title = :articleTitle, image = :articleImageUrl, content = :articleContent, content_right = :articleContentRight WHERE id = :articleId');
+            $stmt = $connection->prepare('UPDATE posts SET title = :articleTitle, image = :articleImageUrl, content = :articleContent, chapo = :articleChapo WHERE id = :articleId');
             $stmt->bindValue(':articleImageUrl',urlencode($article->getImage()),\PDO::PARAM_STR);
         }
         $stmt->bindValue(':articleId',$article->getId(),\PDO::PARAM_INT);
         $stmt->bindValue(':articleTitle',$article->getTitle(),\PDO::PARAM_STR);
         $stmt->bindValue(':articleContent',$article->getContent(),\PDO::PARAM_STR);
-        $stmt->bindValue(':articleContentRight',$article->getContentRight(),\PDO::PARAM_STR);
+        $stmt->bindValue(':articleChapo',$article->getChapo(),\PDO::PARAM_STR);
         $stmt->execute();
 
     }

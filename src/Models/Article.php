@@ -8,7 +8,7 @@ class Article
     protected $id;
     protected $title;
     protected $content;
-    protected $content_right;
+    protected $chapo;
     protected $image;
     protected $created_at;
     protected $updated_at;
@@ -67,13 +67,13 @@ class Article
         $this->content = $content;
     }
 
-    public function getContentRight()
+    public function getChapo()
     {
-        return $this->content_right;
+        return $this->chapo;
     }
-    public function setContentRight(string $content_right)
+    public function setChapo(string $chapo)
     {
-        $this->content_right = $content_right;
+        $this->chapo = $chapo;
     }
 
     public function getImage()

@@ -5,11 +5,11 @@
  * Time: 21:04
  */
 
-namespace src\Controllers\Dashboard\Validator\Constraints;
+namespace src\Validator\Constraints;
 
 /**
  * Class IsNotEmpty
- * @package src\Controllers\Dashboard\Validator\Constraints
+ * @package src\Controllers\Dashboard\Articles\Validator\Constraints
  */
 class IsNotEmpty
 {
@@ -27,9 +27,9 @@ class IsNotEmpty
     {
         if (!empty($item)) {
             return;//$this->message[] = $key . ' is not empty';
-        } else {
-            return $this->message[] = $key . ' warning is empty';
         }
+        $this->message[] = $key . ' warning is empty';
+
     }
 
     /**
@@ -40,9 +40,8 @@ class IsNotEmpty
     {
         if (!empty($entry)) {
             return;//$this->message = ' is not empty';
-        } else {
-            return $this->message = ' warning is empty';
         }
+        $this->message = ' warning is empty';
     }
 
     /**
@@ -51,18 +50,9 @@ class IsNotEmpty
     public function check($entry)
     {
         if (is_array($entry)) {
-            foreach ($entry as $element => $key) {
-                $containSubmit = stristr($element, 'submit');
-
-            }
-            unset($entry[$containSubmit]);
             array_walk_recursive($entry, array($this, 'arrayIsNotEmpty'));
-        } else {
-
-            $this->varIsNotEmpty($entry);
         }
-
-
+        $this->varIsNotEmpty($entry);
     }
 
     /**

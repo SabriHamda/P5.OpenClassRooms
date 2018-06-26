@@ -5,11 +5,11 @@
  * Time: 21:04
  */
 
-namespace src\Controllers\Dashboard\Validator\Constraints;
+namespace src\Validator\Constraints;
 
 /**
  * Class IsInteger
- * @package src\Controllers\Dashboard\Validator\Constraints
+ * @package src\Controllers\Dashboard\Articles\Validator\Constraints
  */
 class IsInteger
 {
@@ -27,9 +27,8 @@ class IsInteger
     {
         if (filter_var($item, FILTER_VALIDATE_INT)) {
             return;//$this->message[] =  $key . ' is integer';
-        } else {
-            return $this->message[] = $key . ' warning is not integer';
         }
+        $this->message[] = $key . ' warning is not integer';
     }
 
     /**
@@ -40,9 +39,8 @@ class IsInteger
     {
         if (filter_var($entry, FILTER_VALIDATE_INT)) {
             return;//$this->message = ' is integer';
-        } else {
-            return $this->message = " warning is not integer";
         }
+        $this->message = " warning is not integer";
     }
 
     /**
@@ -53,16 +51,11 @@ class IsInteger
         if (is_array($entry)) {
             foreach ($entry as $element => $key) {
                 $containSubmit = stristr($element, 'submit');
-
             }
             unset($entry[$containSubmit]);
             array_walk_recursive($entry, array($this, 'arrayIsInteger'));
-        } else {
-
-            $this->varIsInteger($entry);
         }
-
-
+        $this->varIsInteger($entry);
     }
 
     /**

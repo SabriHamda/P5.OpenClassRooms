@@ -5,10 +5,10 @@
  * Time: 14:47
  */
 
-namespace src\Controllers\Dashboard\Validator;
+namespace src\Validator;
 /**
  * Class Validator
- * @package src\Controllers\Dashboard\Validator
+ * @package src\Controllers\Dashboard\Articles\Validator
  */
 class Validator
 {
@@ -31,14 +31,13 @@ class Validator
         if (empty($constraints)) {
             return;
         }
-
         foreach ($constraints as $constraint) {
             $constraint->check($entry);
             $this->violations[] = $constraint->getMessage();
         }
-
         //extract message from array
         $allViolations = array_filter($this->getViolations());
+
         if (!empty($allViolations)) {
             for ($i = 0; $i <= count($allViolations); $i++) {
                 if (stristr($allViolations[$i][$i], 'is empty')) {
