@@ -49,10 +49,10 @@ class Validator
                 }
 
             }
-        } else {
-            array_push($this->alertMessages, ['status' => 'alert-success', 'message' => '<strong>Succès ! </strong> informations validées avec succès.']);
-
         }
+        array_push($this->alertMessages, ['status' => 'alert-success', 'message' => '<strong>Succès ! </strong> informations validées avec succès.']);
+
+
         $this->alertMessages = array_unique($this->alertMessages);
 
         if (empty(array_filter($this->violations))) {
