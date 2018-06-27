@@ -14,11 +14,9 @@ class Request
         if (null !== $param) {
             if (isset($_GET[$param])) {
                 return $_GET[$param];
-            } else {
-                return $default;
             }
+            return $default;
         }
-
         return $_GET;
     }
 
