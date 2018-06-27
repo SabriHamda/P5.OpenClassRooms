@@ -50,6 +50,6 @@ abstract class Controller
      */
     public function setMessage($message)
     {
-        $this->message []= $message;
+        $this->message= $message;
     }
 }

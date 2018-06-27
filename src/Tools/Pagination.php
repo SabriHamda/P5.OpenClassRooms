@@ -75,8 +75,7 @@ class Pagination extends DBConnexion
         $countRows->setFetchMode(\PDO::FETCH_CLASS, self::class);
         $totalData = $countRows->fetch();
         $totalRows = $totalData->total;
-        $countPages = ceil($totalRows / $resultsInPage);
-        /** Count how many pages */
+        $countPages = ceil($totalRows / $resultsInPage); /** Count how many pages */
         return $countPages;
     }
 
@@ -87,15 +86,19 @@ class Pagination extends DBConnexion
     private function getPage(int $curentPage)
     {
 
-        if (isset($curentPage) && !empty($curentPage)) {
+        if (isset($curentPage) && !empty($curentPage))
+        {
             $this->page = intval($curentPage);
 
-            if ($this->page > $this->countPages) {
+            if ($this->page > $this->countPages)
+            {
                 $this->page = $this->countPages;
             }
+        } else // Sinon
+        {
+
+            $this->page = 1; /** The actual page is the n°1 */
         }
-        $this->page = 1;
-        /** The actual page is the n°1 */
         return $this->page;
     }
 
@@ -107,8 +110,7 @@ class Pagination extends DBConnexion
     private function getTable(string $table, int $resultsInPage)
     {
 
-        $firstEntry = ($this->page - 1) * $resultsInPage;
-        /** Calculate the first entry to read */
+        $firstEntry = ($this->page - 1) * $resultsInPage; /** Calculate the first entry to read */
 
         $connection = $this->getDb()->getConnection();
         $queryString = "SELECT * FROM `$table` ORDER BY id DESC LIMIT :firstEntry, :resultsInPage";
@@ -118,6 +120,7 @@ class Pagination extends DBConnexion
         $retour_messages->execute();
         $retour_messages->setFetchMode(\PDO::FETCH_CLASS, self::class);
         return $retour_messages->fetchAll();
+
 
 
     }
