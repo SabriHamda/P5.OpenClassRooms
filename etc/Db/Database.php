@@ -21,7 +21,7 @@ class Database
         try {
             $this->pdo = new PDO($config['dsn'], $config['username'], $config['password']);
         } catch (PDOException $e) {
-            die('Database connection cannot be established');
+            exit('Database connection cannot be established');
         }
     }
 
