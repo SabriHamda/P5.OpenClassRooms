@@ -1,7 +1,6 @@
 <?php
 
 namespace etc\Http;
-use src\Validator\Validator;
 
 /**
  * Description of Request.
@@ -28,7 +27,8 @@ class Request
         if (null !== $param) {
             if (// WPCS: XSS OK
                 isset(// WPCS: XSS OK
-                    $_POST[$param]) && !empty($_POST[$param])) {
+                    $_POST[$param]) && !empty(// WPCS: XSS OK
+                $_POST[$param])) {
                 return $_POST[$param];
             } else {
                 return $default;
@@ -46,8 +46,9 @@ class Request
     {
         return $_SERVER['REQUEST_METHOD'];
     }
-    
-    public function redirect($url, $permanent = false){
+
+    public function redirect($url, $permanent = false)
+    {
         header('Location: ' . $url, true, $permanent ? 301 : 302);
         exit();
     }
