@@ -25,7 +25,7 @@ trait CreateArticleController
 
     public function createArticleIndex()
     {
-        echo $this->render('createArticleView.twig',[
+        echo $this->render('createArticleView.twig', [
             'article' => $this->article,
             'user' => $this->user,
             'uri' => $this->uri,
@@ -46,19 +46,19 @@ trait CreateArticleController
             $this->articleImage = $_FILES['article-image'];
             if (empty($this->articleImage['name'])) {
                 $this->hydrateCreateArticle($this->articleImage['name']);
-            } else {
-                $uploadMyFile = UploadFile::uploadFile('article-image', 'assets/images/uploads/' . $this->articleImage["name"] . '', FALSE, array('png', 'gif', 'jpg', 'jpeg'));
-                if ($uploadMyFile) {
-                    $this->hydrateCreateArticle($this->articleImage['name']);
-                    $updateArticle = new ArticleRepository();
-                    $updateArticle->addArticle($this->data);
-                    $this->setMessage($validator->getAlertMessages());
-                    $this->getRequest()->redirect('/dashboard');
-                } else {
-                    $this->message = ['status' => 'alert-danger', 'message' => '<strong>Erreur ! </strong> Le format de votre image est incorrect'];
-                    $this->editArticle($this->articleId);
-                }
             }
+            $uploadMyFile = UploadFile::uploadFile('article-image', 'assets/images/uploads/' . $this->articleImage["name"] . '', FALSE, array('png', 'gif', 'jpg', 'jpeg'));
+            if ($uploadMyFile) {
+                $this->hydrateCreateArticle($this->articleImage['name']);
+                $updateArticle = new ArticleRepository();
+                $updateArticle->addArticle($this->data);
+                $this->setMessage($validator->getAlertMessages());
+                $this->getRequest()->redirect('/dashboard');
+            } else {
+                $this->message = ['status' => 'alert-danger', 'message' => '<strong>Erreur ! </strong> Le format de votre image est incorrect'];
+                $this->editArticle($this->articleId);
+            }
+
 
         } else {
             $this->setMessage($validator->getAlertMessages());

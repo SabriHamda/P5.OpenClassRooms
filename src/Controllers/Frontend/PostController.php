@@ -20,7 +20,7 @@ class PostController extends Controller
         $articleRepository = new ArticleRepository();
         $article = $articleRepository->getArticle($articleId);
 
-        echo $this->render('articleView.twig', ['article' => $article, 'contentRight' => $contentRight, 'user' => $this->user]);
+        echo $this->render('articleView.twig', ['article' => $article, 'user' => $this->user]);
 
     }
 

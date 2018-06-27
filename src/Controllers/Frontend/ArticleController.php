@@ -21,17 +21,6 @@ class ArticleController
         echo $this->render('articles/index.twig');
     }
 
-    // view article by id
-
-    /**
-     * @param $id
-     */
-    public function view($id)
-    {
-        $article = $this->getArticle($id);
-        echo $this->render('articles/view.twig');
-    }
-
     //create a new article
 
     /**
@@ -50,17 +39,6 @@ class ArticleController
     public function update($id)
     {
         echo $this->render('articles/update.twig');
-    }
-
-    //delete existing article
-
-    /**
-     * @param $id
-     */
-    public function delete($id)
-    {
-        $article = $this->getArticle($id);
-        echo 'article delete';
     }
 
 
