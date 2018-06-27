@@ -8,7 +8,7 @@
                 <form class="navbar-form navbar-left" role="search">
 
                     <div class="form-group">
-                        <p class="btn btn-primary color-blue"><a href="index.php?action=add-article" style="color:#fff">Ajouter
+                        <p class="btn btn-primary color-blue"><a href="/dashboard/article/add" style="color:#fff">Ajouter
                                 un Article</a></p>
                     </div>
                     <div class="form-group">
@@ -44,7 +44,7 @@
                 {% for article in articles %}
 
                     <tr>
-                        <td class="text-center">{{ article.id }}</td>
+                        <td class="text-center" id="aId">{{ article.id }}</td>
                         <td><strong>{{ article.title }}</strong></td>
                         <td>{% set array = article.content|split(' ', 6) %} {{ attribute(array, 0)|raw }} {{ attribute(array, 1)|raw }} {{ attribute(array, 2)|raw }} {{ attribute(array, 3)|raw }} {{ attribute(array, 4)|raw }}
                             ...
@@ -55,8 +55,8 @@
                                         href="/article/{{ article.id }}">Voir</a></span>
                             <span class="label label-success color-pirple"><a
                                         href="/dashboard/article/edit/{{ article.id }}">Modifier</a></span>
-                            <span class="label label-danger color-red"><a
-                                        href="/article/{{ article.id }}">Supprimer</a></span>
+                            <span class="label label-danger color-red"><a href="javascript:void(0)"
+                                        data-toggle="modal" data-target="#myModal">Supprimer</a></span>
                         </td>
                     </tr>
                 {% endfor %}

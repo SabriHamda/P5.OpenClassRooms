@@ -15,7 +15,7 @@ use src\Tools\UploadFile;
 use src\Models\Article;
 
 
-trait ArticleUpdateController
+trait UpdateArticleController
 {
     private $articleId;
     private $articleImage;
@@ -36,30 +36,30 @@ trait ArticleUpdateController
             $this->articleTitle = $entry->post('article-title');
             $this->articleContent = $entry->post('article-content');
             $this->articleChapo = $entry->post('article-chapo');
-            $this->articleImage = $entry->post('article-image');
-            if (empty($articleImage['name'])) {
-                $this->hydrateArticle($articleImage['name']);
+            $this->articleImage = $_FILES['article-image'];
+            if (empty($this->articleImage['name'])) {
+                $this->hydrateArticle($this->articleImage['name']);
                 $updateArticle = new ArticleRepository();
                 $updateArticle->updateArticle($this->data);
-                $this->message = $validator->getAlertMessages();
+                $this->setMessage($validator->getAlertMessages());
                 $this->editArticle($this->getArticleId());
             } else {
-                $uploadMyFile = UploadFile::uploadFile('article-image', 'assets/images/uploads/' . $articleImage["name"] . '', FALSE, array('png', 'gif', 'jpg', 'jpeg'));
+                $uploadMyFile = UploadFile::uploadFile('article-image', 'assets/images/uploads/' . $this->articleImage["name"] . '', FALSE, array('png', 'gif', 'jpg', 'jpeg'));
                 if ($uploadMyFile) {
-                    $this->editArticle($articleId);
+                    $this->hydrateArticle($this->articleImage['name']);
                     $updateArticle = new Articlerepository();
                     $updateArticle->updateArticle($this->data);
-                    $this->message = $validator->getAlertMessages();
+                    $this->setMessage($validator->getAlertMessages());
                     $this->editArticle($this->getArticleId());
                 } else {
-                    $this->message = ['status' => 'alert-danger', 'message' => "<strong>Erreur ! </strong> Le format de votre image est incorrect"];
-                    $this->editArticle($articleId);
+                    $this->setMessage(['status' => 'alert-danger', 'message' => "<strong>Erreur ! </strong> Le format de votre image est incorrect"]);
+                    $this->editArticle($this->articleId);
                 }
             }
 
         } else {
-            $this->message = $validator->getAlertMessages();
-            $this->editArticle($articleId);
+            $this->setMessage($validator->getAlertMessages());
+            $this->editArticle($this->articleId);
 
         }
     }

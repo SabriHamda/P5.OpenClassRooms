@@ -14,25 +14,24 @@ class DashboardController extends ProtectedController
     private $articlePaginate;
     private $articleCountPages;
     private $articlePage;
+    public $message = [];
 
     /**
      *
      */
     public function index()
     {
-
-
         $uri = blog()->getRequest()->getUri();
         $user = blog()->getIdentity()->getUser();
         $this->paginateArticles(1);
-
 
         echo $this->render('dashboard.twig', [
             'user' => $user,
             'uri' => $uri,
             'articles' => $this->articlePaginate,
             'page' => $this->articlePage,
-            'countPages' => $this->articleCountPages
+            'countPages' => $this->articleCountPages,
+            'message' => $this->getMessage()
         ]);
     }
 

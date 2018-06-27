@@ -66,45 +66,45 @@ return [
     /* Backend */
     'adminLogin' => [
         'path' => '/dashboard/login',
-        'controller' => src\Controllers\Dashboard\Articles\AuthController::class,
+        'controller' => src\Controllers\Dashboard\AuthController::class,
         'action' => 'index',
     ],
     'adminLoginDo' => [
         'path' => '/dashboard/login',
-        'controller' => src\Controllers\Dashboard\Articles\AuthController::class,
+        'controller' => src\Controllers\Dashboard\AuthController::class,
         'action' => 'login',
         'method' => 'POST'
     ],
     'adminLogout' => [
         'path' => '/logout',
-        'controller' => src\Controllers\Dashboard\Articles\AuthController::class,
+        'controller' => src\Controllers\Dashboard\AuthController::class,
         'action' => 'logout',
     ],
     'adminRequestResetPassword' => [
         'path' => '/dashboard/auth/password-reset',
-        'controller' => src\Controllers\Dashboard\Articles\AuthController::class,
+        'controller' => src\Controllers\Dashboard\AuthController::class,
         'action' => 'requestReset',
     ],
     'adminSentRecoveryToken' => [
         'path' => '/dashboard/auth/password-reset',
-        'controller' => src\Controllers\Dashboard\Articles\AuthController::class,
+        'controller' => src\Controllers\Dashboard\AuthController::class,
         'action' => 'sendRecoveryToken',
         'method' => 'POST'
     ],
     'adminValidateResetToken' => [
         'path' => '/dashboard/auth/password-reset',
-        'controller' => src\Controllers\Dashboard\Articles\AuthController::class,
+        'controller' => src\Controllers\Dashboard\AuthController::class,
         'action' => 'validateResetToken',
     ],
     'adminValidateResetToken' => [
         'path' => '/dashboard/auth/password-reset',
-        'controller' => src\Controllers\Dashboard\Articles\AuthController::class,
+        'controller' => src\Controllers\Dashboard\AuthController::class,
         'action' => 'resetPassword',
     ],
 
     'homepage' => [
         'path' => '/dashboard',
-        'controller' => src\Controllers\Dashboard\Articles\DashboardController::class,
+        'controller' => src\Controllers\Dashboard\DashboardController::class,
         'action' => 'index',
     ],
     'articles' => [
@@ -139,9 +139,22 @@ return [
         ],
     ],
     'article_add' => [
-        'path' => '/dashboard/articles/create',
+        'path' => '/dashboard/article/add',
         'controller' => src\Controllers\Dashboard\Articles\ArticleController::class,
-        'action' => 'create',
+        'action' => 'createArticleIndex'
     ],
-
+    'article_add_do' => [
+        'path' => '/dashboard/article/add',
+        'controller' => src\Controllers\Dashboard\Articles\ArticleController::class,
+        'action' => 'addArticle',
+        'method' => 'POST'
+    ],
+    'delete_article' => [
+        'path' => '/dashboard/article/del/{id}',
+        'controller' => src\Controllers\Dashboard\Articles\ArticleController::class,
+        'action' => 'delArticle',
+        'params' =>[
+            'id' => ('[0-9]+')
+        ]
+    ]
 ];

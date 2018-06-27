@@ -156,4 +156,23 @@ class ArticleRepository extends DBConnexion
         $stmt->execute();
 
     }
+
+    public function addArticle(Article $article)
+    {
+        $connection = $this->getDb()->getConnection();
+        $stmt = $connection->prepare('INSERT INTO posts (title, image, content, chapo) VALUES (:articleTitle, :articleImageUrl, :articleContent, :articleChapo)');
+        $stmt->bindValue(':articleTitle',$article->getTitle(),\PDO::PARAM_STR);
+        $stmt->bindValue(':articleImageUrl',urlencode($article->getImage()),\PDO::PARAM_STR);
+        $stmt->bindValue(':articleContent',$article->getContent(),\PDO::PARAM_STR);
+        $stmt->bindValue(':articleChapo',$article->getChapo(),\PDO::PARAM_STR);
+        $stmt->execute();
+
+    }
+    public function deleteArticle(Article $article)
+    {
+        $connection = $this->getDb()->getConnection();
+        $stmt = $connection->prepare('DELETE FROM posts WHERE id = :articleId');
+        $stmt->bindValue(':articleId', $article->getId(), \PDO::PARAM_INT);
+        $stmt->execute();
+    }
 }

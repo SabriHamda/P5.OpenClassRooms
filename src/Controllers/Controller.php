@@ -12,6 +12,7 @@ abstract class Controller
     private $request;
     private $loader;
     public $user;
+    public $message = [];
 
     public function __construct($request)
     {
@@ -34,5 +35,21 @@ abstract class Controller
     public function render($view, $params = [])
     {
         return $this->twig->render($view, $params);
+    }
+
+    /**
+     * @return array
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * @param array $message
+     */
+    public function setMessage($message)
+    {
+        $this->message []= $message;
     }
 }

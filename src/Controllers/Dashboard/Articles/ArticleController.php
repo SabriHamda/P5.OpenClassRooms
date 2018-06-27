@@ -5,6 +5,7 @@ namespace src\Controllers\Dashboard\Articles;
 use src\Controllers\Dashboard\ProtectedController;
 use src\Repository\ArticleRepository;
 use src\Tools\Pagination;
+use src\models\Article;
 
 
 
@@ -15,7 +16,8 @@ use src\Tools\Pagination;
  */
 class ArticleController extends ProtectedController
 {
-    use ArticleUpdateController;
+    use UpdateArticleController;
+    use CreateArticleController;
 
 
     private $uri;
@@ -24,7 +26,7 @@ class ArticleController extends ProtectedController
     private $articleCountPages;
     private $articlePage;
     public $article;
-    public $message = array();
+    //public $message = [];
 
 
     public function __construct($request)
@@ -56,7 +58,7 @@ class ArticleController extends ProtectedController
             'article' => $this->article,
             'user' => $this->user,
             'uri' => $this->uri,
-            'message' => $this->message
+            'message' => $this->getMessage()
         ]);
     }
 
@@ -81,6 +83,19 @@ class ArticleController extends ProtectedController
         $this->articleCountPages = $countPages;
         $this->articlePage = $page;
     }
+
+    public function delArticle($articleId)
+    {
+        $data = new Article();
+        $data->setId($articleId);
+        $delArticle = new ArticleRepository();
+        $delArticle->deleteArticle($data);
+        $this->setMessage(['status' => 'success', 'message' => '<strong>Succès ! </strong> Article suprimé avec succès']);
+        $this->getRequest()->redirect('/dashboard');
+
+
+    }
+
 
     /**
      * @return mixed

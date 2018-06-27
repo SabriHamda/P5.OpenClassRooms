@@ -15,30 +15,23 @@
                 </div>
                 <div class="col-md-10 animate-box fadeInLeft animated" style="float:right">
                     <div class="widget widget-right">
+                        {% if message %}
                         <div class="container-fluid table-responsive">
-                            {% if message %}
+
                                 {% for messages in message %}
                                     <div class="alert {{ messages.status|raw }}">
                                         {{ messages.message|raw }}
                                     </div>
-                                {% endfor %}
-                            {% endif %}
-                            <form class="navbar-form navbar-left" role="search">
-                                <div class="form-group">
-                                    <p class="btn btn-primary color-blue"><a href="/article/{{ article.id }}" style="color:#fff">Voir L'article</a>
-                                    </p>
-                                </div>
-                                <div class="form-group">
-                                    <p class="btn btn-primary color-red"><a href="/dashboard/article/id/{{ article.id }}" style="color:#fff">Supprimer L'article</a>
-                                    </p>
-                                </div>
-                            </form>
                         </div>
+                                {% endfor %}
+
+                        {% endif %}
+
                         <br>
                         <form id="form-article-update" method="post" action="" class="add-content-form" enctype="multipart/form-data">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fas fa-hand-point-right"></i>&nbsp;Titre</span>
-                                <input type="text" class="form-control" name="article-title" value="{{ article.title }}" placeholder="Titre" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" name="article-title"  placeholder="Titre" aria-describedby="basic-addon1">
                             </div>
                             <br>
                             <div class="input-groupe col-md-6 text-center"
@@ -47,7 +40,7 @@
                                 <input type="file" class="filestyle" name="article-image" onchange="readURL(this);" style="margin-left:auto;margin-right:auto;">
                             </div>
                             <div class="input-groupe col-md-6 text-center" style="padding:10px;background-color:#fff;border:1px solid #ccc;height:400px;line-height:400px;">
-                                <img style="text-align:center;width:350px;" id="preview" src="{{ article.image }}"
+                                <img style="text-align:center;width:350px;" id="preview" src="/assets/images/uploads/sample.jpg"
                                      alt="image">
                                 <label id="dimensions"></label>
                             </div>
@@ -55,13 +48,13 @@
                                 <label>
                                     <h4><i class="fab fa-pied-piper"></i>&nbsp; Chapô</h4>
                                 </label>
-                                <textarea name="article-chapo" class="editable-content form-control" rows="20">{{ article.chapo|raw }}</textarea>
+                                <textarea name="article-chapo" class="editable-content form-control" rows="20"></textarea>
                             </div>
                             <div class="input-groupe">
                                 <label>
                                     <h4><i class="fab fa-pied-piper"></i>&nbsp; Contenu</h4>
                                 </label>
-                                <textarea name="article-content" class="editable-content form-control" rows="20">{{ article.content|raw }}</textarea>
+                                <textarea name="article-content" class="editable-content form-control" rows="20"></textarea>
                             </div>
                             <br>
                             <div class="input-groupe">
