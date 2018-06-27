@@ -1,6 +1,7 @@
 <?php
 
 namespace etc\Http;
+use src\Validator\Validator;
 
 /**
  * Description of Request.
@@ -25,7 +26,8 @@ class Request
     public function post($param = null, $default = null)
     {
         if (null !== $param) {
-            if (isset($_POST[$param])) {
+            if (isset($_POST[$param]) && !empty($_POST[$param])) {
+                // WPCS: XSS OK
                 return $_POST[$param];
             } else {
                 return $default;

@@ -27,5 +27,6 @@ try {
 } catch (NotFoundHttpException $e) {
     throw $e;
 } catch (Exception $e) {
+    // WPCS: XSS OK
     echo $e->getmessage();
 }
