@@ -27,7 +27,8 @@ class Request
     {
         if (null !== $param) {
             if (// WPCS: XSS OK
-                isset($_POST[$param]) && !empty($_POST[$param])) {
+                isset(// WPCS: XSS OK
+                    $_POST[$param]) && !empty($_POST[$param])) {
                 return $_POST[$param];
             } else {
                 return $default;
