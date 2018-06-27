@@ -94,12 +94,9 @@ class Pagination extends DBConnexion
             {
                 $this->page = $this->countPages;
             }
-        } else // Sinon
-        {
-
-            $this->page = 1; /** The actual page is the n°1 */
+            return $this->page;
         }
-        return $this->page;
+            return $this->page = 1; /** The actual page is the n°1 */
     }
 
     /**
