@@ -43,7 +43,7 @@ trait UpdateArticleController
                 $updateArticle->updateArticle($this->data);
                 $this->setMessage($validator->getAlertMessages());
                 $this->editArticle($this->getArticleId());
-            } else {
+            }
                 $uploadMyFile = UploadFile::uploadFile('article-image', 'assets/images/uploads/' . $this->articleImage["name"] . '', FALSE, array('png', 'gif', 'jpg', 'jpeg'));
                 if ($uploadMyFile) {
                     $this->hydrateArticle($this->articleImage['name']);
@@ -55,7 +55,7 @@ trait UpdateArticleController
                     $this->setMessage(['status' => 'alert-danger', 'message' => "<strong>Erreur ! </strong> Le format de votre image est incorrect"]);
                     $this->editArticle($this->articleId);
                 }
-            }
+
 
         } else {
             $this->setMessage($validator->getAlertMessages());
