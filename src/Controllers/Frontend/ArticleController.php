@@ -21,27 +21,6 @@ class ArticleController
         echo $this->render('articles/index.twig');
     }
 
-    //create a new article
-
-    /**
-     *
-     */
-    public function create()
-    {
-        echo $this->render('articles/create.twig');
-    }
-
-    //update article
-
-    /**
-     * @param $id
-     */
-    public function update($id)
-    {
-        echo $this->render('articles/update.twig');
-    }
-
-
     /**
      * @return array
      */
