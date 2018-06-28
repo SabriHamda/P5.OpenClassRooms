@@ -14,7 +14,7 @@ class AuthController extends Controller
 
     public function index()
     {
-        if ($this->user)
+        if ($this->user->role === 'admin')
         {
             $this->getRequest()->redirect('/dashboard');
         }

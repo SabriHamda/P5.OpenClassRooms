@@ -69,7 +69,9 @@ class AdminUser extends DBConnexion
      */
     public function login()
     {
-        return blog()->getIdentity()->login($this->user->id, true);
+        if ($this->user->role === 'admin') {
+            return blog()->getIdentity()->login($this->user->id, true);
+        }
     }
 
     public function setEmail($email)
