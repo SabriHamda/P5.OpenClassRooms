@@ -56,13 +56,13 @@ trait CreateArticleController
                 $this->getRequest()->redirect('/dashboard');
             } else {
                 $this->message = ['status' => 'alert-danger', 'message' => '<strong>Erreur ! </strong> Le format de votre image est incorrect'];
-                $this->editArticle($this->articleId);
+                $this->createArticleIndex();
             }
 
 
         } else {
             $this->setMessage($validator->getAlertMessages());
-            $this->editArticle($this->articleId);
+            $this->createArticleIndex();
 
         }
     }
