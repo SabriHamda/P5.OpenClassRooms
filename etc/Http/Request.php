@@ -21,10 +21,10 @@ class Request
     }
 
     public function post($param = null, $default = null)
-    {
+    {// WPCS: XSS OK
         if (null !== $param) {
             if (// WPCS: XSS OK
-            isset($_POST[$param])) {
+            isset($_POST[$param])) {// WPCS: XSS OK
                 return $_POST[$param];
             }
             return $default;
