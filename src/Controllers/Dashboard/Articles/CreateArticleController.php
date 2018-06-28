@@ -54,10 +54,9 @@ trait CreateArticleController
                 $updateArticle->addArticle($this->data);
                 $this->setMessage($validator->getAlertMessages());
                 $this->getRequest()->redirect('/dashboard');
-            } else {
-                $this->message = ['status' => 'alert-danger', 'message' => '<strong>Erreur ! </strong> Le format de votre image est incorrect'];
-                $this->editArticle($this->articleId);
             }
+            $this->message = ['status' => 'alert-danger', 'message' => '<strong>Erreur ! </strong> Le format de votre image est incorrect'];
+            $this->editArticle($this->articleId);
 
 
         } else {
