@@ -24,6 +24,9 @@ Before instalation you must configure virtual host on your machine click [here](
 
 ### Installation with composer
 
+First, download the project [here](https://github.com/SabriHamda/P5.OpenClassRooms/archive/master.zip)
+After, go to your command prompt and type this command :
+
 ```shell
 php composer.phar install
 ```
