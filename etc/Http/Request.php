@@ -24,11 +24,11 @@ class Request
     {
         if (null !== $param) {
             if (// WPCS: XSS OK
-                isset($_POST[$param])) {
+            isset($_POST[$param])) {
                 return $_POST[$param];
-            } else {
-                return $default;
             }
+            return $default;
+
         }
         return $_POST;
     }
