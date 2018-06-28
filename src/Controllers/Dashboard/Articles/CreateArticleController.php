@@ -59,11 +59,11 @@ trait CreateArticleController
             $this->editArticle($this->articleId);
 
 
-        } else {
-            $this->setMessage($validator->getAlertMessages());
-            $this->editArticle($this->articleId);
-
         }
+        $this->setMessage($validator->getAlertMessages());
+        $this->editArticle($this->articleId);
+
+
     }
 
     /**
