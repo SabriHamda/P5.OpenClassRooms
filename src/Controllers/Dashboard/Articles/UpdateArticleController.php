@@ -44,24 +44,22 @@ trait UpdateArticleController
                 $this->setMessage($validator->getAlertMessages());
                 $this->editArticle($this->getArticleId());
             }
-                $uploadMyFile = UploadFile::uploadFile('article-image', 'assets/images/uploads/' . $this->articleImage["name"] . '', FALSE, array('png', 'gif', 'jpg', 'jpeg'));
-                if ($uploadMyFile) {
-                    $this->hydrateArticle($this->articleImage['name']);
-                    $updateArticle = new Articlerepository();
-                    $updateArticle->updateArticle($this->data);
-                    $this->setMessage($validator->getAlertMessages());
-                    $this->editArticle($this->getArticleId());
-                }
-                    $this->setMessage(['status' => 'alert-danger', 'message' => "<strong>Erreur ! </strong> Le format de votre image est incorrect"]);
-                    $this->editArticle($this->articleId);
-
-
-
-        } else {
-            $this->setMessage($validator->getAlertMessages());
+            $uploadMyFile = UploadFile::uploadFile('article-image', 'assets/images/uploads/' . $this->articleImage["name"] . '', FALSE, array('png', 'gif', 'jpg', 'jpeg'));
+            if ($uploadMyFile) {
+                $this->hydrateArticle($this->articleImage['name']);
+                $updateArticle = new Articlerepository();
+                $updateArticle->updateArticle($this->data);
+                $this->setMessage($validator->getAlertMessages());
+                $this->editArticle($this->getArticleId());
+            }
+            $this->setMessage(['status' => 'alert-danger', 'message' => "<strong>Erreur ! </strong> Le format de votre image est incorrect"]);
             $this->editArticle($this->articleId);
 
+
         }
+        $this->setMessage($validator->getAlertMessages());
+        $this->editArticle($this->articleId);
+
     }
 
     /**
