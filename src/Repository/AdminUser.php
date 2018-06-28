@@ -143,9 +143,4 @@ class AdminUser extends DBConnexion
         }
         return true;
     }
-    public function update($var)
-    {
-        return true;
-        exit();
-    }
 }
