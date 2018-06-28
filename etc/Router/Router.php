@@ -7,7 +7,7 @@ use src\Exceptions\NotFoundHttpException;
 class Router
 {
     private $routes = [];
-    private $params;
+    //private $params;
     private $request;
 
     public function __construct($request)
