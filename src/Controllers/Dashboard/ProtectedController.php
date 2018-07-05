@@ -2,7 +2,6 @@
 
 namespace src\Controllers\Dashboard;
 use src\Exceptions\UnauthorizedHttpException;
-
 /**
  * Description of UnauthorizedHttpException.
  *
@@ -13,9 +12,13 @@ class ProtectedController extends Controller{
    public function __construct($request) {
         parent::__construct($request);
         $user = blog()->getIdentity();
-        if(!$user->isLoggedIn()){
+        $infoUser = $user->getUser();
+       if(!$user->isLoggedIn()){
            $request->redirect('/dashboard/login');
-        }else if (!$user->isAdmin()){
+        }elseif ($infoUser->role === 'visitor')
+       {
+           $request->redirect('/home');
+       }else if (!$user->isAdmin()){
             throw new UnauthorizedHttpException('You are not authorized to view this page');
         }
     } 

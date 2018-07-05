@@ -69,7 +69,7 @@ class AdminUser extends DBConnexion
      */
     public function login()
     {
-        if ($this->user->role === 'admin') {
+        if ($this->user->role === 'admin' || $this->user->role === 'visitor') {
             return blog()->getIdentity()->login($this->user->id, true);
         }
     }

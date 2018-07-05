@@ -17,7 +17,6 @@ abstract class Controller
     public function __construct($request)
     {
         $this->user = blog()->getIdentity()->getUser();
-
         $this->request = $request;
         $this->loader = new \Twig_Loader_Filesystem($this->getViewsBasePath());
         $this->twig = new \Twig_Environment($this->loader, array(
@@ -51,5 +50,13 @@ abstract class Controller
     public function setMessage($message)
     {
         $this->message= $message;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

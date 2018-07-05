@@ -1,4 +1,5 @@
 <?php
+
 namespace src\Controllers\Dashboard;
 
 use src\Controllers\Dashboard\Controller;
@@ -14,22 +15,24 @@ class AuthController extends Controller
 
     public function index()
     {
-        if ($this->user->role === 'admin')
-        {
+        if ($this->user->role === 'admin') {
             $this->getRequest()->redirect('/dashboard');
+        } elseif ($this->user->role === 'visitor') {
+            $this->getRequest()->redirect('/home');
         }
         echo $this->render('auth/login.twig');
     }
 
     public function login()
     {
-
         $user = new AdminUser();
         $request = $this->getRequest();
         $user->setEmail($request->post('email'));
         $user->setPassword($request->post('password'));
-        if ($user->validate() && $user->login()) {
+        if ($user->validate() && $user->login() && $user->getUserByEmail()->role === 'admin') {
             $request->redirect('/dashboard');
+        } elseif ($user->validate() && $user->login() && $user->getUserByEmail()->role === 'visitor') {
+            $request->redirect('/home');
         }
         $errors = $user->getErrors();
         $message = array_shift($errors);
@@ -44,7 +47,7 @@ class AuthController extends Controller
 
     public function requestReset()
     {
-       echo $this->render('auth/recovery.twig');
+        echo $this->render('auth/recovery.twig');
     }
 
     public function sendRecoveryToken()
@@ -53,7 +56,7 @@ class AuthController extends Controller
         $request = $this->getRequest();
         $user->setEmail($request->post('email'));
         if ($user->generateToken()) {
-            $request->redirect('/dashboard/login', ['message'=> 'Please check your email for instructions.']);
+            $request->redirect('/dashboard/login', ['message' => 'Please check your email for instructions.']);
         }
         $errors = $user->getErrors();
         $message = array_shift($errors);
