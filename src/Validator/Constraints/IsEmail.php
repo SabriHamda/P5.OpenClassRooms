@@ -51,7 +51,10 @@ class IsEmail
     public function check($entry)
     {
         if (is_array($entry)) {
-
+            foreach ($entry as $element => $key) {
+                $containSubmit = stristr($element, 'submit');
+            }
+            unset($entry[$containSubmit]);
             array_walk_recursive($entry, array($this, 'arrayIsEmail'));
         } else {
 
