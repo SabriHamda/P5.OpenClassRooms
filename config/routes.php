@@ -66,39 +66,39 @@ return [
     /* Backend */
     'adminLogin' => [
         'path' => '/dashboard/login',
-        'controller' => src\Controllers\Dashboard\AuthController::class,
+        'controller' => src\Controllers\Authentication\AuthController::class,
         'action' => 'index',
     ],
     'adminLoginDo' => [
         'path' => '/dashboard/login',
-        'controller' => src\Controllers\Dashboard\AuthController::class,
+        'controller' => src\Controllers\Authentication\AuthController::class,
         'action' => 'login',
         'method' => 'POST'
     ],
     'adminLogout' => [
         'path' => '/logout',
-        'controller' => src\Controllers\Dashboard\AuthController::class,
+        'controller' => src\Controllers\Authentication\AuthController::class,
         'action' => 'logout',
     ],
     'adminRequestResetPassword' => [
         'path' => '/dashboard/auth/password-reset',
-        'controller' => src\Controllers\Dashboard\AuthController::class,
+        'controller' => src\Controllers\Authentication\AuthController::class,
         'action' => 'requestReset',
     ],
     'adminSentRecoveryToken' => [
         'path' => '/dashboard/auth/password-reset',
-        'controller' => src\Controllers\Dashboard\AuthController::class,
+        'controller' => src\Controllers\Authentication\AuthController::class,
         'action' => 'sendRecoveryToken',
         'method' => 'POST'
     ],
     'adminValidateResetToken' => [
         'path' => '/dashboard/auth/password-reset',
-        'controller' => src\Controllers\Dashboard\AuthController::class,
+        'controller' => src\Controllers\Authentication\AuthController::class,
         'action' => 'validateResetToken',
     ],
     'adminValidateResetToken' => [
         'path' => '/dashboard/auth/password-reset',
-        'controller' => src\Controllers\Dashboard\AuthController::class,
+        'controller' => src\Controllers\Authentication\AuthController::class,
         'action' => 'resetPassword',
     ],
 

@@ -7,11 +7,11 @@
 namespace src\Repository;
 
 /**
- * Description of User
+ * Description of UserRepository
  *
  * @author Sabri Hamda
  */
-class User extends DBConnexion
+class UserRepository extends DBConnexion
 {
 
     public $firstname;

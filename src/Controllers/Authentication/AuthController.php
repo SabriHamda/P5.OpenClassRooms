@@ -1,9 +1,9 @@
 <?php
 
-namespace src\Controllers\Dashboard;
+namespace src\Controllers\Authentication;
 
+use src\Repository\UserRepository;
 use src\Controllers\Dashboard\Controller;
-use src\Repository\AdminUser;
 
 /**
  * Description of PostController.
@@ -25,7 +25,7 @@ class AuthController extends Controller
 
     public function login()
     {
-        $user = new AdminUser();
+        $user = new UserRepository();
         $request = $this->getRequest();
         $user->setEmail($request->post('email'));
         $user->setPassword($request->post('password'));
@@ -52,7 +52,7 @@ class AuthController extends Controller
 
     public function sendRecoveryToken()
     {
-        $user = new AdminUser();
+        $user = new UserRepository();
         $request = $this->getRequest();
         $user->setEmail($request->post('email'));
         if ($user->generateToken()) {

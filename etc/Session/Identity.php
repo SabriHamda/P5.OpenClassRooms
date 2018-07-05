@@ -2,8 +2,7 @@
 
 namespace etc\Session;
 
-use src\Repository\AdminUser;
-use src\Repository\User;
+use src\Repository\UserRepository;
 /**
  * Description of Identity
  *
@@ -23,10 +22,10 @@ class Identity {
         return $this->_session->get($this->key,false);
     }
 
-    public function login(int $userId, $isAdmin = false) {
+    public function login(int $userId, $isAuthorized = false) {
         $this->_session->set($this->key, $userId);
-        if($isAdmin){
-            $this->_session->set('is_admin', true);
+        if($isAuthorized){
+            $this->_session->set('is_authorized', true);
         }
         return true;
     }
@@ -36,8 +35,8 @@ class Identity {
         return $this->_session->remove($this->key);
     }
 
-    public function isAdmin() {
-       return $this->_session->get('is_admin',false);
+    public function isAuthorized() {
+       return $this->_session->get('is_authorized',false);
     }
     
     public function getUser(){
@@ -45,8 +44,8 @@ class Identity {
         if(!$id){
             return null;
         }
-        $isAdmin = $this->isAdmin();
-        $userClass = $isAdmin ? AdminUser::class : User::class;
+        $isAuthorized = $this->isAuthorized();
+        $userClass = $isAuthorized ? UserRepository::class : UserRepository::class;
         $user = new $userClass;
         return $user->getByPk($id);
     }
