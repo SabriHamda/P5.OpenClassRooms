@@ -55,7 +55,7 @@ CREATE TABLE `comments` (
   `post_id` int(255) NOT NULL,
   `author` varchar(255) NOT NULL,
   `comment` text NOT NULL,
-  `civilite` varchar(255) NOT NULL,
+  `civility` varchar(255) NOT NULL,
   `is_valid` tinyint(1) DEFAULT NULL,
   `comment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -64,7 +64,7 @@ CREATE TABLE `comments` (
 -- Déchargement des données de la table `comments`
 --
 
-INSERT INTO `comments` (`id`, `post_id`, `author`, `comment`, `civilite`, `is_valid`, `comment_date`) VALUES
+INSERT INTO `comments` (`id`, `post_id`, `author`, `comment`, `civility`, `is_valid`, `comment_date`) VALUES
 (1, 4, 'Stephane', 'ArticleRepository très intéressant , je me demande si on peut vraiment se passer de jquery surtout pour l\'animation c\'est beaucoup plus simple.', 'man', 1, '2018-04-15 22:03:47'),
 (2, 4, 'Julie', 'ArticleRepository top, explications complétes', 'woman', 1, '2018-04-16 20:36:38'),
 (6, 7, 'admin', '<p>Lorem ipsum <strong>dolor sit amet, consectetur adipiscing</strong> elit. Sed tempor nulla non vehicula tristique. Sed nec ullamcorper dui. Mauris enim turpis, tempus a tincidunt in, tempor eget mi. Aliquam vel vehicula justo. Ut condimentum velit sed metus pellentesque congue. Sed blandit leo dapibus dolor vestibulum, vel elementum leo aliquam. Etiam <em>non luctus orci</em>, sit amet auctor orci. Donec ut sem nec dui dignissim suscipit at eu massa.</p>', 'man', 1, '2018-04-21 22:53:13');
@@ -116,7 +116,7 @@ CREATE TABLE `users` (
   `prenom` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `civilite` varchar(255) NOT NULL,
+  `civility` varchar(255) NOT NULL,
   `register_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -125,7 +125,7 @@ CREATE TABLE `users` (
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `role`, `prenom`, `password`, `email`, `civilite`, `register_date`, `updated_date`) VALUES
+INSERT INTO `users` (`id`, `role`, `prenom`, `password`, `email`, `civility`, `register_date`, `updated_date`) VALUES
 (1, 'admin', 'admin', '$2y$10$ztyXKdhKydewesrDXpd4YOB2fMTfVXpopuQbk9w5bhIpxLvzLx9je', 'admin@admin.com', 'man', '2018-04-14 20:25:53', '2018-04-14 20:25:53'),
 (2, 'visitor', 'visitor', '$2y$10$Rh9cFMyn9Zj6Hx57TQR2Eu9fymYl9HlGFEx6Y7DiIDkvYfqokGVi2', 'visitor@visitor.com', 'man', '2018-04-20 09:12:42', '2018-04-20 09:12:42'),
 (5, 'visitor', 'diolene', '$2y$10$02cweG1LeAnkZEnfp2zw3eSZfn7gjuDXyRKcc7OBrYwYrGjwhY.jK', 'diolene.hamda@gmail.com', 'woman', '2018-04-22 23:13:36', '2018-04-22 23:13:36');

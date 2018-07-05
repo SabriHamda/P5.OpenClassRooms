@@ -46,6 +46,7 @@ class ArticleRepository extends DBConnexion
      */
     public function __construct()
     {
+
         if ($this->image) {
             $this->image = urldecode($this->image);
         }

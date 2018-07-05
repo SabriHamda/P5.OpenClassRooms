@@ -2,6 +2,7 @@
 
 namespace src\Controllers\Dashboard;
 
+use src\Repository\CommentRepository;
 use src\Tools\Pagination;
 
 /**
@@ -24,10 +25,13 @@ class DashboardController extends ProtectedController
         $uri = blog()->getRequest()->getUri();
         $user = blog()->getIdentity()->getUser();
         $this->paginateArticles(1);
+        $commentRepository = new CommentRepository();
+        $comments = $commentRepository->getAllComments();
 
         echo $this->render('dashboard.twig', [
             'user' => $user,
             'uri' => $uri,
+            'comments'=> $comments,
             'articles' => $this->articlePaginate,
             'page' => $this->articlePage,
             'countPages' => $this->articleCountPages,

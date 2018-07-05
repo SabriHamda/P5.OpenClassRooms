@@ -9,6 +9,7 @@ namespace src\Controllers\Frontend;
 
 use src\Models\Article;
 use src\Repository\ArticleRepository;
+use src\Repository\CommentRepository;
 
 
 class PostController extends Controller
@@ -18,9 +19,12 @@ class PostController extends Controller
     {
 
         $articleRepository = new ArticleRepository();
+        $commentRepository = new CommentRepository();
         $article = $articleRepository->getArticle($articleId);
+        $comments = $commentRepository->getComments($articleId);
 
-        echo $this->render('articleView.twig', ['article' => $article, 'user' => $this->user]);
+
+        echo $this->render('articleView.twig', ['article' => $article,'comments'=>$comments, 'user' => $this->user]);
 
     }
 

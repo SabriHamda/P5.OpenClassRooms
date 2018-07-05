@@ -100,15 +100,15 @@
 
                     <!-- COMMENTS-->
                     <div id="comments">
-                        {% for comments in comments %}
+                        {% for comment in comments %}
 
-                            {% if comments.civilite == "man" %}
+                            {% if comment.civility == "man" %}
                                 {% set civility = "/assets/images/man.svg" %}
                             {% else %}
                                 {% set civility = "/assets/images/woman.svg" %}
                             {% endif %}
 
-                            {% if comments.is_valid == 1 %}
+                            {% if comment.is_valid == 1 %}
 
                                 <div class="col-md-12" style="border-bottom:solid 1px #2d3038;padding-top: 30px; ">
                                     <div class="fh5co-feature animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
@@ -116,9 +116,9 @@
                                             <img class="align-self-start mr-3" src="{{ civility }}" alt="Generic placeholder image" width="100%" height="100%">
                                         </div>
                                         <div class="fh5co-text">
-                                            <h3>{{ comments.author }}</h3>
-                                            <small>Le : {{ comments.comment_date_fr }}</small>
-                                            <p>{{ comments.comment|raw|nl2br }}</p>
+                                            <h3>{{ comment.author }}</h3>
+                                            <small>Le : {{ comment.comment_date_fr }}</small>
+                                            <p>{{ comment.comment|convert_encoding('UTF-8','ISO-8859-1')|raw }}</p>
                                         </div>
                                     </div>
                                 </div>
