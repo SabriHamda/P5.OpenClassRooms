@@ -7,11 +7,11 @@
 namespace src\Repository;
 
 /**
- * Description of AdminUser
+ * Description of User
  *
  * @author Sabri Hamda
  */
-class AdminUser extends DBConnexion
+class User extends DBConnexion
 {
 
     public $firstname;
@@ -48,7 +48,7 @@ class AdminUser extends DBConnexion
 
     /**
      * validate the email address
-     * 
+     *
      * @param string $errorMessage
      * @return boolean
      */
@@ -64,7 +64,7 @@ class AdminUser extends DBConnexion
 
     /**
      * Login the user
-     * 
+     *
      * @return boolean
      */
     public function login()
@@ -92,7 +92,7 @@ class AdminUser extends DBConnexion
     /**
      * Validate the supplied password
      * against the stored password
-     * 
+     *
      * @param string $supliedPassword
      * @param string $password
      * @return boolean
@@ -100,7 +100,7 @@ class AdminUser extends DBConnexion
     protected function validatePassword($supliedPassword, $password)
     {
         password_verify(password_hash($supliedPassword,PASSWORD_DEFAULT),$password);
-            return true;
+        return true;
     }
 
     public function getUserByEmail()
