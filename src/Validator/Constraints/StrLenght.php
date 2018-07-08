@@ -7,7 +7,11 @@
 
 namespace src\Validator\Constraints;
 
-
+/**
+ * Class StrLenght
+ * This Class filter lenght of entry given.
+ * @package src\Validator\Constraints
+ */
 class StrLenght
 {
     /**
