@@ -6,7 +6,7 @@
 			{% endif %}
 
 			<div class="sub-menu">
-				{% if user.prenom|default %}
+				{% if user.name|default %}
 					<nav class="navbar navbar-default">
 						<div class="container-fluid">
 							<div class="navbar-header">
@@ -17,7 +17,7 @@
 									<span class="icon-bar"></span>
 								</button>
 								<div class="identity">
-								<a class="navbar-brand" href="#"><!--<img src="{{ avatar }}" class="img-circle" alt="Cinque Terre">--> bonjour {{ user.prenom }}</a>
+								<a class="navbar-brand" href="#"><!--<img src="{{ avatar }}" class="img-circle" alt="Cinque Terre">--> bonjour {{ user.name }}</a>
 								</div>
 							</div>
 							<div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
@@ -27,7 +27,7 @@
 					<!--<li class="color-orange"><a href="index.php?action=portfolio">Creations</a></li>-->
 					<li class="color-red"><a href="/blog">Blog</a></li>
 					<li class="color-pink"><a href="/contact">Contact</a></li>
-					{% if user.prenom|default %}
+					{% if user.name|default %}
 						{% if user.role == 'admin' %}
 						<li class="color-orange-light"><a href="/dashboard">Dashboard</a></li>
 					{% endif %}	

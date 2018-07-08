@@ -31,7 +31,7 @@ class CommentRepository extends DBConnexion
         $stmt = $connection->prepare('SELECT id, author, comment,civility,is_valid, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE post_id = :articleId ORDER BY comment_date DESC');
         $stmt->bindValue(':articleId',$articleId,\PDO::PARAM_INT);
         $stmt->execute();
-        $stmt->setFetchMode(\PDO::FETCH_CLASS, self::class);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS, Comment::class);
         return $stmt->fetchAll();
     }
 

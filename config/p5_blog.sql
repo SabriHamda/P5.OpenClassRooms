@@ -113,7 +113,7 @@ INSERT INTO `posts` (`id`, `title`, `content`, `chapo`, `image`, `created_at`, `
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `role` varchar(255) NOT NULL,
-  `prenom` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `civility` varchar(255) NOT NULL,
@@ -125,7 +125,7 @@ CREATE TABLE `users` (
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `role`, `prenom`, `password`, `email`, `civility`, `register_date`, `updated_date`) VALUES
+INSERT INTO `users` (`id`, `role`, `name`, `password`, `email`, `civility`, `register_date`, `updated_date`) VALUES
 (1, 'admin', 'admin', '$2y$10$ztyXKdhKydewesrDXpd4YOB2fMTfVXpopuQbk9w5bhIpxLvzLx9je', 'admin@admin.com', 'man', '2018-04-14 20:25:53', '2018-04-14 20:25:53'),
 (2, 'visitor', 'visitor', '$2y$10$Rh9cFMyn9Zj6Hx57TQR2Eu9fymYl9HlGFEx6Y7DiIDkvYfqokGVi2', 'visitor@visitor.com', 'man', '2018-04-20 09:12:42', '2018-04-20 09:12:42'),
 (5, 'visitor', 'diolene', '$2y$10$02cweG1LeAnkZEnfp2zw3eSZfn7gjuDXyRKcc7OBrYwYrGjwhY.jK', 'diolene.hamda@gmail.com', 'woman', '2018-04-22 23:13:36', '2018-04-22 23:13:36');
