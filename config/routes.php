@@ -48,6 +48,12 @@ return [
         'controller' => src\Controllers\Frontend\ContactController::class,
         'action' => 'index',
     ],
+    'contact_do' => [
+        'path' => '/contact',
+        'controller' => src\Controllers\Frontend\ContactController::class,
+        'action' => 'validateContact',
+        'method' => 'POST'
+    ],
     'login' => [
         'path' => '/login',
         'controller' => src\Controllers\Frontend\LoginController::class,
