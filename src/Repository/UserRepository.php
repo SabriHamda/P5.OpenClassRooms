@@ -4,7 +4,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 namespace src\Repository;
+use src\Models\User;
 
 /**
  * Description of UserRepository
@@ -99,7 +101,7 @@ class UserRepository extends DBConnexion
      */
     protected function validatePassword($supliedPassword, $password)
     {
-        password_verify(password_hash($supliedPassword,PASSWORD_DEFAULT),$password);
+        password_verify(password_hash($supliedPassword, PASSWORD_DEFAULT), $password);
         return true;
     }
 
@@ -144,5 +146,17 @@ class UserRepository extends DBConnexion
             return false;
         }
         return true;
+    }
+
+    public function addUser(User $data)
+    {
+        $connection = $this->getDb()->getConnection();
+        $stmt = $connection->prepare('INSERT INTO users(role, name, password, email, civility, register_date, updated_date) VALUES(:role, :name, :password, :email, :civility, NOW(), NOW())');
+        $stmt->bindValue(':role',$data->getRole(),\PDO::PARAM_STR);
+        $stmt->bindValue(':name',$data->getName(),\PDO::PARAM_STR);
+        $stmt->bindValue(':password',$data->getPassword(),\PDO::PARAM_STR);
+        $stmt->bindValue(':email',$data->getEmail(),\PDO::PARAM_STR);
+        $stmt->bindValue(':civility',$data->getCivility(),\PDO::PARAM_STR);
+        $stmt->execute();
     }
 }
