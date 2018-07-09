@@ -3,7 +3,7 @@
 namespace src\Controllers\Authentication;
 
 use src\Repository\UserRepository;
-use src\Controllers\Dashboard\Controller;
+use src\Controllers\Frontend\Controller;
 
 /**
  * Description of PostController.
@@ -47,7 +47,7 @@ class AuthController extends Controller
 
     public function requestReset()
     {
-        echo $this->render('auth/recovery.twig');
+        echo $this->render('recoveryView.twig');
     }
 
     public function sendRecoveryToken()
@@ -56,11 +56,11 @@ class AuthController extends Controller
         $request = $this->getRequest();
         $user->setEmail($request->post('email'));
         if ($user->generateToken()) {
-            $request->redirect('/dashboard/login', ['message' => 'Please check your email for instructions.']);
+            $request->redirect('/login', ['message' => 'Please check your email for instructions.']);
         }
         $errors = $user->getErrors();
         $message = array_shift($errors);
-        echo $this->render('auth/recovery.twig', ['message' => $message]);
+        echo $this->render('recoveryView.twig', ['message' => $message]);
     }
 
     public function validateResetToken()

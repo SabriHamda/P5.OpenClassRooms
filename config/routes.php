@@ -71,12 +71,12 @@ return [
     ],
     /* Backend */
     'adminLogin' => [
-        'path' => '/dashboard/login',
+        'path' => '/login',
         'controller' => src\Controllers\Authentication\AuthController::class,
         'action' => 'index',
     ],
     'adminLoginDo' => [
-        'path' => '/dashboard/login',
+        'path' => '/login',
         'controller' => src\Controllers\Authentication\AuthController::class,
         'action' => 'login',
         'method' => 'POST'
@@ -87,18 +87,18 @@ return [
         'action' => 'logout',
     ],
     'adminRequestResetPassword' => [
-        'path' => '/dashboard/auth/password-reset',
+        'path' => '/password-reset',
         'controller' => src\Controllers\Authentication\AuthController::class,
         'action' => 'requestReset',
     ],
     'adminSentRecoveryToken' => [
-        'path' => '/dashboard/auth/password-reset',
+        'path' => '/password-reset',
         'controller' => src\Controllers\Authentication\AuthController::class,
         'action' => 'sendRecoveryToken',
         'method' => 'POST'
     ],
     'adminValidateResetToken' => [
-        'path' => '/dashboard/auth/password-reset',
+        'path' => '/password-reset',
         'controller' => src\Controllers\Authentication\AuthController::class,
         'action' => 'validateResetToken',
     ],
