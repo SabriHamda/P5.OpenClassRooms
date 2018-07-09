@@ -64,6 +64,12 @@ return [
         'controller' => src\Controllers\Frontend\RegisterController::class,
         'action' => 'index',
     ],
+    'register_do' => [
+        'path' => '/register',
+        'controller' => src\Controllers\Frontend\RegisterController::class,
+        'action' => 'addUser',
+        'method' => 'POST',
+    ],
     'error' => [
         'path' => '/error',
         'controller' => src\Controllers\Frontend\ErrorController::class,
