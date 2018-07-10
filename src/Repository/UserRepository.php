@@ -25,7 +25,7 @@ class UserRepository extends DBConnexion
 
     public function validate()
     {
-        $error = 'Invalid email address or password';
+        $error = 'email ou mot de passe invalide';
         if (empty($this->email) || empty($this->password)) {
             $this->addError('email', $error);
             return false;
@@ -138,14 +138,14 @@ class UserRepository extends DBConnexion
         $token = bin2hex(random_bytes(32));
         if(!($user = $this->getUserByEmail()))
         {
-            $this->addError('email', 'Oops something went wrong!');
+            $this->addError('email', 'L\'email saisi n\'existe pas');
             return false;
 
         }
         $user->password_reset_token = $token;
         $this->updateToken($user->email,$user->password_reset_token);
         if (!$user->updateToken($user->email,$token)) {
-            $this->addError('email', 'Oops something went wrong!');
+            $this->addError('email', 'Nous avons rencontré un probleme');
             return false;
         }
         if (!blog()->getMailer()->sendRecoveryToken($user)) {
@@ -169,7 +169,7 @@ class UserRepository extends DBConnexion
     public function searchToken($token)
     {
         $connection = $this->getDb()->getConnection();
-        $stmt = $connection->prepare('SELECT id FROM users WHERE recovery_token = :token');
+        $stmt = $connection->prepare('SELECT email FROM users WHERE recovery_token = :token');
         $stmt->bindValue(':token',$token,\PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetch();

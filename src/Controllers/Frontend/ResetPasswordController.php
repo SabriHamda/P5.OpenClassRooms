@@ -20,8 +20,10 @@ class ResetPasswordController extends Controller
     {
         if($this->checkToken($token))
         {
+            $userRepository = new UserRepository();
+            $email = $userRepository->searchToken($token);
             $message = $this->message;
-            echo $this->render('resetPasswordView.twig', ['user' => $this->user, 'message' => $message]);
+            echo $this->render('resetPasswordView.twig', ['user' => $this->user, 'message' => $message,'email'=>$email]);
         }
         $request = $this->getRequest();
         $request->redirect('/home',['message' => '<strong>Erreur ! </strong> Le format de votre image est incorrect']);
