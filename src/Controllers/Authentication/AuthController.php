@@ -12,7 +12,8 @@ use src\Controllers\Frontend\Controller;
  */
 class AuthController extends Controller
 {
-public $message = [];
+    public $message = [];
+
     public function index()
     {
         if ($this->user->role === 'admin') {
@@ -36,7 +37,7 @@ public $message = [];
         }
         $errors = $user->getErrors();
         $message = array_shift($errors);
-$this->message []= ['status' => 'alert-danger', 'message' => '<strong>Erreur ! </strong> '.$message.' !'];
+        $this->message [] = ['status' => 'alert-danger', 'message' => '<strong>Erreur ! </strong> ' . $message . ' !'];
         echo $this->render('/loginView.twig', ['message' => $this->message]);
     }
 
@@ -58,12 +59,12 @@ $this->message []= ['status' => 'alert-danger', 'message' => '<strong>Erreur ! <
         $user->setEmail($request->post('email'));
         if ($user->generateToken()) {
             $this->message [] = ['status' => 'alert-success', 'message' => '<strong>Succès ! </strong> Un email vous a été envoyé, veuillez suivre les instructions !'];
-            echo $this->render('recoveryView.twig',['message'=>$this->message]);
+            echo $this->render('recoveryView.twig', ['message' => $this->message]);
         }
         $errors = $user->getErrors();
         $message = array_shift($errors);
-        $this->message [] = ['status' => 'alert-danger', 'message' => '<strong>Erreur ! </strong>'.$message.' !'];
-        echo $this->render('recoveryView.twig',['message'=>$this->message]);
+        $this->message [] = ['status' => 'alert-danger', 'message' => '<strong>Erreur ! </strong>' . $message . ' !'];
+        echo $this->render('recoveryView.twig', ['message' => $this->message]);
     }
 
 }

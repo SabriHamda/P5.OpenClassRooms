@@ -111,6 +111,15 @@ return [
             'token' => '[0-9,a-z,A-Z]+'
         ]
     ],
+    'UpdatePassword' => [
+        'path' => '/password-reset/token/{token}',
+        'controller' => src\Controllers\Frontend\ResetPasswordController::class,
+        'action' => 'updatePassword',
+        'method' => 'POST',
+        'params' => [
+            'token' => '[0-9,a-z,A-Z]+'
+        ]
+    ],
 
     'homepage' => [
         'path' => '/dashboard',

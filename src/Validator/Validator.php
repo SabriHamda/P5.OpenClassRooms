@@ -37,7 +37,6 @@ class Validator
         }
         //extract message from array
         $allViolations = array_filter($this->getViolations());
-
         if (!empty($allViolations)) {
             for ($i = 0; $i <= count($allViolations); $i++) {
                 if (stristr($allViolations[$i][$i], 'is empty')) {
@@ -46,6 +45,8 @@ class Validator
                     array_push($this->alertMessages, ['status' => 'alert-danger', 'message' => '<strong>Erreur!</strong> Le champ email doit contenir un email valid.']);
                 } elseif (stristr($allViolations[$i][$i], 'is not integer')) {
                     array_push($this->alertMessages, ['status' => 'alert-danger', 'message' => '<strong>Erreur!</strong> Le champ nombre doit contenir un nombre.']);
+                }elseif (stristr($allViolations[$i][$i], 'MIN 6 characters and MAX 22')) {
+                    array_push($this->alertMessages, ['status' => 'alert-danger', 'message' => '<strong>Erreur!</strong> Nombre de caractére compris entre 5 et 22.']);
                 }
 
             }

@@ -26,7 +26,7 @@ class StrLenght
      */
     private function arrayStrLenght($item, $key)
     {
-        if (strlen($item) > 5 && strlen($item) < 22) {
+        if (strlen($item) >= 5 && strlen($item) <= 22) {
             return;
         } else {
             return $this->message[] = $key . ' warning MIN 6 characters and MAX 22';
@@ -39,7 +39,7 @@ class StrLenght
      */
     private function varStrLenght($entry)
     {
-        if (strlen($item) > 5 && strlen($item) < 22) {
+        if (strlen($entry) >= 5 && strlen($entry) <= 22) {
             return;
         } else {
             return $this->message = " warning MIN 6 characters and MAX 22";

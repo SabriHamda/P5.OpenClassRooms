@@ -186,4 +186,15 @@ class UserRepository extends DBConnexion
         $stmt->execute();
         return true;
     }
+
+    // update token in db
+    public function updatePassword(User $data,$email)
+    {
+        $connection = $this->getDb()->getConnection();
+        $stmt = $connection->prepare('UPDATE users SET password = :token WHERE email = :email');
+        $stmt->bindValue(':token',$token,\PDO::PARAM_STR);
+        $stmt->bindValue(':email',$email,\PDO::PARAM_STR);
+        $stmt->execute();
+        return true;
+    }
 }
