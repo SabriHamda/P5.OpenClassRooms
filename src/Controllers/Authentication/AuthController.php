@@ -56,7 +56,7 @@ class AuthController extends Controller
         $request = $this->getRequest();
         $user->setEmail($request->post('email'));
         if ($user->generateToken()) {
-            $request->redirect('/login', ['message' => 'Please check your email for instructions.']);
+            $request->redirect('/login', ['status' => 'alert-danger', 'message' => '<strong>Erreur ! </strong> Le format de votre image est incorrect']);
         }
         $errors = $user->getErrors();
         $message = array_shift($errors);

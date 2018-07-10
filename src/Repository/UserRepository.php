@@ -136,9 +136,15 @@ class UserRepository extends DBConnexion
             return false;
         }
         $token = bin2hex(random_bytes(32));
-        $user = $this->getUserByEmail();
+        if(!($user = $this->getUserByEmail()))
+        {
+            $this->addError('email', 'Oops something went wrong!');
+            return false;
+
+        }
         $user->password_reset_token = $token;
-        if (!$user->update(['password_reset_token'])) {
+        $this->updateToken($user->email,$user->password_reset_token);
+        if (!$user->updateToken($user->email,$token)) {
             $this->addError('email', 'Oops something went wrong!');
             return false;
         }
@@ -158,5 +164,26 @@ class UserRepository extends DBConnexion
         $stmt->bindValue(':email',$data->getEmail(),\PDO::PARAM_STR);
         $stmt->bindValue(':civility',$data->getCivility(),\PDO::PARAM_STR);
         $stmt->execute();
+    }
+
+    public function searchToken($token)
+    {
+        $connection = $this->getDb()->getConnection();
+        $stmt = $connection->prepare('SELECT id FROM users WHERE recovery_token = :token');
+        $stmt->bindValue(':token',$token,\PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
+
+    // update token in db
+    public function updateToken($email,$token)
+    {
+        $connection = $this->getDb()->getConnection();
+        $stmt = $connection->prepare('UPDATE users SET recovery_token = :token WHERE email = :email');
+        $stmt->bindValue(':token',$token,\PDO::PARAM_STR);
+        $stmt->bindValue(':email',$email,\PDO::PARAM_STR);
+        $stmt->execute();
+        return true;
     }
 }

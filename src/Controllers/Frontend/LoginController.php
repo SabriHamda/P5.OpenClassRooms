@@ -11,8 +11,10 @@ namespace src\Controllers\Frontend;
 
 class LoginController extends Controller
 {
+    public $message = [];
     public function index()
     {
-        echo $this->render('loginView.twig',['user'=>$this->user]);
+        $message = $this->message;
+        echo $this->render('loginView.twig',['user'=>$this->user,'message'=>$message]);
     }
 }
