@@ -34,8 +34,8 @@
             {% else %}
              <span class="label label-success color-green"><a href="/dashboard/comment/val/{{ comment.id}}">Valider</a></span>
              {% endif %}
-             <span class="label label-primary color-blue"><a href="index.php?action=post&id={{ comment.post_id}}#comments">Voir</a></span>
-             <span class="label label-danger color-red"><a href="index.php?action=del-comment&id={{ comment.id}} ">Supprimer</a></span>
+             <span class="label label-primary color-blue"><a href="/article/{{ comment.post_id }}">Voir</a></span>
+             <span class="label label-danger color-red"><a href="/dashboard/comment/del/{{ comment.id }} ">Supprimer</a></span>
            </div>
          {% endfor %}
        </div>

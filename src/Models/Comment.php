@@ -11,7 +11,7 @@ namespace src\Models;
 class Comment
 {
     protected $id;
-    protected $post_id;
+    public $post_id;
     protected $author;
     protected $comment;
     protected $civility;

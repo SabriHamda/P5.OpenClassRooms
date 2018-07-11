@@ -41,13 +41,17 @@ private $data;
 
     }
 
-    public static function deleteComment($commentId)
+    public function deleteComment($commentId)
     {
-        $data = new Comment();
-        $data->setId($commentId);
-
+        $this->data = new Comment();
+        $this->data->setId($commentId);
         $delComment = new commentRepository();
-        $delComment->deleteComment($data);
+        $delProcess = $delComment->deleteComment($this->data);
+        if ($delProcess)
+        {
+            echo $this->getRequest()->redirect('/dashboard');
+        }
+        echo "<script>alert('Oups le commentaire na pas pu étre suprimé');</script>";
     }
 }
 

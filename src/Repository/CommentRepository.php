@@ -1,6 +1,7 @@
 <?php
 
 namespace src\Repository;
+
 use src\Models\Comment;
 
 
@@ -13,10 +14,10 @@ class CommentRepository extends DBConnexion
     public function getAllComments()
     {
         $connection = $this->getDb()->getConnection();
-            $stmt = $connection->prepare('SELECT * FROM comments');
-            $stmt->execute();
-            $stmt->setFetchMode(\PDO::FETCH_CLASS, Comment::class);
-            return $stmt->fetchAll();
+        $stmt = $connection->prepare('SELECT * FROM comments');
+        $stmt->execute();
+        $stmt->setFetchMode(\PDO::FETCH_CLASS, Comment::class);
+        return $stmt->fetchAll();
     }
 
 
@@ -29,7 +30,7 @@ class CommentRepository extends DBConnexion
     {
         $connection = $this->getDb()->getConnection();
         $stmt = $connection->prepare('SELECT id, author, comment,civility,is_valid, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE post_id = :articleId ORDER BY comment_date DESC');
-        $stmt->bindValue(':articleId',$articleId,\PDO::PARAM_INT);
+        $stmt->bindValue(':articleId', $articleId, \PDO::PARAM_INT);
         $stmt->execute();
         $stmt->setFetchMode(\PDO::FETCH_CLASS, Comment::class);
         return $stmt->fetchAll();
@@ -71,7 +72,7 @@ class CommentRepository extends DBConnexion
         $connection = $this->getDb()->getConnection();
         $stmt = $connection->prepare('DELETE FROM comments WHERE id = :commentId');
         $stmt->bindValue(':commentId', $comment->getId(), \PDO::PARAM_INT);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
 }

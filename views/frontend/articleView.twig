@@ -118,7 +118,7 @@
                                         <div class="fh5co-text">
                                             <h3>{{ comment.author }}</h3>
                                             <small>Le : {{ comment.comment_date_fr }}</small>
-                                            <p>{{ comment.comment|convert_encoding('UTF-8','ISO-8859-1')|raw }}</p>
+                                            <p>{{ comment.comment|raw }}</p>
                                         </div>
                                     </div>
                                 </div>

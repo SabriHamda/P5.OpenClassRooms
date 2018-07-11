@@ -183,5 +183,13 @@ return [
     'params' =>[
         'id' => ('[0-9]+')
     ]
+],
+       'delete_comment' => [
+    'path' => '/dashboard/comment/del/{id}',
+    'controller' => src\Controllers\Dashboard\Comments\CommentController::class,
+    'action' => 'deleteComment',
+    'params' =>[
+        'id' => ('[0-9]+')
+    ]
 ]
 ];
