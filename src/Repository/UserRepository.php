@@ -101,8 +101,7 @@ class UserRepository extends DBConnexion
      */
     protected function validatePassword($supliedPassword, $password)
     {
-        password_verify(password_hash($supliedPassword, PASSWORD_DEFAULT), $password);
-        return true;
+        return password_verify($supliedPassword, $password);
     }
 
     public function getUserByEmail()
@@ -157,7 +156,7 @@ class UserRepository extends DBConnexion
     public function addUser(User $data)
     {
         $connection = $this->getDb()->getConnection();
-        $stmt = $connection->prepare('INSERT INTO users(role, name, password, email, civility, register_date, updated_date) VALUES(:role, :name, :password, :email, :civility, NOW(), NOW())');
+        $stmt = $connection->prepare('INSERT INTO users (role, user_name, password, email, civility, register_date, updated_date) VALUES (:role, :name, :password, :email, :civility, NOW(), NOW())');
         $stmt->bindValue(':role',$data->getRole(),\PDO::PARAM_STR);
         $stmt->bindValue(':name',$data->getName(),\PDO::PARAM_STR);
         $stmt->bindValue(':password',$data->getPassword(),\PDO::PARAM_STR);
@@ -191,8 +190,8 @@ class UserRepository extends DBConnexion
     public function updatePassword(User $data,$email)
     {
         $connection = $this->getDb()->getConnection();
-        $stmt = $connection->prepare('UPDATE users SET password = :token WHERE email = :email');
-        $stmt->bindValue(':token',$token,\PDO::PARAM_STR);
+        $stmt = $connection->prepare('UPDATE users SET password = :password WHERE email = :email');
+        $stmt->bindValue(':password',$data->getPassword(),\PDO::PARAM_STR);
         $stmt->bindValue(':email',$email,\PDO::PARAM_STR);
         $stmt->execute();
         return true;

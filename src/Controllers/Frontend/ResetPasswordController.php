@@ -66,7 +66,7 @@ class ResetPasswordController extends Controller
                 $this->data->setPassword($this->getRequest()->post('passOne'));
                 $userRepository->updatePassword($this->data, $this->email['email']);
                 //post data to login
-                $this->login($this->email['email'],$this->getRequest()->post('passOne'));
+                $this->directLogin($this->email['email'],$this->getRequest()->post('passOne'));
                 //end post data to login
                 echo $this->render('loginView.twig');
 
@@ -80,7 +80,7 @@ class ResetPasswordController extends Controller
         }
     }
 
-    private function login($email,$password)
+    private function directLogin($email,$password)
     {
         $user = new UserRepository();
         $request = $this->getRequest();
