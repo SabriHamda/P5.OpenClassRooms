@@ -1,5 +1,6 @@
 <?php
 namespace src\Controllers\Dashboard\Comments;
+use src\Controllers\Dashboard\ProtectedController;
 use src\Repository\commentRepository;
 use src\Models\Comment;
 
@@ -8,11 +9,17 @@ use src\Models\Comment;
  * Class CommentController
  * @package src\Controllers\Dashboard\Comments
  */
-class CommentController
+class CommentController extends ProtectedController
 {
 
+private $data;
 
-
+    public function __construct($request)
+    {
+        parent::__construct($request);
+        $this->uri = blog()->getRequest()->getUri();
+        $this->user = blog()->getIdentity()->getUser();
+    }
 
     /**
      * [validateThisComment description]
@@ -21,11 +28,16 @@ class CommentController
      */
     public function validateThisComment(int $id){
 
-        $data = new Comment();
-        $data->setId($id);
+        $this->data = new Comment();
+        $this->data->setId($id);
 
-        $updateComment = new commentRepository();
-        $updateComment->updateCommentValidity($data);
+        $updateComment = new CommentRepository();
+        $validationProcess =  $updateComment->updateCommentValidity($this->data);
+        if ($validationProcess)
+        {
+            echo $this->getRequest()->redirect('/dashboard');
+        }
+        echo "<script>alert('Oups le commentaire na pas pu étre validé');</script>";
 
     }
 

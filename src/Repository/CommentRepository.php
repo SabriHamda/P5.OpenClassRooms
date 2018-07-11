@@ -57,13 +57,13 @@ class CommentRepository extends DBConnexion
         return $affectedLines;
     }
 
-    public function updateCommentValidity(Comment $comment)
+    public function updateCommentValidity(Comment $data)
     {
         $connection = $this->getDb()->getConnection();
         $stmt = $connection->prepare('UPDATE comments SET is_valid = :is_valid WHERE id = :id');
-        $stmt->bindValue(':id', $comment->getId(), \PDO::PARAM_INT);
+        $stmt->bindValue(':id', $data->getId(), \PDO::PARAM_INT);
         $stmt->bindValue(':is_valid', 1, \PDO::PARAM_INT);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     public function deleteComment(Comment $comment)

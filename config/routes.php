@@ -175,5 +175,13 @@ return [
         'params' =>[
             'id' => ('[0-9]+')
         ]
+    ],
+      'validate_comment' => [
+    'path' => '/dashboard/comment/val/{id}',
+    'controller' => src\Controllers\Dashboard\Comments\CommentController::class,
+    'action' => 'validateThisComment',
+    'params' =>[
+        'id' => ('[0-9]+')
     ]
+]
 ];
