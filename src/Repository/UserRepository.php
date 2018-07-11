@@ -15,9 +15,6 @@ use src\Models\User;
  */
 class UserRepository extends DBConnexion
 {
-
-    public $firstname;
-    public $lastname;
     public $email;
     public $password;
     public $password_reset_token;
@@ -124,11 +121,6 @@ class UserRepository extends DBConnexion
         return $stmt->fetch();
     }
 
-    public function getFullname()
-    {
-        return ucwords($this->firstname . ' ' . $this->lastname);
-    }
-
     public function generateToken()
     {
         if (!$this->validateEmail('Invalid email address!')) {
@@ -156,7 +148,7 @@ class UserRepository extends DBConnexion
     public function addUser(User $data)
     {
         $connection = $this->getDb()->getConnection();
-        $stmt = $connection->prepare('INSERT INTO users (role, user_name, password, email, civility, register_date, updated_date) VALUES (:role, :name, :password, :email, :civility, NOW(), NOW())');
+        $stmt = $connection->prepare('INSERT INTO users (role, name, password, email, civility, register_date, updated_date) VALUES (:role, :name, :password, :email, :civility, NOW(), NOW())');
         $stmt->bindValue(':role',$data->getRole(),\PDO::PARAM_STR);
         $stmt->bindValue(':name',$data->getName(),\PDO::PARAM_STR);
         $stmt->bindValue(':password',$data->getPassword(),\PDO::PARAM_STR);
@@ -193,7 +185,7 @@ class UserRepository extends DBConnexion
         $stmt = $connection->prepare('UPDATE users SET password = :password WHERE email = :email');
         $stmt->bindValue(':password',$data->getPassword(),\PDO::PARAM_STR);
         $stmt->bindValue(':email',$email,\PDO::PARAM_STR);
-        $stmt->execute();
-        return true;
+        return $stmt->execute();
+
     }
 }
