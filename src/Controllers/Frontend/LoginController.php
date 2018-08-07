@@ -9,7 +9,7 @@
 namespace src\Controllers\Frontend;
 
 
-class LoginController extends Controller
+class LoginController extends FrontendController
 {
     public $message = [];
     public function index()

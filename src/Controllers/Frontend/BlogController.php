@@ -11,7 +11,7 @@ use src\Models\Article;
 use src\Tools\Pagination;
 
 
-class BlogController extends Controller
+class BlogController extends FrontendController
 {
     public function index($page)
     {

@@ -7,7 +7,7 @@ namespace src\Controllers;
  *
  * @author Sabri Hamda
  */
-abstract class Controller
+abstract class AbstractController
 {
     private $request;
     private $loader;

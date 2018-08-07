@@ -7,7 +7,7 @@ namespace src\Controllers\Frontend;
  *
  * @author Sabri Hamda
  */
-class AboutController extends Controller
+class AboutController extends FrontendController
 {
     public function index()
     {

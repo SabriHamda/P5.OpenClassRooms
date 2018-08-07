@@ -8,7 +8,7 @@ namespace src\Controllers\Frontend;
  *
  * @author Sabri Hamda
  */
-class HomeController extends Controller
+class HomeController extends FrontendController
 {
     public function index()
     {

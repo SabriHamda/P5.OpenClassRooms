@@ -2,12 +2,14 @@
 
 namespace src\Controllers\Frontend;
 
+use src\Controllers\AbstractController;
+
 /**
- * Description of Controller.
+ * This Controller Control Frontend actions
  *
  * @author Sabri Hamda
  */
-class Controller extends \src\Controllers\Controller
+class FrontendController extends AbstractController
 {
     public function getViewsBasePath()
     {

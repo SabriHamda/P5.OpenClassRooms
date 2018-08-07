@@ -3,14 +3,14 @@
 namespace src\Controllers\Authentication;
 
 use src\Repository\UserRepository;
-use src\Controllers\Frontend\Controller;
+use src\Controllers\Frontend\FrontendController;
 
 /**
  * Description of PostController.
  *
  * @author Sabri Hamda
  */
-class AuthController extends Controller
+class AuthController extends FrontendController
 {
     public $message = [];
 

@@ -9,7 +9,7 @@ use src\Exceptions\UnauthorizedHttpException;
  *
  * @author Sabri Hamda
  */
-class ProtectedController extends Controller
+class ProtectedController extends BackendController
 {
 
     public function __construct($request)

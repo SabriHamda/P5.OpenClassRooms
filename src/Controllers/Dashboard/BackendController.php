@@ -1,13 +1,14 @@
 <?php
 
 namespace src\Controllers\Dashboard;
+use src\Controllers\AbstractController;
 
 /**
- * Description of Controller.
+ * This Controller Control Backend actions
  *
  * @author Sabri Hamda
  */
-class Controller extends \src\Controllers\Controller
+class BackendController extends AbstractController
 {
     public function getViewsBasePath()
     {

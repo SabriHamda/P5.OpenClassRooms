@@ -12,7 +12,7 @@ use src\Validator\Constraints\IsNotEmpty;
 use src\Validator\Validator;
 
 
-class ContactController extends Controller
+class ContactController extends FrontendController
 {
     public $message = [];
 

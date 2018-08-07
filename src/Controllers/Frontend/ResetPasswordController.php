@@ -14,7 +14,7 @@ use src\Validator\Constraints\IsNotEmpty;
 use src\Validator\Constraints\StrLenght;
 use src\Validator\Validator;
 
-class ResetPasswordController extends Controller
+class ResetPasswordController extends FrontendController
 {
     private $token;
     public $message = [];

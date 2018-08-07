@@ -9,7 +9,7 @@
 namespace src\Controllers\Frontend;
 
 
-class ErrorController extends Controller
+class ErrorController extends FrontendController
 {
     public function index()
     {

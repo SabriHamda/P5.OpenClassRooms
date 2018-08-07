@@ -15,7 +15,7 @@ use src\Validator\Constraints\IsEmail;
 use src\Validator\Constraints\IsNotEmpty;
 use src\Validator\Validator;
 
-class RegisterController extends Controller
+class RegisterController extends FrontendController
 {
     public $message = [];
     private $data;

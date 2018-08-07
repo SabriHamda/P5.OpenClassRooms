@@ -12,7 +12,7 @@ use src\Repository\ArticleRepository;
 use src\Repository\CommentRepository;
 
 
-class PostController extends Controller
+class PostController extends FrontendController
 {
 
     public function index($articleId)
