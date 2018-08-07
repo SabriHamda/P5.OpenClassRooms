@@ -42,7 +42,7 @@ class Router
         }
 
         if (!$hasHandler) {
-            header('location: error');
+            header('location: /error');
             throw new NotFoundHttpException();
         }
     }

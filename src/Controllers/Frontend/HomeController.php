@@ -16,5 +16,6 @@ class HomeController extends Controller
         $articleController = new ArticleController();
         $articles = $articleController->getArticles();
         echo $this->render('home.twig', ['articles' => $articles, 'user'=>$user]);
+
     }
 }
