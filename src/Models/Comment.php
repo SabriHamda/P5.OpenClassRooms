@@ -11,11 +11,11 @@ namespace src\Models;
 class Comment
 {
     protected $id;
-    public $post_id;
+    public $postId;
     protected $author;
     protected $comment;
     protected $civility;
-    public $is_valid;
+    public $isValid;
     protected $comment_date;
 
 
@@ -31,12 +31,12 @@ class Comment
 
     public function getPostId()
     {
-        return $this->post_id;
+        return $this->postId;
     }
 
-    public function setPotsId(string $post_id)
+    public function setPostId(string $postId)
     {
-        $this->post_id = $post_id;
+        $this->postId = $postId;
     }
 
     public function getAuthor()
@@ -71,12 +71,12 @@ class Comment
 
     public function getIsValid()
     {
-        return $this->is_valid;
+        return $this->isValid;
     }
 
-    public function setIsValid(int $is_valid)
+    public function setIsValid(int $isValid)
     {
-        $this->is_valid = $is_valid;
+        $this->isValid = $isValid;
     }
 
     public function getCommentDate()

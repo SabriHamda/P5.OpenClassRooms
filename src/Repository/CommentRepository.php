@@ -26,7 +26,7 @@ class CommentRepository extends DBConnexion
      * @param  [INT] $articleId [description]
      * @return [OBJ]         [description]
      */
-    public function getComments($articleId)
+    public function getComments($articleId = null)
     {
         $connection = $this->getDb()->getConnection();
         $stmt = $connection->prepare('SELECT id, author, comment,civility,is_valid, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE post_id = :articleId ORDER BY comment_date DESC');
@@ -47,15 +47,13 @@ class CommentRepository extends DBConnexion
     public function addComment(Comment $comment)
     {
         $connection = $this->getDb()->getConnection();
-        $stmt = $connection->prepare('INSERT INTO comments(post_id, author, comment,civility, is_valid, comment_date) VALUES(?, ?, ?, ?, ?, NOW())');
-        $affectedLines = $stmt->execute(array(
-            $comment->getId(),
-            $comment->getAuthor(),
-            $comment->getComment(),
-            $comment->getCivilite(),
-            $comment->getIsValid()
-        ));
-        return $affectedLines;
+        $stmt = $connection->prepare('INSERT INTO comments (post_id, author, comment,civility, is_valid) VALUES (:postId, :author, :comment, :civility, :isValid)');
+        $stmt->bindValue(':postId', $comment->getPostId(), \PDO::PARAM_INT);
+        $stmt->bindValue(':author', $comment->getAuthor(), \PDO::PARAM_STR);
+        $stmt->bindValue(':comment', $comment->getComment(), \PDO::PARAM_STR);
+        $stmt->bindValue(':civility', $comment->getCivility(), \PDO::PARAM_STR);
+        $stmt->bindValue(':isValid', $comment->getIsValid(), \PDO::PARAM_STR);
+        return $stmt->execute();
     }
 
     public function updateCommentValidity(Comment $data)

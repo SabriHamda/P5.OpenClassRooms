@@ -7,10 +7,12 @@
 
 namespace src\Controllers\Frontend;
 
-use src\Exceptions\NotFoundHttpException;
+use src\Validator\Validator;
+use src\Validator\Constraints\IsNotEmpty;
+use src\Models\Comment;
 use src\Repository\CommentRepository;
 
-class CommentController
+class CommentController extends FrontendController
 {
     /**
      * @return array
@@ -22,7 +24,6 @@ class CommentController
         return $comments;
     }
 
-
     /**
      * [addComment description]
      * @param [type] $articleId   [description]
@@ -30,23 +31,31 @@ class CommentController
      * @param [type] $comment  [description]
      * @param [type] $civility [description]
      */
-    public function addComment($articleId, $author, $comment, $civility, $role)
+    public function addComment($articleId)
 
     {
-        $is = ($role == 'admin') ? 1 : 0;
-        $data = new Comment();
-        $data->setId($articleId);
-        $data->setAuthor($author);
-        $data->setComment($comment);
-        $data->setCivilite($civility);
-        $data->setIsValid($is);
-        $commentRepository = new CommentRepository();
-        $affectedLines = $commentRepository->addComment($data);
-        if ($affectedLines === false) {
-            throw new \Exception("Impossible d\'ajouter le commentaire !");
+        $role = $this->user->role;
+        $validator = new Validator();
+        $entry = blog()->getRequest();
+        $updateViolations = $validator->validate($entry->post(), [new IsNotEmpty()]);
+        if ($updateViolations){
+            $isValid = ($role == 'admin') ? 1 : 0;
+            $data = new Comment();
+            $data->setPostId($articleId);
+            $data->setAuthor($this->user->name);
+            $data->setComment($entry->post('comment'));
+            $data->setCivility($this->user->civility);
+            $data->setIsValid($isValid);
+            $commentManager = new CommentRepository();
+            $affectedLines = $commentManager->addComment($data);
+            if ($affectedLines === false) {
+                $this->getRequest()->redirect('/article/'.$articleId);
+                throw new \Exception("Impossible d\'ajouter le commentaire !");
+            }
+            else {
+                $this->getRequest()->redirect('/article/'.$articleId);
+            }
         }
-        else {
-            header('Location: index.php?action=post&id=' . $articleId . '#comments');
-        }
+
     }
 }

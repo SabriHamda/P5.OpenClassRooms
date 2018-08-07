@@ -172,24 +172,33 @@ return [
         'path' => '/dashboard/article/del/{id}',
         'controller' => src\Controllers\Dashboard\Articles\ArticleController::class,
         'action' => 'delArticle',
-        'params' =>[
+        'params' => [
             'id' => ('[0-9]+')
         ]
     ],
-      'validate_comment' => [
-    'path' => '/dashboard/comment/val/{id}',
-    'controller' => src\Controllers\Dashboard\Comments\CommentController::class,
-    'action' => 'validateThisComment',
-    'params' =>[
-        'id' => ('[0-9]+')
+    'validate_comment' => [
+        'path' => '/dashboard/comment/val/{id}',
+        'controller' => src\Controllers\Dashboard\Comments\CommentController::class,
+        'action' => 'validateThisComment',
+        'params' => [
+            'id' => ('[0-9]+')
+        ]
+    ],
+    'delete_comment' => [
+        'path' => '/dashboard/comment/del/{id}',
+        'controller' => src\Controllers\Dashboard\Comments\CommentController::class,
+        'action' => 'deleteComment',
+        'params' => [
+            'id' => ('[0-9]+')
+        ]
+    ],
+    'add_comment' => [
+        'path' => '/comment/add/{id}',
+        'controller' => src\Controllers\Frontend\CommentController::class,
+        'action' => 'addComment',
+        'method' => 'POST',
+        'params' => [
+            'id' => ('[0-9]+')
+        ]
     ]
-],
-       'delete_comment' => [
-    'path' => '/dashboard/comment/del/{id}',
-    'controller' => src\Controllers\Dashboard\Comments\CommentController::class,
-    'action' => 'deleteComment',
-    'params' =>[
-        'id' => ('[0-9]+')
-    ]
-]
 ];

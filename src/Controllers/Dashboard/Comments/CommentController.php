@@ -3,6 +3,8 @@ namespace src\Controllers\Dashboard\Comments;
 use src\Controllers\Dashboard\ProtectedController;
 use src\Repository\commentRepository;
 use src\Models\Comment;
+use src\Validator\Constraints\IsNotEmpty;
+use src\Validator\Validator;
 
 
 /**
@@ -20,6 +22,8 @@ private $data;
         $this->uri = blog()->getRequest()->getUri();
         $this->user = blog()->getIdentity()->getUser();
     }
+
+
 
     /**
      * [validateThisComment description]

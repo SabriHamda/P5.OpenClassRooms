@@ -6,6 +6,18 @@
         <div id="fh5co-main">
 
             <div class="fh5co-narrow-content">
+                {% if message %}
+                    <div class="container-fluid table-responsive">
+
+                        {% for messages in message %}
+                            <div class="alert {{ messages.status|raw }}">
+                                {{ messages.message|raw }}
+                            </div>
+                        {% endfor %}
+                    </div>
+
+
+                {% endif %}
 
                 {% if user.role == 'admin' %}
                     <p><a href="/dashboard/article/edit/{{ article.id }}" class="btn btn-primary">Modifier L'article</a></p>
@@ -62,7 +74,7 @@
                                     {% set civility = "/assets/images/woman.svg" %}
                                 {% endif %}
 
-                                <form action="index.php?action=addComment&amp;id={{ post['id'] }}" method="post" >
+                                <form action="/comment/add/{{ article.id }}" method="post" >
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="row">
