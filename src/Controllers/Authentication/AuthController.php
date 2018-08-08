@@ -24,12 +24,18 @@ class AuthController extends FrontendController
         echo $this->render('auth/login.twig');
     }
 
-    public function login()
+    public function login($email = null, $password = null)
     {
         $user = new UserRepository();
         $request = $this->getRequest();
-        $user->setEmail($request->post('email'));
-        $user->setPassword($request->post('password'));
+        if ($email && $password){
+            $user->setEmail($email);
+            $user->setPassword($password);
+        }else{
+            $user->setEmail($request->post('email'));
+            $user->setPassword($request->post('password'));
+        }
+
         if ($user->validate() && $user->login() && $user->getUserByEmail()->role === 'admin') {
             $request->redirect('/dashboard');
         } elseif ($user->validate() && $user->login() && $user->getUserByEmail()->role === 'visitor') {

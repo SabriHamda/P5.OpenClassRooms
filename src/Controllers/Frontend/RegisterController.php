@@ -9,6 +9,7 @@
 namespace src\Controllers\Frontend;
 
 
+use src\Controllers\Authentication\AuthController;
 use src\Models\User;
 use src\Repository\UserRepository;
 use src\Validator\Constraints\IsEmail;
@@ -41,6 +42,8 @@ class RegisterController extends FrontendController
                 $this->data->setPassword($request->post('password'));
                 $userRepository = new UserRepository();
                 $userRepository->addUser($this->data);
+                $auth = new AuthController($request);
+                $auth->login($request->post('email'), $request->post('password'));
             } else {
                 $this->message[] = ['status' => 'alert-danger', 'message' => "<strong>Erreur ! </strong> Mots de Passe non identiques"];
                 return $this->index();
