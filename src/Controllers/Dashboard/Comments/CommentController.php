@@ -3,8 +3,7 @@ namespace src\Controllers\Dashboard\Comments;
 use src\Controllers\Dashboard\ProtectedController;
 use src\Repository\commentRepository;
 use src\Models\Comment;
-use src\Validator\Constraints\IsNotEmpty;
-use src\Validator\Validator;
+
 
 
 /**
