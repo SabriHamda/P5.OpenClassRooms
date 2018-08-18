@@ -51,6 +51,9 @@ class RegisterController extends FrontendController
             $this->message = $validator->getAlertMessages();
             return $this->index();
 
+        }else{
+            $this->message = $validator->getAlertMessages();
+            return $this->index();
         }
     }
 

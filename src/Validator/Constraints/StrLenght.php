@@ -28,7 +28,7 @@ class StrLenght
     {
         if (strlen($item) >= 5 && strlen($item) <= 22) {
             return;
-        } else {
+        }else {
             return $this->message[] = $key . ' warning MIN 6 characters and MAX 22';
         }
     }
