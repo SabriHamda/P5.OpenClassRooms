@@ -13,6 +13,6 @@ class FrontendController extends AbstractController
 {
     public function getViewsBasePath()
     {
-        return realpath('../views/Frontend/');
+        return realpath('../views/frontend/');
     }
 }
