@@ -45,10 +45,7 @@ To safly start with this project we needs some configurations.
 <?php
 return [
     'username' => 'YOUR_YOUSERNAME',
-    'password' => 'YOUR_PASSWORD',
-    'server' => 'SMTP_SERVER',
-    'port' => 'PORT',
-    'encryption' => 'SSL_OR_TLS'
+    'password' => 'YOUR_PASSWORD'
 ];
 ``` 
 #### Mailer
@@ -59,7 +56,10 @@ Go to ```config/``` and rename  ```mailer_sample.php``` to ```mailer.php```.
 <?php
 return [
     'username' => 'YOUR_YOUSERNAME',
-    'password' => 'YOUR_PASSWORD'
+    'password' => 'YOUR_PASSWORD',
+    'server' => 'SMTP_SERVER',
+    'port' => 'PORT',
+    'encryption' => 'SSL_OR_TLS'
 ];
 ``` 
 
