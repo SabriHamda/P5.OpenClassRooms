@@ -44,9 +44,11 @@ To safly start with this project we needs some configurations.
 ```php
 <?php
 return [
-    'dsn'=> 'mysql:host=YOUR_HOST;dbname=YOUR_DB_NAME',
-    'username'=> 'USERNAME',
-    'password'=> 'PASSWORD'
+    'username' => 'YOUR_YOUSERNAME',
+    'password' => 'YOUR_PASSWORD',
+    'server' => 'SMTP_SERVER',
+    'port' => 'PORT',
+    'encryption' => 'SSL_OR_TLS'
 ];
 ``` 
 #### Mailer

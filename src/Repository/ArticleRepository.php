@@ -63,7 +63,8 @@ class ArticleRepository extends DBConnexion
     public function addArticle(Article $article)
     {
         $connection = $this->getDb()->getConnection();
-        $stmt = $connection->prepare('INSERT INTO posts (title, image, content, chapo) VALUES (:articleTitle, :articleImageUrl, :articleContent, :articleChapo)');
+        $stmt = $connection->prepare('INSERT INTO posts (user_id, title, image, content, chapo) VALUES (:userId, :articleTitle, :articleImageUrl, :articleContent, :articleChapo)');
+        $stmt->bindValue(':userId',1,\PDO::PARAM_INT);
         $stmt->bindValue(':articleTitle',$article->getTitle(),\PDO::PARAM_STR);
         $stmt->bindValue(':articleImageUrl',urlencode($article->getImage()),\PDO::PARAM_STR);
         $stmt->bindValue(':articleContent',$article->getContent(),\PDO::PARAM_STR);

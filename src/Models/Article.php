@@ -5,40 +5,14 @@ namespace src\models;
  */
 class Article
 {
-    protected $id;
-    protected $title;
-    protected $content;
-    protected $chapo;
-    protected $image;
-    protected $created_at;
-    protected $updated_at;
+    private $id;
+    private $title;
+    private $content;
+    private $chapo;
+    private $image;
+    private $createdAt;
+    private $updatedAt;
 
-    public function __construct($values = null)
-    {
-        if ($values != null)
-        {
-            $this->hydrate($values);
-        }
-
-    }
-    public function hydrate(array $values)
-    {
-        foreach ($values as $key=>$value)
-        {
-            $elements = explode('_',$key);
-            $newKey='';
-            foreach($elements as $el)
-            {
-                $newKey .= ucfirst($el);
-            }
-
-            $method = 'set' .ucfirst($newKey);
-            if (method_exists($this, $method))
-            {
-                $this->$method($value);
-            }
-        }
-    }
 
     public function getId()
     {
@@ -78,7 +52,7 @@ class Article
 
     public function getImage()
     {
-        return urldecode($this->image);
+        return $this->image = urldecode($this->image);
     }
     public function setImage(string $image)
     {
@@ -87,20 +61,20 @@ class Article
 
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
-    public function setCreatedAt(string $created_at)
+    public function setCreatedAt(string $createdAt)
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
     }
 
     public function getUpdated_at()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
-    public function setUpdatedAt(string $updated_at)
+    public function setUpdatedAt(string $updatedAt)
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
     }
 
 }
