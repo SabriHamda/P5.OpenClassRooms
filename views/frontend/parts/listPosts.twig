@@ -16,7 +16,7 @@
                 <div class="desc">
                     <h3><a href="#">{{ article.title }}</a></h3>
                     <span><small>Creer le : </small><small>{{ article.created_at|date("d/m/Y", "Europe/Paris") }}</small></span>
-                    <div style="max-height: 90px;overflow: hidden;">
+                    <div class="chapo" style="max-height: 90px;overflow: hidden;">
                         <p>{{ article.content|raw }} </p>
                     </div>
                     <p>. . .</p>
