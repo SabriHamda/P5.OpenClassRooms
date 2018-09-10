@@ -1,14 +1,14 @@
 <?php
-namespace src\Controllers\Dashboard\Comments;
-use src\Controllers\Dashboard\ProtectedController;
-use src\Repository\commentRepository;
-use src\Models\Comment;
+namespace app\Controllers\Dashboard\Comments;
+use app\Controllers\Dashboard\ProtectedController;
+use app\Repository\commentRepository;
+use app\Models\Comment;
 
 
 
 /**
  * Class CommentController
- * @package src\Controllers\Dashboard\Comments
+ * @package app\Controllers\Dashboard\Comments
  */
 class CommentController extends ProtectedController
 {

@@ -1,7 +1,7 @@
 <?php
 
-namespace src\Controllers\Dashboard;
-use src\Controllers\AbstractController;
+namespace app\Controllers\Dashboard;
+use app\Controllers\AbstractController;
 
 /**
  * This Controller Control Backend actions

@@ -1,6 +1,6 @@
 <?php
 
-namespace src\Controllers\Frontend;
+namespace app\Controllers\Frontend;
 
 
 /**

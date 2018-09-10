@@ -5,12 +5,12 @@
  * Time: 13:53
  */
 
-namespace src\Controllers\Frontend;
+namespace app\Controllers\Frontend;
 
-use src\Validator\Validator;
-use src\Validator\Constraints\IsNotEmpty;
-use src\Models\Comment;
-use src\Repository\CommentRepository;
+use app\Validator\Validator;
+use app\Validator\Constraints\IsNotEmpty;
+use app\Models\Comment;
+use app\Repository\CommentRepository;
 
 class CommentController extends FrontendController
 {

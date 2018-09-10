@@ -5,12 +5,12 @@
  * Time: 19:15
  */
 
-namespace src\Validator\Constraints;
+namespace app\Validator\Constraints;
 
 /**
  * Class StrLenght
  * This Class filter lenght of entry given.
- * @package src\Validator\Constraints
+ * @package app\Validator\Constraints
  */
 class StrLenght
 {

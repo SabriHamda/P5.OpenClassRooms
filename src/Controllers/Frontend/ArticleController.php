@@ -1,9 +1,9 @@
 <?php
 
-namespace src\Controllers\Frontend;
+namespace app\Controllers\Frontend;
 
-use src\Exceptions\NotFoundHttpException;
-use src\Repository\ArticleRepository;
+use app\Exceptions\NotFoundHttpException;
+use app\Repository\ArticleRepository;
 
 /**
  * Description of PostController.

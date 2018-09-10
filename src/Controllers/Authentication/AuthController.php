@@ -1,9 +1,9 @@
 <?php
 
-namespace src\Controllers\Authentication;
+namespace app\Controllers\Authentication;
 
-use src\Repository\UserRepository;
-use src\Controllers\Frontend\FrontendController;
+use app\Repository\UserRepository;
+use app\Controllers\Frontend\FrontendController;
 
 /**
  * Description of PostController.

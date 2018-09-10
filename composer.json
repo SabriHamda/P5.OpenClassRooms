@@ -20,7 +20,7 @@
 
     "autoload": {
         "psr-4": {
-            "src\\":"src/","etc\\":"etc/"
+            "app\\":"src/","core\\":"etc/"
         }
     }
 }

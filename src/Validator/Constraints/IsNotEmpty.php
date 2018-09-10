@@ -5,11 +5,11 @@
  * Time: 21:04
  */
 
-namespace src\Validator\Constraints;
+namespace app\Validator\Constraints;
 
 /**
  * Class IsNotEmpty
- * @package src\Controllers\Dashboard\Articles\Validator\Constraints
+ * @package app\Controllers\Dashboard\Articles\Validator\Constraints
  */
 class IsNotEmpty
 {

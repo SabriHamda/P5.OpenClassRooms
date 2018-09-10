@@ -2,8 +2,8 @@
 require __DIR__ . './../vendor/autoload.php';
 
 
-use src\Exceptions\NotFoundHttpException;
-use src\Blog;
+use app\Exceptions\NotFoundHttpException;
+use app\Blog;
 
 
 function dd($val, $exit = true)

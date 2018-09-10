@@ -1,5 +1,5 @@
 <?php
-namespace etc\Db;
+namespace core\Db;
 
 use PDOException;
 use PDO;

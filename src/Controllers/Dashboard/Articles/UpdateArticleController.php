@@ -5,14 +5,14 @@
  * Time: 10:43
  */
 
-namespace src\Controllers\Dashboard\Articles;
+namespace app\Controllers\Dashboard\Articles;
 
-use src\Repository\ArticleRepository;
-use src\Validator\Validator;
-use src\Validator\Constraints\IsNotEmpty;
-use src\Validator\Constraints\IsInteger;
-use src\Tools\UploadFile;
-use src\Models\Article;
+use app\Repository\ArticleRepository;
+use app\Validator\Validator;
+use app\Validator\Constraints\IsNotEmpty;
+use app\Validator\Constraints\IsInteger;
+use app\Tools\UploadFile;
+use app\Models\Article;
 
 
 trait UpdateArticleController

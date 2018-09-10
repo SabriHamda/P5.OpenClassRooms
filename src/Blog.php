@@ -1,12 +1,12 @@
 <?php
 
-namespace src;
+namespace app;
 
-use etc\Http\Request;
-use etc\Router\Router;
-use etc\Session\Identity;
-use etc\Session\Session;
-use etc\Mail\Mailer;
+use core\Http\Request;
+use core\Router\Router;
+use core\Session\Identity;
+use core\Session\Session;
+use core\Mail\Mailer;
 
 class Blog
 {

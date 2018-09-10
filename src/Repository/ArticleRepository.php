@@ -1,9 +1,9 @@
 <?php
 
-namespace src\Repository;
-use src\models\Article;
+namespace app\Repository;
+use app\models\Article;
 
-use src\Exceptions\NotFoundHttpException;
+use app\Exceptions\NotFoundHttpException;
 
 /**
  * Description of ArticleRepository.
@@ -50,7 +50,7 @@ class ArticleRepository extends DBConnexion
             $stmt = $connection->prepare('UPDATE posts SET title = :articleTitle, content = :articleContent, chapo = :articleChapo WHERE id = :articleId');
         }else{
             $stmt = $connection->prepare('UPDATE posts SET title = :articleTitle, image = :articleImageUrl, content = :articleContent, chapo = :articleChapo WHERE id = :articleId');
-            $stmt->bindValue(':articleImageUrl',urlencode($article->getImage()),\PDO::PARAM_STR);
+            $stmt->bindValue(':articleImageUrl',$article->getImage(),\PDO::PARAM_STR);
         }
         $stmt->bindValue(':articleId',$article->getId(),\PDO::PARAM_INT);
         $stmt->bindValue(':articleTitle',$article->getTitle(),\PDO::PARAM_STR);
@@ -66,7 +66,7 @@ class ArticleRepository extends DBConnexion
         $stmt = $connection->prepare('INSERT INTO posts (user_id, title, image, content, chapo) VALUES (:userId, :articleTitle, :articleImageUrl, :articleContent, :articleChapo)');
         $stmt->bindValue(':userId',1,\PDO::PARAM_INT);
         $stmt->bindValue(':articleTitle',$article->getTitle(),\PDO::PARAM_STR);
-        $stmt->bindValue(':articleImageUrl',urlencode($article->getImage()),\PDO::PARAM_STR);
+        $stmt->bindValue(':articleImageUrl',$article->getImage(),\PDO::PARAM_STR);
         $stmt->bindValue(':articleContent',$article->getContent(),\PDO::PARAM_STR);
         $stmt->bindValue(':articleChapo',$article->getChapo(),\PDO::PARAM_STR);
         $stmt->execute();

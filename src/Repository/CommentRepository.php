@@ -1,8 +1,8 @@
 <?php
 
-namespace src\Repository;
+namespace app\Repository;
 
-use src\Models\Comment;
+use app\Models\Comment;
 
 
 /**

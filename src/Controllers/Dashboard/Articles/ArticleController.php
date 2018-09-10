@@ -1,11 +1,11 @@
 <?php
 
-namespace src\Controllers\Dashboard\Articles;
+namespace app\Controllers\Dashboard\Articles;
 
-use src\Controllers\Dashboard\ProtectedController;
-use src\Repository\ArticleRepository;
-use src\Tools\Pagination;
-use src\models\Article;
+use app\Controllers\Dashboard\ProtectedController;
+use app\Repository\ArticleRepository;
+use app\Tools\Pagination;
+use app\models\Article;
 
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace etc\Http;
+namespace core\Http;
 
 /**
  * Description of Request.

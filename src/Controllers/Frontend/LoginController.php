@@ -6,7 +6,7 @@
  * Time: 19:24
  */
 
-namespace src\Controllers\Frontend;
+namespace app\Controllers\Frontend;
 
 
 class LoginController extends FrontendController

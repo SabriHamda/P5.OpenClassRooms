@@ -6,15 +6,15 @@
  * Time: 19:24
  */
 
-namespace src\Controllers\Frontend;
+namespace app\Controllers\Frontend;
 
 
-use src\Controllers\Authentication\AuthController;
-use src\Models\User;
-use src\Repository\UserRepository;
-use src\Validator\Constraints\IsEmail;
-use src\Validator\Constraints\IsNotEmpty;
-use src\Validator\Validator;
+use app\Controllers\Authentication\AuthController;
+use app\Models\User;
+use app\Repository\UserRepository;
+use app\Validator\Constraints\IsEmail;
+use app\Validator\Constraints\IsNotEmpty;
+use app\Validator\Validator;
 
 class RegisterController extends FrontendController
 {

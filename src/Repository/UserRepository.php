@@ -5,8 +5,8 @@
  * and open the template in the editor.
  */
 
-namespace src\Repository;
-use src\Models\User;
+namespace app\Repository;
+use app\Models\User;
 
 /**
  * Description of UserRepository

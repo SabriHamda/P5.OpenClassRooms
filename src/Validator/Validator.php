@@ -5,10 +5,10 @@
  * Time: 14:47
  */
 
-namespace src\Validator;
+namespace app\Validator;
 /**
  * Class Validator
- * @package src\Controllers\Dashboard\Articles\Validator
+ * @package app\Controllers\Dashboard\Articles\Validator
  */
 class Validator
 {

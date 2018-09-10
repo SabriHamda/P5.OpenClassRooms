@@ -1,6 +1,6 @@
 <?php
 
-namespace src\Exceptions;
+namespace app\Exceptions;
 
 /**
  * Description of NotFoundHttpException.

@@ -5,7 +5,7 @@
  * Time: 18:49
  */
 
-namespace src\Models;
+namespace app\Models;
 
 
 class User

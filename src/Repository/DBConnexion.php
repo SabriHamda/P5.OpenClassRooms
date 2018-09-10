@@ -1,7 +1,7 @@
 <?php
-namespace src\Repository;
+namespace app\Repository;
 
-use etc\Db\Database;
+use core\Db\Database;
 /**
  * Description of DBConnexion
  *

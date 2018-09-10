@@ -6,9 +6,9 @@
  * Time: 20:01
  */
 
-namespace src\Tools;
+namespace app\Tools;
 
-use src\Repository\DBConnexion;
+use app\Repository\DBConnexion;
 
 
 class Pagination extends DBConnexion

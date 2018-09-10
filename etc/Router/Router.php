@@ -1,8 +1,8 @@
 <?php
 
-namespace etc\Router;
+namespace core\Router;
 
-use src\Exceptions\NotFoundHttpException;
+use app\Exceptions\NotFoundHttpException;
 
 class Router
 {

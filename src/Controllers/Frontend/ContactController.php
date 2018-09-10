@@ -6,10 +6,10 @@
  * Time: 18:46
  */
 
-namespace src\Controllers\Frontend;
-use src\Validator\Constraints\IsEmail;
-use src\Validator\Constraints\IsNotEmpty;
-use src\Validator\Validator;
+namespace app\Controllers\Frontend;
+use app\Validator\Constraints\IsEmail;
+use app\Validator\Constraints\IsNotEmpty;
+use app\Validator\Validator;
 
 
 class ContactController extends FrontendController

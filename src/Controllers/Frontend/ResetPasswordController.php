@@ -5,14 +5,14 @@
  * Time: 11:40
  */
 
-namespace src\Controllers\Frontend;
+namespace app\Controllers\Frontend;
 
 
-use src\Models\User;
-use src\Repository\UserRepository;
-use src\Validator\Constraints\IsNotEmpty;
-use src\Validator\Constraints\StrLenght;
-use src\Validator\Validator;
+use app\Models\User;
+use app\Repository\UserRepository;
+use app\Validator\Constraints\IsNotEmpty;
+use app\Validator\Constraints\StrLenght;
+use app\Validator\Validator;
 
 class ResetPasswordController extends FrontendController
 {

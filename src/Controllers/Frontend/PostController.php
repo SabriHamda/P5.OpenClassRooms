@@ -5,11 +5,11 @@
  * Time: 15:11
  */
 
-namespace src\Controllers\Frontend;
+namespace app\Controllers\Frontend;
 
-use src\Models\Article;
-use src\Repository\ArticleRepository;
-use src\Repository\CommentRepository;
+use app\Models\Article;
+use app\Repository\ArticleRepository;
+use app\Repository\CommentRepository;
 
 
 class PostController extends FrontendController

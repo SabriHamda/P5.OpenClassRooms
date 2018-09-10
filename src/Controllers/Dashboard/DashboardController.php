@@ -1,9 +1,9 @@
 <?php
 
-namespace src\Controllers\Dashboard;
+namespace app\Controllers\Dashboard;
 
-use src\Repository\CommentRepository;
-use src\Tools\Pagination;
+use app\Repository\CommentRepository;
+use app\Tools\Pagination;
 
 /**
  * Description of HomeController.

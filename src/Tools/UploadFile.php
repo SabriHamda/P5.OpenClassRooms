@@ -5,7 +5,7 @@
  * Time: 14:15
  */
 
-namespace src\Tools;
+namespace app\Tools;
 
 
 Class UploadFile

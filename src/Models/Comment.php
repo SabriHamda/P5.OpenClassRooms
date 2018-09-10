@@ -5,7 +5,7 @@
  * Time: 02:06
  */
 
-namespace src\Models;
+namespace app\Models;
 
 
 class Comment

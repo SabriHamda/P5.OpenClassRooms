@@ -1,5 +1,5 @@
 <?php
-namespace src\models;
+namespace app\models;
 /**
  * This Class hydrate the entities of articles
  */
@@ -52,7 +52,7 @@ class Article
 
     public function getImage()
     {
-        return $this->image = urldecode($this->image);
+        return $this->image;
     }
     public function setImage(string $image)
     {

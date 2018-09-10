@@ -1,8 +1,8 @@
 <?php
 
-namespace src\Controllers\Frontend;
+namespace app\Controllers\Frontend;
 
-use src\Controllers\AbstractController;
+use app\Controllers\AbstractController;
 
 /**
  * This Controller Control Frontend actions

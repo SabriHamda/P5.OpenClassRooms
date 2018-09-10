@@ -1,8 +1,8 @@
 <?php
 
-namespace etc\Session;
+namespace core\Session;
 
-use src\Repository\UserRepository;
+use app\Repository\UserRepository;
 /**
  * Description of Identity
  *

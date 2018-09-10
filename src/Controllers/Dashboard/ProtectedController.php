@@ -1,8 +1,8 @@
 <?php
 
-namespace src\Controllers\Dashboard;
+namespace app\Controllers\Dashboard;
 
-use src\Exceptions\UnauthorizedHttpException;
+use app\Exceptions\UnauthorizedHttpException;
 
 /**
  * Description of ProtectedController.

@@ -27,7 +27,7 @@
 
                 <div class="row row-bottom-padded-md">
                     <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-                        <img class="img-responsive" src="/{{ article.image }}" alt="image" width="100%" height="100%">
+                        <img class="img-responsive" src="{{ article.image }}" alt="image" width="100%" height="100%">
                     </div>
                     <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
                         <h2 class="fh5co-heading">
@@ -62,7 +62,7 @@
 
                         {% if user.role is empty %}
                             <div id="form-add-comment" class="row" style="display: none; background-color:rgba(0, 0, 0, 0.1);padding: 30px;">
-                                <h2>Pour ajouter un commentaire veuillez vous identifier ou vous enregistrer <a href="index.php?action=register"> ici</h2></p>
+                                <h2>Pour ajouter un commentaire veuillez vous identifier ou vous enregistrer <a href="/register"> ici</h2></p>
                             </div>
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace etc\Session;
+namespace core\Session;
 
 /**
  * Description of Session
