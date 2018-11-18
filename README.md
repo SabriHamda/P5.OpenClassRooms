@@ -5,11 +5,11 @@
 ##### Frontend screenshot 
 
 
-![Alt text](https://hamda.ch/images/readme/front-screenshot.png?raw=true "front-end")
+![Alt text](public/assets/images/readme/front-screenshot.png?raw=true "front-end")
 
 ##### Dashboard screenshot 
 
-![Alt text](https://hamda.ch/images/readme/dashboard-screenshot.png?raw=true "front-end")
+![Alt text](public/assets/images/readme/dashboard-screenshot.png?raw=true "front-end")
 
 
 
